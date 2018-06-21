@@ -344,6 +344,6 @@ ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicatio
 如果通过new 生成的对象，因为没有进行依赖注入，这个对象时没办法调用对象中的Service对象（因为Service对象时通过注解注入的，并不是通过new生成的）
 
 
-demo地址：
+demo地址：https://github.com/hzaucheng/StudyNote/tree/master/6.spring%2Bmybatis%E6%95%B4%E5%90%88/SpringTest_1
 
 [1]: http://static.zybuluo.com/HzauCheck/fdaxcqsps7u9dfnf3srme339/demo%E6%9E%B6%E6%9E%84%E5%9B%BE.png
