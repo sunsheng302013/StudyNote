@@ -149,15 +149,18 @@ resource中填写映射文件地址+文件名，映射文件的位置没有规�
 映射文件中主要用于sql查询语句。
 一个映射文件对应一个接口，接口中有未实现的方法。
 namespace中填写对应的接口，将映射文件和接口关联。
-。
+
 核心标识：
 <select>：查询语句填写在<select> sql查询语句</select>中
 id：对应映射接口TeacherMapper中的未实现的方法
 resultMap：resultMap的名称，据此找到对应的resultMap
 
-<resultMap>：结果集映射的配置标签，返回值类型，这个如果查询语句比较简单，是可以不填写的，对于复杂查询，尤其是多表关联的查询语句，可以通过resultMap设置返回参数的类型。
+<resultMap>：结果集映射的配置标签，返回值类型，这个如果查询语句比较简单，是可以不填写的，对于复杂查询，尤其是多表关联的查询语句，
+可以通过resultMap设置返回参数的类型。
+
 type对应的是与查询表关联的实体类。
 id="Teacher_Course"指这个result的名称，通过id与<select>关联。
+
 `子元素说明`
 id property = "id" column="t_id :这个id用于设置主键字段与领域模型属性的映射关系
 result元素 ，用于设置普通字段与领域模型属性的映射关系
@@ -165,6 +168,7 @@ association:一对一关系，只有一个查询结果
 collection:一对多关系，
 这两个关键词主要用于多表关联查询，多表关联查询查出的多个表的结果，为了和表的实体相对应，就需要使用
 association,collection这两个关键词。这个比较重要，需要单独写一章，这里就不说了。
+
 ```
 <mapper namespace="com.mybatis.maper.TeacherMapper">
 
