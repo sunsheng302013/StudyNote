@@ -16,6 +16,7 @@
 4. 删除映射接口TeacherMapper,在映射文件中将映射的接口改为TeacherDao
 
 项目整体架构图：
+
 ![\[图片\]][1]
 
 ## 2 applicationContext.xml更新说明
