@@ -1,0 +1,130 @@
+Java常用修饰符
+Java数组的定义，一维数组，二维数组创建及使用
+System对象常用的方法
+Java循环和判断的方式
+
+
+一.Java常用修饰符
+修饰符用来定义类、方法或者变量，通常放在语句的最前端
+
+访问控制修饰符：public,private,protected,default
+public：公共访问控制符修饰类的时候
+将一个类声明为公共类，他可以被任何对象访问，一个程序的主类必须是公共类。
+修饰变量和方法的时候
+表示这个变量和方法是公用的，可以被任何对象访问
+
+private：私有访问控制符
+修饰变量和方法：
+表示该变量和方法只能自己类使用，其他类以及子类不能够调用该变量和方法
+
+protected：保护访问控制符
+修饰的变量和方法只能被自己类和子类访问，调用，其他类不能够调用
+
+*线程控制修饰符：synchronized，volatile
+synchronized：同步修饰符，用于方法和变量之前，对修饰对象加锁，防止多个线程同时访问
+volatile:只能修饰变量，主要用在多个线程感知实例变量被更改了场合。它强制线程每次从
+主内存中读取变量，而不是从线程的私有内存中读取变量，使得各个线程获得最新的值
+从而保证了数据的可见性。但是volatile并不阻止多线程同时操作变量，导致线程并不安全
+
+
+*final:终止修饰符
+final修饰类：类不能被继承，不能修饰接口和抽象类（因为这两者就是为了被继承才产生的）
+final修饰方法：方法与其他方法一样，但是方法不能被重载，
+final修饰变量：变量一旦被赋值，变量值不能被改变(创建变量时必须赋值）
+
+*static:静态修饰符
+static可以修饰方法，变量和代码块
+static修饰的方法，代码块和变量会在类加载的时候初始化，早于类的main方法和类的初始化对象
+
+static修饰的方法和变量不需要对象即可引用（类名.方法/变量）
+
+
+
+二.Java中数组的使用
+在数组的使用中包含Java中循环和判断知识
+
+数组的创建及初始化
+数组可以是基本类型，也可以是字符串，也可以是对象
+一维数组：
+int[] intArray;//未初始化
+int[] intBrray = new int[10];//定义数组长度并初始化，初始值为0
+int[] intCrray = new int[]{1,2,3,4}//不设定数组长度，在大括号中定义值，根据值确定长度
+
+对象数组的创建和基本类型数组一样，不同之处在于，若不指定初始值则为null;
+
+二维数组
+基本和一维数组相同
+
+
+三.Java循环
+1.for循环
+for(int i = 0; i < 10; i++) {
+
+}
+2.for-each循环
+for-each针对数据，集合进行遍历
+for(变量参数 : 数组/集合名)
+int[] arrayInt = new int[10];
+for (int i : arrayInt) {
+	System.out.println(i);
+}
+通过这种方式将数组中的值取出
+
+3.while(判断条件){}
+当条件为假时结束循环
+
+4.do{...}while(判断条件）
+当条件为假时结束循环
+
+这些循环方式都可以使用break强行跳出循环
+
+四.Java判断
+1.if-else:
+if(判断条件）{
+} else {...}
+
+判断条件为真的时候执行if，为假的时候执行else
+
+多层判断
+if(条件A){
+} else if(条件B){
+} else {
+}
+需要注意层级关系
+
+2.switch-case
+
+switch（参数变量）{
+case 值:
+执行内容;
+case 值:
+执行内容;
+default:
+执行内容;
+}
+
+*switch在匹配参数值时，会从匹配的case开始，不再判断case条件，直接执行后面所有的case内容，
+包括default内容，因此使用switch-case时，每个case执行内容中需要添加return/break，使得匹配
+成功并执行内容之后结束判断。
+
+
+
+五.System常用方法
+1.系统当前时间
+System.currentTimeMillis();
+
+2.获取控制台输入内容
+System.in
+Scanner s = new Scanner(System.in);
+String str = s.nextLine();//s.nextLine等待控制台输入值，Systen.in读取输入值，并将值写到str中
+
+3.数组copy
+System.arraycopy(sourceArray,sourceBegin,array,arrayBegin,length);
+注意事项：创建的数组长度比如超过要copy的长度，否则将导致内存溢出
+即length>array.size();
+
+
+六.利用数组和循环判断，键盘输入等知识做一个棋盘的小游戏
+
+
+

@@ -1,0 +1,96 @@
+1、Java开发环境配置
+安装JDK和eclipse
+默认开发环境：
+JDK8
+Eclipse mars
+工具获取链接：http://pan.baidu.com/s/1kVtIl1d 密码：5m0m
+
+一.搭建开发环境
+1.安装JDK
+2.在Windows中配置JDK环境变量
+3.在eclipse中安装checkStyle插件
+
+二.Java基础类型 
+byte short int long float double char boolean
+整型: byte（1），short(2),int(4),long(8)
+浮点型: float(4), double(8)
+字符型: char(2)
+布尔型: boolean(1) 只有true或false
+
+在Windows中1字节占8位字符，除去第一位正负标识，可以计算出每个类型取值范围
+当使用unsigned修饰类型时，表示类型无符号，即全是正数，取值范围从0开始
+
+低精度可以自动向高精度转换，即低字节的类型可以直接转换成高字节的类型
+这是因为低字节类型的取值范围在高字节类型的取值范围之内
+在两个不同类型进行+，-,*,/,%运算时，自动转成高精度类型。
+
+高精度可以强制转换成小范围，但是超出取值范围的时候会报错
+强转方式 （低字节类型）值
+int i = 100;
+byte b = (byte)i;//正确
+
+int i1 = 1000;
+byte b1 = (byte)i1//错误，可以执行，但值错误
+
+三.Java包装类型
+Byte Short Integer Long Float Double Char Boolean
+基本与基础类型相同
+
+包装类型相当于类，可以创建类型对象，其中有相应的方法
+对象创建方法：
+1.使用new创建对象（类对象创建的普遍方法）
+2.直接赋值（特殊之处：只有包装类可以直接给对象赋值生成对象）
+
+包装类进行类型转换
+int->String
+String.valueOf(int)
+int.toString()//对象的方法
+String = int + "";//int类型后面接空字符串，可以将int转为String
+
+String->int
+Integer.parseInt(String)
+
+四.字符串类型
+String赋值
+直接赋值 String str = "你好";
+
+String是字符串常量，值是不能被改变的，但在使用过程
+str = str + "啊";
+str 值为"你好啊",
+看上去str值已经改变，但是实际上，str在改变值时JVM会将原str值
+和新加值合在一起生成一个新的String对象str，原来的对象将会删除
+本质上String值就是常量，所谓改变是新建一个对象，同时GC回收无用对象
+这个过程中，生成新对象，回收无用对象效率低下
+
+StringBuffer StringBuilder是字符串变量
+改变对象值的时候，并不创建新对象，因此在对字符串值进行改变的时候，
+效率要比String高
+
+两者方法一样，不同点在于
+StringBuffer是线程安全的，多线程情况下，对象只能同时被一个线程控制
+StringBuilder是线程不安全的，多线程情况下，对象可能被多个线程同时控制
+
+StringBuffer为了保证线程安全，牺牲了一部分效率，因此对字符串数据进行处理时
+StringBuffer效率不如StringBuilder，但StringBuilder多线程下不安全。
+
+因此：
+1、字符串数据操作量少时用String
+大量数据操作时：
+单线程：StringBuilder
+多线程：StringBuffer
+
+StringBuffer和StringBuilder常用的方法：
+append(Object);
+在字符串后面添加内容
+
+insert(int index, Object)
+在指定位置添加内容
+
+toString
+转成String类型
+
+delete(int start, int end);
+删除从start到end的字符
+
+String str = sb.substring(begin, int end);
+截取从begin到end的字符赋值给str；

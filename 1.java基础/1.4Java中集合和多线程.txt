@@ -1,0 +1,130 @@
+三.Java中集合
+Java中的集合可以分为两大类：
+Collection类：
+List，Set，Queue都是继承Collection接口的接口，并扩展不同的功能
+List：必须保持元素特定的顺序
+Set：元素不能重复
+Queue：元素保持队列（先进先出）//面试基本不问，可以不说
+
+1.Map类：
+所有实现Map接口的集合类都必须有键值对 Key-value
+HashMap,HashTable,TreeMap都是继承Map的实现类
+
+*****HashMap实现方式*****
+HashMap是基于hash表的Map接口的非同步实现，使用key，value存储值，前景、其中key，value可以为null。
+HashMap并不保证存储值按照顺序存储
+HashMap中数据存储方式是基于数组和链表，红黑树这些数据结构实现的
+
+·hashMap源码中最核心的是一个EntryNode结点类，这个类中定义了 hash，key，value变量和一个EntryNode对象
+next，通过这个结点类实现了链表结构。有一个table数组，数组中值就是EntryNode对象。通过数组和链表
+实现了HashMap的接口
+·HashMap存值时，首先会将key利用hash算法获得hash值，生成一个EntryNode对象，初始化对象的hash，key,value
+
+
+Collections:集合类的工具类
+提供各种静态方法，可以通过Collections.方法名 直接调用，用于集合处理
+具体方法可以查看API，这里不具体介绍
+
+集合的常用实现类：
+List：
+ArrayList:数组列表，存放到List中的元素按照位置顺序存放
+List中位置是从0开始计数的,如果index超出List的长度，会导致异常
+存值：add(Object);
+插入值：add(index,Object）
+取值：get(index);//其中index从0开始取
+删除：remove(index）
+替代：set(index,Object);
+排序：利用Collections中的sort方法对list列表排序
+1.默认排序Collections.sort(list) 按照从小到大顺序排序
+
+2.自定义排序 重写sort方法中的Comparator类的compare方法
+Collections.sort(list, new Comparator<T>(){
+//重写Compare方法
+
+ArrayList是不同步的，也就是线程不安全的，多线程情况下，多个线程可以同时操作一个ArrayList导致读写错误
+
+Vector:和ArrayList功能一样，不过Vector是同步的，线程安全
+
+LinkedList:链表
+LinkedList是一个双向链表，能够当做堆，队列或双端队列处理。
+
+Set：
+HashSet：散列存放数据，数据并不会顺序存放
+HashSet不能添加重复值
+存值：add(Object) 不能插入值
+删除：remove(Object）指定删除的对象，不能通过下标（因为根本没有下标）
+循环：for-each循环 和Iterator迭代器循环，迭代器循环时线程安全的，当循环时如果set内容更改，将异常提示
+Iterator<T> it = set.iterator();
+while (it.hashNext()) {
+it.next();
+}
+
+TreeSet:使用自然顺序存放数据，插入值会自动进行排序
+
+
+
+
+Java中的多线程，线程安全和线程池
+Java中集合类型
+*线程控制修饰符：synchronized，volatile
+synchronized：同步修饰符，用于方法和变量，代码块之前，对修饰对象加锁，防止多个线程同时访问
+ 
+volatile:只能修饰变量，主要用在多个线程感知实例变量被更改了场合。它强制线程每次从
+主内存中读取变量，而不是从线程的私有内存中读取变量，使得各个线程获得最新的值
+从而保证了数据的可见性。但是volatile并不阻止多线程同时操作变量，导致线程并不安全
+当执行++操作时会造成线程冲突
+
+一.Java中多线程
+1.线程创建
+继承Thread类、实现Runnable接口、通过Callable和Future创建线程（不常用）
+
+
+继承Thread类的线程类，重写类中run()方法
+在main或者其他类中通过 new线程对象，线程对象调用start()方法，启动线程，线程运行run()方法
+ThreadTest tt = new ThreadTest();
+tt.start()//启动线程，线程执行run()方法
+tt.run()//执行run()方法
+
+线程对象可以调用run()，但是这种情况下并不会创建线程。
+
+实现Runnable接口的县城类，实现接口中run()方法
+在main或者其他类中，启动方式和继承Thread类的方式有些区别：需要借助Thread类
+RunnableTest rt = new RunnableTest();
+Thread trt = new Thread(rt);
+rt.start();
+
+2.线程状态：
+
+
+
+二.线程池：Executor
+Executor是一个顶层接口，只声明了一个execute()方法
+ExecutorService继承Executor,并增加submit、invokeAll、invokeAny、shutDown方法
+ThreadPoolExecutor实现ExecutorService接口，通过改变初始参数可以设定不同的线程类型
+但是不建议使用，通常使用Executors线程池工厂创建创建特定的线程池。
+Executors作为线程池的工厂类，提供不同的线程池
+ExecutorService threadService = Executors.线程池类型
+下面常用的线程池本质上就是ThreadPoolExecutor类的对象，只是通过工厂模式生成特定对象
+
+常用线程池：
+1.定长线程池：Executors.newFixedThreadPool(5);
+指定线程池的大小，多的线程不执行，等到线程池中的线程执行完成之后才会执行
+
+2.定时线程池：Executors.newScheduledThreadPool(int corePoolSize);
+ScheduleExecutorService scheduleThreadPool = Executors.newScheduleThreadPool(5);
+scheduleThreadPool.schedule(Runnable command, Long delay, TimeUnit unit)
+command:线程对象
+delay:延迟时间
+TimeUnit:延迟时间单位
+TimeUnit.DAYS/HOURS/MINUTES/SECONDS/MICROSECONDS/MILLISECONDS
+
+3.带缓存的线程池：Executors.newCacheThreadPool();
+线程池大小是无穷大的，但是线程池中执行过得线程会缓存在线程池中，当有相同线程对象需要执行时
+会调用线程池中的线程，而不是启动一个新线程。
+
+4.单线程模式：Executors.newSingleThreadPool();
+
+
+线程锁：
+
+

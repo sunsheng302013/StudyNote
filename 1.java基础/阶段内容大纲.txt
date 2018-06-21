@@ -1,0 +1,52 @@
+培训内容：
+Java类包
+一、java.lang:Java基础类型及包装类型
+
+二、Java选择，判断，循环
+
+三、Java面向对象概念
+
+四、Java.util: List，Map, Set, Collections
+
+五、Java.io: ImputStream, OutputStream, BufferReader, BufferWriter
+
+    Java.net: Socket, URL
+
+六、Java.sql: Connection, Statement, ResultSet等JDBC相关类
+
+
+
+
+
+目的：
+Java入门，了解Java常用类和Java面向对象概念 
+
+
+具体内容：
+一、java.lang:Java基础类型及包装类型
+
+Java基础类型：byte, short, int,     long, double, float, char
+Java包装类型：Byte，Short，Integer，Long，Double，Float，Char
+字符串类型：String，StringBuffer，StringBuilder
+数组介绍，System对象介绍
+
+二、Java.util*
+Collection集合对象
+List，Set, Map接口
+接口的常用实现类：
+List-ArrayList，LinkList，Vector
+Set-HashSet，TreeSet
+Map-HashMap，HashTable，TreeMap
+集合的使用中会用到线程，因此将会重点讲解
+java.lang Thread,Runable,Comparable
+
+三、Java.io.*，java.net
+io类和net类通常一起使用，实现网络通讯
+InputStream-FileInputStream
+OutputStream-FileOutputStream
+InputStreamReader-BufferReader
+OutputStreamWriter-BufferWriter
+
+四、Java.sql 
+
+五、反射
