@@ -248,6 +248,7 @@ SqlSession sqlSession = SqlSessionFactory.openSession()
 4: 创建映射对象
 TeacherMapper tm = sqlSession.getMapper(TeacherMapper.class);
 通过映射对象，可以调映射接口中的方法，实现数据库操作。
+
 ```
 public class MybatisUtil {
 
@@ -283,8 +284,8 @@ public class TeacherDaoImpl implements ITeacherDao {
         return t;
     }
 }
-```
 
+```
 ### 5. 创建service类
 
 Service类比较简单，在我们这个项目中基本上没有什么操作
@@ -321,6 +322,7 @@ public class TeacherController {
         return teacher;
     }
 }
+
 ```
 ### 7. 创建测试类
 在web项目中，spring容器的初始化是由tomcat等容器启动的，但是在非web项目中，需要自己加载spring配置文件，对spring进行初始化，spring初始化之后spring注解等功能才会生效。测试类Main主要作用就是加载spring配置文件，初始化spring容器。
@@ -337,6 +339,7 @@ public class Main {
     }
 }
 ```
+
 其中最重要的两个步骤是：
 1：加载applicationContext.xml文件,生成上下文对象ac
 ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
