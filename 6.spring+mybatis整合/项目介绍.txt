@@ -1,6 +1,6 @@
 制作了五个demo
 springTest1,2,3是Spring整合mybatis
-springBoot1,2是springBoot整合mybatis（还没写完）
+springBoot1,2是springBoot整合mybatis（还没写）
 
 spring整合mybatis的配置环境：
 win10,jdk8,tomcat8.5,eclipse4.7.3。jar包的版本可以直接引入我提供的jar包
