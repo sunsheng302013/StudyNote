@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.dao.BossMapper">
+  <resultMap id="BaseResultMap" type="com.cq.model.Boss">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="boss_login_id" jdbcType="VARCHAR" property="bossLoginId" />
+    <result column="boss_name" jdbcType="VARCHAR" property="bossName" />
+    <result column="boss_pwd" jdbcType="VARCHAR" property="bossPwd" />
+    <result column="boss_email" jdbcType="VARCHAR" property="bossEmail" />
+    <result column="boss_role" jdbcType="BIT" property="bossRole" />
+    <result column="boss_money" jdbcType="INTEGER" property="bossMoney" />
+    <result column="is_status" jdbcType="BIT" property="isStatus" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, boss_login_id, boss_name, boss_pwd, boss_email, boss_role, boss_money, is_status, 
+    gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fss_boss
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fss_boss
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.model.Boss">
+    insert into fss_boss (id, boss_login_id, boss_name, 
+      boss_pwd, boss_email, boss_role, 
+      boss_money, is_status, gmt_create, 
+      gmt_modified)
+    values (#{id,jdbcType=INTEGER}, #{bossLoginId,jdbcType=VARCHAR}, #{bossName,jdbcType=VARCHAR}, 
+      #{bossPwd,jdbcType=VARCHAR}, #{bossEmail,jdbcType=VARCHAR}, #{bossRole,jdbcType=BIT}, 
+      #{bossMoney,jdbcType=INTEGER}, #{isStatus,jdbcType=BIT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.model.Boss">
+    insert into fss_boss
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bossLoginId != null">
+        boss_login_id,
+      </if>
+      <if test="bossName != null">
+        boss_name,
+      </if>
+      <if test="bossPwd != null">
+        boss_pwd,
+      </if>
+      <if test="bossEmail != null">
+        boss_email,
+      </if>
+      <if test="bossRole != null">
+        boss_role,
+      </if>
+      <if test="bossMoney != null">
+        boss_money,
+      </if>
+      <if test="isStatus != null">
+        is_status,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bossLoginId != null">
+        #{bossLoginId,jdbcType=VARCHAR},
+      </if>
+      <if test="bossName != null">
+        #{bossName,jdbcType=VARCHAR},
+      </if>
+      <if test="bossPwd != null">
+        #{bossPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="bossEmail != null">
+        #{bossEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="bossRole != null">
+        #{bossRole,jdbcType=BIT},
+      </if>
+      <if test="bossMoney != null">
+        #{bossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="isStatus != null">
+        #{isStatus,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.model.Boss">
+    update fss_boss
+    <set>
+      <if test="bossLoginId != null">
+        boss_login_id = #{bossLoginId,jdbcType=VARCHAR},
+      </if>
+      <if test="bossName != null">
+        boss_name = #{bossName,jdbcType=VARCHAR},
+      </if>
+      <if test="bossPwd != null">
+        boss_pwd = #{bossPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="bossEmail != null">
+        boss_email = #{bossEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="bossRole != null">
+        boss_role = #{bossRole,jdbcType=BIT},
+      </if>
+      <if test="bossMoney != null">
+        boss_money = #{bossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="isStatus != null">
+        is_status = #{isStatus,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.model.Boss">
+    update fss_boss
+    set boss_login_id = #{bossLoginId,jdbcType=VARCHAR},
+      boss_name = #{bossName,jdbcType=VARCHAR},
+      boss_pwd = #{bossPwd,jdbcType=VARCHAR},
+      boss_email = #{bossEmail,jdbcType=VARCHAR},
+      boss_role = #{bossRole,jdbcType=BIT},
+      boss_money = #{bossMoney,jdbcType=INTEGER},
+      is_status = #{isStatus,jdbcType=BIT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
