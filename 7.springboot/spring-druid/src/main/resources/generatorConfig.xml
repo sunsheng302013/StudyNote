@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="D:/repo/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar" />
+	<context id="my" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="false" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/company" userId="root"
+			password="012315" />
+
+		<javaModelGenerator targetPackage="com.shyroke.model" targetProject="druidTest/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mappers" targetProject="druidTest/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator targetPackage="com.shyroke.dao" targetProject="druidTest/src/main/java" type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="dept_emp" domainObjectName="DeptEmp" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true">
+		</table>
+		
+		<table tableName="dept_manager" domainObjectName="DeptManager" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true">
+		</table>
+		
+		<table tableName="employees" domainObjectName="Employees" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true">
+		</table>
+		
+		<table tableName="salaries" domainObjectName="Salaries" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true">
+		</table>
+
+	</context>
+</generatorConfiguration>

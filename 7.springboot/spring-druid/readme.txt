@@ -1,0 +1,8 @@
+springboot整合druid线程池
+
+需要在本地建一个数据库 company,执行company.sql会创建四个类
+
+之后直接执行SpringbootMybatisDruidApplication类就可以启动项目
+
+浏览器localhost:8080/druid/login.html 登录druid控制台
+项目执行的sql在控制台中可以看到
