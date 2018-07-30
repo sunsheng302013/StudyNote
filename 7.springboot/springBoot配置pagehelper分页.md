@@ -28,6 +28,15 @@ mybatis自带的分页比较简单，主要是通过sql中limit实现分页。
 
 ## 2. 使用pageHelper分页插件查询
 
+使用pageHelper需要先在pom.xml中添加依赖
+
+```xml
+<dependency>
+     <groupId>com.github.pagehelper</groupId>
+     <artifactId>pagehelper</artifactId>
+</dependency>
+```
+
 pageHelper的优点在于，查询的结果会保存在PageInfo对象中，PageInfo对象中保存有记录总数，分页查询的结果。只需要在mapper中写一个查询语句，就可以了。
 
 ```xml
@@ -40,7 +49,7 @@ mapper中写的查询比较简单
 
 ```java
 public PageInfo<User> getAllUser(int pageNo, int pageSize) {
-    PageHelper.start(pageNo, pagesize);
+    PageHelper.startPage(pageNo, pagesize);
     List<User> userList = userDao.selectAll(pageNo, pageSize);
     PageInfo pageInfo = new PageInfo<User>(userList);
 }
