@@ -1,21 +1,20 @@
 package com.shyroke.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.shyroke.model.Salaries;
-import com.shyroke.model.SalariesKey;
 
 @Mapper
 public interface SalariesDao {
-    int deleteByPrimaryKey(SalariesKey key);
-
-    int insert(Salaries record);
+    int deleteByPrimaryKey(int key);
 
     int insertSelective(Salaries record);
 
-    Salaries selectByPrimaryKey(SalariesKey key);
+    List<Salaries> selectAll();
+    
+    Salaries selectByPrimaryKey(int i);
 
     int updateByPrimaryKeySelective(Salaries record);
-
-    int updateByPrimaryKey(Salaries record);
 }

@@ -10,8 +10,6 @@ import com.shyroke.model.Employees;
 public interface EmployeesDao {
     int deleteByPrimaryKey(Integer empNo);
 
-    int insert(Employees record);
-
     int insertSelective(Employees record);
 
     Employees selectByPrimaryKey(Integer empNo);
@@ -20,5 +18,4 @@ public interface EmployeesDao {
 
     int updateByPrimaryKeySelective(Employees record);
 
-    int updateByPrimaryKey(Employees record);
 }

@@ -3,6 +3,8 @@ package com.shyroke.model;
 import java.util.Date;
 
 public class Employees {
+    private Long id;
+
     private Integer empNo;
 
     private Date birthDate;
@@ -14,6 +16,14 @@ public class Employees {
     private String gender;
 
     private Date hireDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Integer getEmpNo() {
         return empNo;

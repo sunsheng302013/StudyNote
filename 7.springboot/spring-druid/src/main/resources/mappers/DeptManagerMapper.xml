@@ -2,40 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shyroke.dao.DeptManagerDao">
   <resultMap id="BaseResultMap" type="com.shyroke.model.DeptManager">
-    <id column="emp_no" jdbcType="INTEGER" property="empNo" />
-    <id column="dept_no" jdbcType="CHAR" property="deptNo" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dept_no" jdbcType="CHAR" property="deptNo" />
+    <result column="emp_no" jdbcType="INTEGER" property="empNo" />
     <result column="from_date" jdbcType="DATE" property="fromDate" />
     <result column="to_date" jdbcType="DATE" property="toDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    emp_no, dept_no, from_date, to_date
+    id, dept_no, emp_no, from_date, to_date
   </sql>
-  <select id="selectByPrimaryKey" parameterType="com.shyroke.model.DeptManagerKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from dept_manager
-    where emp_no = #{empNo,jdbcType=INTEGER}
-      and dept_no = #{deptNo,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.shyroke.model.DeptManagerKey">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from dept_manager
-    where emp_no = #{empNo,jdbcType=INTEGER}
-      and dept_no = #{deptNo,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.shyroke.model.DeptManager">
-    insert into dept_manager (emp_no, dept_no, from_date, 
-      to_date)
-    values (#{empNo,jdbcType=INTEGER}, #{deptNo,jdbcType=CHAR}, #{fromDate,jdbcType=DATE}, 
-      #{toDate,jdbcType=DATE})
-  </insert>
+  
   <insert id="insertSelective" parameterType="com.shyroke.model.DeptManager">
     insert into dept_manager
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="empNo != null">
-        emp_no,
+      <if test="id != null">
+        id,
       </if>
       <if test="deptNo != null">
         dept_no,
+      </if>
+      <if test="empNo != null">
+        emp_no,
       </if>
       <if test="fromDate != null">
         from_date,
@@ -45,11 +42,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="empNo != null">
-        #{empNo,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="deptNo != null">
         #{deptNo,jdbcType=CHAR},
+      </if>
+      <if test="empNo != null">
+        #{empNo,jdbcType=INTEGER},
       </if>
       <if test="fromDate != null">
         #{fromDate,jdbcType=DATE},
@@ -59,9 +59,16 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.shyroke.model.DeptManager">
     update dept_manager
     <set>
+      <if test="deptNo != null">
+        dept_no = #{deptNo,jdbcType=CHAR},
+      </if>
+      <if test="empNo != null">
+        emp_no = #{empNo,jdbcType=INTEGER},
+      </if>
       <if test="fromDate != null">
         from_date = #{fromDate,jdbcType=DATE},
       </if>
@@ -69,14 +76,7 @@
         to_date = #{toDate,jdbcType=DATE},
       </if>
     </set>
-    where emp_no = #{empNo,jdbcType=INTEGER}
-      and dept_no = #{deptNo,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shyroke.model.DeptManager">
-    update dept_manager
-    set from_date = #{fromDate,jdbcType=DATE},
-      to_date = #{toDate,jdbcType=DATE}
-    where emp_no = #{empNo,jdbcType=INTEGER}
-      and dept_no = #{deptNo,jdbcType=CHAR}
-  </update>
+  
 </mapper>

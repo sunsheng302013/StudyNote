@@ -25,7 +25,7 @@ public class EmployeesController {
 	
 	@ResponseBody
 	@RequestMapping(value="/list")
-	public List<Employees> list() {
+	public  List<Employees> list() {
 		return employeesDao.selectAll();
 	}
 	
