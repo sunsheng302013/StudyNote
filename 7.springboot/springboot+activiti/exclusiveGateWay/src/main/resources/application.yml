@@ -1,0 +1,18 @@
+server:
+  port: 8080
+security:
+  basic:
+    enabled: false
+
+spring.activiti.check-process-definitions: false
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/activiti?useSSL=false
+    username: root
+    password: "012315"
+    driver-class-name: com.mysql.jdbc.Driver
+    
+mybatis:
+  type-aliases-package: com.cq.model
+  mapper-locations: classpath:mappers/*.xml
