@@ -57,13 +57,4 @@ public class DataSourceConfig {
         return dynamicDataSource;
     }
 
-    /**
-     * 配置@Transactional注解事物
-     * 
-     * @return
-     */
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dynamicDataSource());
-    }
 }
