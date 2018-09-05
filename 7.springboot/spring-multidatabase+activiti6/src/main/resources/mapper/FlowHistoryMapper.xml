@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.differ.jackyun.oa.dao.FlowHistoryDao" >
+  <resultMap id="BaseResultMap" type="com.differ.jackyun.oa.model.FlowHistory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="business_key" property="businessKey" jdbcType="BIGINT" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="VARCHAR" />
+    <result column="operate_department" property="operateDepartment" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    id, business_key, task_name, operate_time, operate_department, operator, comment, 
+    gmt_create, gmt_modified
+  </sql>
+ 
+  <select id="listByKey" resultMap="BaseResultMap" parameterType="object" >
+    select 
+    <include refid="Base_Column_List" />
+    from j_flow_history
+    where business_key = #{businessKey}
+  </select>
+   
+  <insert id="insert" parameterType="com.differ.jackyun.oa.model.FlowHistory" >
+    insert into j_flow_history (id, business_key, task_name, 
+      operate_time, operate_department, operator, 
+      comment
+      )
+    values (#{id,jdbcType=INTEGER}, #{businessKey,jdbcType=BIGINT}, #{taskName,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=VARCHAR}, #{operateDepartment,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+   
+</mapper>
