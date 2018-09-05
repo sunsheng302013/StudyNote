@@ -10,6 +10,7 @@ DynamicDataSourceAspect：AOP切面类，通过自定义注解实现数据源动
 
 DS：切库注解
 
+activiti流程表放在activiti_flow数据库中，在项目第一次启动时会自动在数据库中生成28张表
+数据库的配置在OaPrimaryDataSourceConfig类中
 
-
-
+j_depart_info中是需要建立的业务表
