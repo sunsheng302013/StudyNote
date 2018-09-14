@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="myProcess1536904748952" name="程前并行网关测试" isExecutable="true">
+    <startEvent id="startevent1" name="Start"/>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask3"/>
+    <endEvent id="endevent2" name="End"/>
+    <userTask id="usertask3" name="申请资金" activiti:assignee="${user3}"/>
+    <sequenceFlow id="flow2" sourceRef="usertask3" targetRef="usertask5"/>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"/>
+    <sequenceFlow id="flow3" sourceRef="exclusivegateway4" targetRef="usertask6">
+      <conditionExpression xsi:type="tFormalExpression">${days&gt;10}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="exclusivegateway4" targetRef="parallelgateway7">
+      <conditionExpression xsi:type="tFormalExpression">${days&lt;=10}</conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask5" name="组长审批" activiti:assignee="${user5}"/>
+    <sequenceFlow id="flow5" sourceRef="usertask5" targetRef="exclusivegateway4"/>
+    <userTask id="usertask6" name="部门经理审批" activiti:assignee="${user6}"/>
+    <sequenceFlow id="flow6" sourceRef="usertask6" targetRef="usertask8"/>
+    <parallelGateway id="parallelgateway7" name="Parallel Gateway"/>
+    <sequenceFlow id="flow7" sourceRef="parallelgateway7" targetRef="usertask10"/>
+    <sequenceFlow id="flow8" sourceRef="parallelgateway7" targetRef="usertask9"/>
+    <userTask id="usertask8" name="总经理审批" activiti:assignee="${user8}"/>
+    <sequenceFlow id="flow9" sourceRef="usertask8" targetRef="usertask12"/>
+    <userTask id="usertask9" name="人事审批" activiti:assignee="${user9}"/>
+    <sequenceFlow id="flow10" sourceRef="usertask9" targetRef="parallelgateway11"/>
+    <userTask id="usertask10" name="部门经理审批" activiti:assignee="${user10}"/>
+    <sequenceFlow id="flow11" sourceRef="usertask10" targetRef="parallelgateway11"/>
+    <parallelGateway id="parallelgateway11" name="Parallel Gateway"/>
+    <sequenceFlow id="flow12" sourceRef="parallelgateway11" targetRef="usertask8"/>
+    <userTask id="usertask12" name="人事备案" activiti:assignee="${user12}"/>
+    <sequenceFlow id="flow13" sourceRef="usertask12" targetRef="endevent2"/>
+  </process>
+</definitions>
