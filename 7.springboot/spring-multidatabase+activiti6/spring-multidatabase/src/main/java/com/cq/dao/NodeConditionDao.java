@@ -31,7 +31,7 @@ public interface NodeConditionDao {
      * @param nodeId
      * @return
      */
-    public List<NodeConditionDTO> selectNodeCondition(@Param(value = "nodeId") Long nodeId);
+    public List<NodeConditionDTO> listNodeCondition(@Param(value = "nodeId") Long nodeId);
 
     /**
      * 根据id删除流转配置项
@@ -42,7 +42,7 @@ public interface NodeConditionDao {
 
     /**
      * 根据nodeId获取只想该节点的流转配置项
-     * 
+     *
      * @param nodeId
      * @return
      */

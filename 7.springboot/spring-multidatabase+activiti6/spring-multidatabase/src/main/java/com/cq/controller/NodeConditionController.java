@@ -62,7 +62,7 @@ public class NodeConditionController extends BaseController {
      * @return
      */
     @PostMapping("/selectflownode")
-    public JackYunResponse<Object> selectFlowNodeInCondition(Long flowId) {
+    public JackYunResponse<Object> FlowNodeInCondition(Long flowId) {
         List<FlowNodeDTO> flowNodeList = flowNodeService.selectNodeInCondition(flowId);
         return sendSuccessData(flowNodeList);
     }
@@ -80,14 +80,16 @@ public class NodeConditionController extends BaseController {
     }
 
     /**
-     * 查询节点流转配置项
+     *
+     * 查询节点流转配置项(表头查询+左侧筛选过滤)
      *
      * @param nodeId
      * @return
      */
-    @GetMapping("/selectnodecondition")
-    public JackYunResponse<Object> selectNodeCondition(Long nodeId) {
-        List<NodeConditionDTO> nodeConditionList = nodeConditionService.selectNodeCondition(nodeId);
+    @GetMapping("/list")
+    public JackYunResponse<Object> listNodeCondition(Long nodeId) {
+
+        List<NodeConditionDTO> nodeConditionList = nodeConditionService.listNodeCondition(nodeId);
         return sendSuccessData(nodeConditionList);
     }
 

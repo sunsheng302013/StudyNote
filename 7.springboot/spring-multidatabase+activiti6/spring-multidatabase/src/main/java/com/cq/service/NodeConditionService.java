@@ -38,7 +38,7 @@ public interface NodeConditionService {
      * @param nodeId
      * @return
      */
-    public List<NodeConditionDTO> selectNodeCondition(Long nodeId);
+    public List<NodeConditionDTO> listNodeCondition(Long nodeId);
 
     /**
      * 删除节点流转配置
@@ -49,7 +49,7 @@ public interface NodeConditionService {
 
     /**
      * 删除节点后更新流转配置
-     * 
+     *
      * @param nodeId
      */
     public void afterDelete(Long nodeId);

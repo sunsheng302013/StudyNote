@@ -1,0 +1,24 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.cq.config.DataSourceConfig",
+      "name": "spring.datasource.db1",
+      "sourceMethod": "public javax.sql.DataSource dataSource1() ",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "com.cq.config.DataSourceConfig",
+      "name": "spring.datasource.db2",
+      "sourceMethod": "public javax.sql.DataSource dataSource2() ",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "com.cq.config.OaPrimaryDataSourceConfig",
+      "name": "spring.primary.datasource",
+      "sourceMethod": "public javax.sql.DataSource activitiDataSource() ",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": []
+}

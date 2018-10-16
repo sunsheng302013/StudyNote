@@ -68,8 +68,8 @@ public class NodeConditionServiceImpl implements NodeConditionService {
 
     @Override
     @DS
-    public List<NodeConditionDTO> selectNodeCondition(Long nodeId) {
-        List<NodeConditionDTO> nodeConditionList = nodeConditionDao.selectNodeCondition(nodeId);
+    public List<NodeConditionDTO> listNodeCondition(Long nodeId) {
+        List<NodeConditionDTO> nodeConditionList = nodeConditionDao.listNodeCondition(nodeId);
         for (NodeConditionDTO nodeCondition : nodeConditionList) {
             String operateCondition = "";
             String formAttribute = "";
@@ -99,7 +99,7 @@ public class NodeConditionServiceImpl implements NodeConditionService {
     @DS
     public void afterDelete(Long nodeId) {
         List<NodeCondition> lastNodeConditionList = nodeConditionDao.getLastNodeCondition(nodeId);
-        List<NodeConditionDTO> nodeConditionList = nodeConditionDao.selectNodeCondition(nodeId);
+        List<NodeConditionDTO> nodeConditionList = nodeConditionDao.listNodeCondition(nodeId);
 
         for (NodeCondition lastNnodeCondition : lastNodeConditionList) {
             for (NodeConditionDTO nodeCondition : nodeConditionList) {

@@ -107,7 +107,7 @@ public class FlowNodeServiceImpl implements FlowNodeService {
     @Override
     @DS
     public void deleteNodeInCondition(Long nodeId) {
-        List<NodeConditionDTO> nodeConditionList = nodeConditionDao.selectNodeCondition(nodeId);
+        List<NodeConditionDTO> nodeConditionList = nodeConditionDao.listNodeCondition(nodeId);
         if (nodeConditionList != null && nodeConditionList.size() > 0) {
 
         } else {
