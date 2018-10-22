@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.dao.user.UserInfoDao">
+  <resultMap id="BaseResultMap" type="com.cq.model.user.UserInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_alias" jdbcType="VARCHAR" property="userAlias" />
+    <result column="order_pos" jdbcType="INTEGER" property="orderPos" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, user_name, user_alias, order_pos, sex, birthday, gmt_create, gmt_modified
+  </sql>
+  
+  <select id="listUserInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select * from user_info where user_id = #{userId}
+  </select>
+  
+</mapper>
