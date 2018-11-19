@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.dao.UserFlowDao" >
+  <resultMap id="BaseResultMap" type="com.cq.model.UserFlow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="business_key" property="businessKey" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="flow_id" property="flowId" jdbcType="BIGINT" />
+    <result column="form_id" property="formId" jdbcType="BIGINT" />
+    <result column="next_node_id" property="nextNodeId" jdbcType="VARCHAR" />
+    <result column="participant_user_id" property="participantUserId" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, user_id, flow_id, form_id, next_node_id, participant_user_id, gmt_create, gmt_modified
+  </sql>
+  
+  <delete id="delete" parameterType="object" >
+      delete from j_user_flow where participant_user_id = #{participantUserId,jdbcType=BIGINT} 
+      and business_key = #{businessKey,jdbcType=BIGINT}
+      and user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  
+  <delete id="batchDelete" parameterType="java.util.List" >
+      delete from j_user_flow where id in
+      <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+       </foreach>
+  </delete>
+  
+   <insert id="insert" parameterType="object" >
+      insert into j_user_flow (id, user_id, flow_id,form_id, next_node_id, participant_user_id, business_key)
+      values
+      (#{id,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},
+      #{flowId,jdbcType=BIGINT},#{formId,jdbcType=BIGINT},
+      #{nextNodeId,jdbcType=VARCHAR},#{participantUserId,jdbcType=BIGINT}, #{businessKey,jdbcType=BIGINT})
+  </insert>
+  
+  <update id="updateNextNodeId" parameterType="map">
+      update j_user_flow set  next_node_id=#{userFlowUpdate.nextNodeId}, participant_user_id = #{userFlowUpdate.participantUserId}
+      where business_key=#{userFlowUpdate.businessKey}
+      and participant_user_id = #{currentUserId}
+  </update>
+  
+  <select id="getUserFlow" parameterType="map" resultMap="BaseResultMap">
+   select * from  j_user_flow  where business_key=#{businessKey,jdbcType=BIGINT}
+   and participant_user_id = #{participantUserId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="getFormId" parameterType="java.lang.Long" resultType="java.lang.Long">
+   select distinct form_id from  j_user_flow  where business_key=#{businessKey,jdbcType=BIGINT}
+  </select>
+  
+  <select id="getUserFlowBusinesKey" parameterType="object" resultMap="BaseResultMap">
+    select * from  j_user_flow   where  user_id=#{userId} and  flow_id=#{flowId} and form_id=#{formId}
+  </select>
+   
+</mapper>

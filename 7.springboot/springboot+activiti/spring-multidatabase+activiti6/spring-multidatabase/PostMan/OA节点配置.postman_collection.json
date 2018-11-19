@@ -1,0 +1,562 @@
+{
+	"id": "18e69672-15be-4506-a28a-a22e78d4cace",
+	"name": "OA节点配置",
+	"description": null,
+	"auth": null,
+	"events": null,
+	"variables": null,
+	"order": [
+		"11d9b1a6-aa7a-47fd-9957-a88c7a5f30d8",
+		"09f6efdd-f562-4030-b510-a0e264fca09e",
+		"aab92f75-add2-4e01-ad1e-c02cef0da8b6",
+		"b6353290-b6a1-4ac2-81f2-db0ab7e29ba6",
+		"4b00f7ee-bc36-4142-85b7-2effb9372ed9",
+		"e8690985-d1fa-405d-b5d4-a77de5121196",
+		"fa974326-6205-4e7b-9b93-8ef073f819ea",
+		"886898cd-6d3c-4eb8-bfec-9e705433670f",
+		"5e3ea3a7-08f3-41af-9c2a-282ea06b9376",
+		"3d46c77d-beda-4c7b-8c61-a60e60e5ea3f",
+		"ebd8d55a-8167-4db2-9ae7-790f18291f4b"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "09f6efdd-f562-4030-b510-a0e264fca09e",
+			"name": "节点配置-新增节点",
+			"url": "http://localhost:8080/oa/flownode/save",
+			"description": "",
+			"data": [
+				{
+					"key": "flowId",
+					"value": "20180829",
+					"sessionValue": "20180829",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nodeName",
+					"value": "申请固定资产",
+					"sessionValue": "申请固定资产",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "category",
+					"value": "2",
+					"sessionValue": "2",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "participant",
+					"value": "4",
+					"sessionValue": "4",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "11d9b1a6-aa7a-47fd-9957-a88c7a5f30d8",
+			"name": "节点配置-查询节点",
+			"url": "http://localhost:8080/oa/flownode/selectall?flowId=437329172379730049&category=3",
+			"description": "节点配置查询",
+			"data": [
+				{
+					"key": "nodeId",
+					"value": "1000",
+					"sessionValue": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nextNodeId",
+					"value": "10003",
+					"sessionValue": "开始节点",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "positionIds",
+					"value": "[2]",
+					"sessionValue": "[1,2,3]",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "flowId",
+					"value": "437329172379730049",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "category",
+					"value": "3",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3d46c77d-beda-4c7b-8c61-a60e60e5ea3f",
+			"name": "流转配置-根据步骤类型查询节点",
+			"url": "http://localhost:8080/oa/flownode/selectbycategory?category=2&flowId=20180829",
+			"description": "",
+			"data": [
+				{
+					"key": "flowId",
+					"value": "20180829",
+					"sessionValue": "20180829",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "category",
+					"value": "2",
+					"sessionValue": "2",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "category",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "flowId",
+					"value": "20180829",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4b00f7ee-bc36-4142-85b7-2effb9372ed9",
+			"name": "流转配置-添加节点",
+			"url": "http://localhost:8080/oa/nodecondition/addflownode",
+			"description": "",
+			"data": [
+				{
+					"key": "nodeId",
+					"value": "438934712254326656",
+					"sessionValue": "438935830598379393",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "serialNum",
+					"value": "1",
+					"sessionValue": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "5e3ea3a7-08f3-41af-9c2a-282ea06b9376",
+			"name": "流转配置-更新流转配置项",
+			"url": "http://localhost:8080/oa/nodecondition/updatenodecondition",
+			"description": "",
+			"data": [
+				{
+					"key": "nodeId",
+					"value": "438934712254326656",
+					"sessionValue": "438935830598379393",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nextNodeId",
+					"value": "438964656866977664",
+					"sessionValue": "438964656866977664",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "formAttribute",
+					"value": "time",
+					"sessionValue": "days",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "operateCondition",
+					"value": "<=",
+					"sessionValue": ">",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "formValue",
+					"value": "360",
+					"sessionValue": "3",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "55",
+					"sessionValue": "55",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "886898cd-6d3c-4eb8-bfec-9e705433670f",
+			"name": "流转配置-删除流转配置项",
+			"url": "http://localhost:8080/oa/nodecondition/deletenodecondition",
+			"description": "",
+			"data": [
+				{
+					"key": "id",
+					"value": "54",
+					"sessionValue": "54",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "aab92f75-add2-4e01-ad1e-c02cef0da8b6",
+			"name": "流转配置-查询节点",
+			"url": "http://localhost:8080/oa/nodecondition/selectflownode",
+			"description": "",
+			"data": [
+				{
+					"key": "flowId",
+					"value": "438773464369463424",
+					"sessionValue": "438935830598379393",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "b6353290-b6a1-4ac2-81f2-db0ab7e29ba6",
+			"name": "节点配置-删除节点",
+			"url": "http://localhost:8080/oa/flownode/delete",
+			"description": "",
+			"data": [
+				{
+					"key": "nodeId",
+					"value": "438942105553987456",
+					"sessionValue": "438935830598379393",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e8690985-d1fa-405d-b5d4-a77de5121196",
+			"name": "流转配置-移除节点",
+			"url": "http://localhost:8080/oa/nodecondition/deleteflownode",
+			"description": "",
+			"data": [
+				{
+					"key": "nodeId",
+					"value": "438934712254326656",
+					"sessionValue": "438935830598379393",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ebd8d55a-8167-4db2-9ae7-790f18291f4b",
+			"name": "流转配置-查询流转配置项",
+			"url": "http://localhost:8080/oa/nodecondition/selectnodecondition?nodeId=438934712254326656",
+			"description": "",
+			"data": [
+				{
+					"key": "flowId",
+					"value": "20180829",
+					"sessionValue": "20180829",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "category",
+					"value": "2",
+					"sessionValue": "2",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "nodeId",
+					"value": "438934712254326656",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "fa974326-6205-4e7b-9b93-8ef073f819ea",
+			"name": "流转配置-新建流转配置项",
+			"url": "http://localhost:8080/oa/nodecondition/savenodecondition",
+			"description": "",
+			"data": [
+				{
+					"key": "nodeId",
+					"value": "438934712254326656",
+					"sessionValue": "438935830598379393",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nextNodeId",
+					"value": "438964656866977664",
+					"sessionValue": "438964656866977664",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "formAttribute",
+					"value": "days",
+					"sessionValue": "days",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "operateCondition",
+					"value": ">",
+					"sessionValue": ">",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "formValue",
+					"value": "3",
+					"sessionValue": "3",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		}
+	]
+}

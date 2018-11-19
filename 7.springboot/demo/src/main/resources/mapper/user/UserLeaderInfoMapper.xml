@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.dao.user.UserLeaderInfoDao" >
+  <resultMap id="BaseResultMap" type="com.cq.model.user.UserLeaderInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="erp_user_id" property="erpUserId" jdbcType="BIGINT" />
+    <result column="erp_user_name" property="erpUserName" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, user_id, erp_user_id, erp_user_name, gmt_create, gmt_modified
+  </sql>
+  
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from j_oa_user_leader_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByUserId" parameterType="java.lang.Long" >
+    delete from j_oa_user_leader_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <!-- 批量删除 -->
+  <delete id="deleteBatchByUserId" parameterType="object" >
+    delete from j_oa_user_leader_info
+    where user_id IN
+    <foreach collection="list" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+	 </foreach>
+  </delete>
+  
+  <!-- 批量删除直属上级信息 -->
+  <delete id="deleteParentPosition" parameterType="object" >
+    delete from j_oa_user_leader_info
+    where type = 0 and user_id IN
+    <foreach collection="list" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+	 </foreach>
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="object" >
+    delete from j_oa_user_leader_info
+    where user_id IN
+    <foreach collection="list" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+	 </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.cq.model.user.UserLeaderInfo" >
+    insert into j_oa_user_leader_info
+    (type, user_id, erp_user_id, erp_user_name)
+      values
+      <foreach collection = "list" item="leader" index = "index" separator = ",">
+      (#{leader.type},
+       #{leader.userId},
+       #{leader.erpUserId},
+       #{leader.erpUserName})
+      </foreach>
+  </insert>
+  
+  <insert id="insertBatch">
+    insert into j_oa_user_leader_info
+    (type, user_id, erp_user_id, erp_user_name)
+      values
+      <foreach collection = "userIds" item="userId" index = "index" separator = ",">
+          <foreach collection = "userLeaderList" item="leader" index = "index" separator = ",">
+              (0,
+              #{userId},
+              #{leader.erpUserId},
+              #{leader.erpUserName})
+          </foreach>
+      </foreach>
+  </insert>
+  
+</mapper>

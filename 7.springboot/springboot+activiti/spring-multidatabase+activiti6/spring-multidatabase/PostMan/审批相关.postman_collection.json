@@ -1,0 +1,114 @@
+{
+	"id": "96b89cca-7b58-4f6e-97aa-8ffdf9538de3",
+	"name": "审批相关",
+	"description": null,
+	"auth": null,
+	"events": null,
+	"variables": null,
+	"order": [
+		"84082c7d-5ab3-4556-9b63-4f6202bbe2af",
+		"e488a9ed-fbf4-440e-a268-e2e9f050df5a"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "84082c7d-5ab3-4556-9b63-4f6202bbe2af",
+			"name": "查询登录用户当前任务",
+			"url": "http://localhost:8080/oa/findtasklistbyname",
+			"description": "",
+			"data": [
+				{
+					"key": "days",
+					"value": "10",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": false
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"sessionValue": "1",
+					"description": "",
+					"type": "text",
+					"enabled": false
+				},
+				{
+					"key": "flowId",
+					"value": "440269177920528256",
+					"sessionValue": "440269177920528256",
+					"description": "",
+					"type": "text",
+					"enabled": false
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e488a9ed-fbf4-440e-a268-e2e9f050df5a",
+			"name": "执行当前用户任务",
+			"url": "http://localhost:8080/oa/examine",
+			"description": "",
+			"data": [
+				{
+					"key": "taskId",
+					"value": "5017",
+					"sessionValue": "5017",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "examineType",
+					"value": "0",
+					"sessionValue": "0",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "flowId",
+					"value": "20180914",
+					"sessionValue": "20180914",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		}
+	]
+}

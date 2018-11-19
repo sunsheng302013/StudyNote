@@ -1,0 +1,140 @@
+{
+	"id": "f224bcba-17a9-4848-bc01-213bc6d22389",
+	"name": "请假流程相关",
+	"description": null,
+	"auth": null,
+	"events": null,
+	"variables": null,
+	"order": [
+		"670b4e18-e593-4371-bed3-dbb60bd6711d",
+		"391fd256-746e-4a2d-a04c-a6a3d87adb44",
+		"4223e0fa-128f-41f9-812f-a11e54220ab9"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "391fd256-746e-4a2d-a04c-a6a3d87adb44",
+			"name": "生成流程文件",
+			"url": "http://localhost:8080/oa/deploy",
+			"description": "",
+			"data": [
+				{
+					"key": "flowId",
+					"value": "440269177920528256",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4223e0fa-128f-41f9-812f-a11e54220ab9",
+			"name": "申请请假单",
+			"url": "http://localhost:8080/oa/form/create",
+			"description": "",
+			"data": [
+				{
+					"key": "days",
+					"value": "10",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "userId",
+					"value": "1",
+					"sessionValue": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "flowId",
+					"value": "20180914",
+					"sessionValue": "440269177920528256",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "670b4e18-e593-4371-bed3-dbb60bd6711d",
+			"name": "用户登录",
+			"url": "http://localhost:8080/oa/login",
+			"description": "",
+			"data": [
+				{
+					"key": "userName",
+					"value": "张三",
+					"sessionValue": "张三",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "123",
+					"sessionValue": "123",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		}
+	]
+}

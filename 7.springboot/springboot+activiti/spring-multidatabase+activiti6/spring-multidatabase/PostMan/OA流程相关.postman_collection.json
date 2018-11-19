@@ -1,0 +1,131 @@
+{
+	"id": "bf204079-7f2e-4801-b166-86755f92a59d",
+	"name": "OA流程相关",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"264b4402-9dfa-4f0c-81fe-f41d0ba0d530",
+		"bcb3d8b0-52ca-4f8b-af1d-7ba8fa847596",
+		"0eab038e-b9c0-4fbd-8b15-94237b4a0a90"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "0eab038e-b9c0-4fbd-8b15-94237b4a0a90",
+			"name": "流程列表",
+			"url": "http://localhost:8080/oa/flow/list",
+			"description": "",
+			"data": [],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "264b4402-9dfa-4f0c-81fe-f41d0ba0d530",
+			"name": "添加流程",
+			"url": "http://localhost:8080/oa/flow/create",
+			"description": "",
+			"data": [
+				{
+					"key": "flowName",
+					"value": "程前测试请假流程",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "flowDescription",
+					"value": "程前测试请假流程",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "bcb3d8b0-52ca-4f8b-af1d-7ba8fa847596",
+			"name": "流程修改",
+			"url": "http://localhost:8080/oa/flow/update",
+			"description": "",
+			"data": [
+				{
+					"key": "flowName",
+					"value": "程前测试请假流程",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "flowDescription",
+					"value": "程前测试请假",
+					"sessionValue": "程前测试请假流程",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "flowId",
+					"value": "438984336910444416",
+					"sessionValue": "438984336910444416",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "mem_name",
+					"value": "oa_demo",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "mem_name: oa_demo\n",
+			"pathVariables": {}
+		}
+	]
+}
