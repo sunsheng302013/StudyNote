@@ -165,7 +165,7 @@ public class IdCardValidator {
      *            15位身份证号
      * @return 18位身份证号
      */
-    private static String convertIdcarBy15bit(String idcard) {
+    public static String convertIdcarBy15bit(String idcard) {
         String idcard17 = null;
         // 非15位身份证
         if (idcard.length() != UserIdCardEnum.num15.getCode()) {

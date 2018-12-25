@@ -11,7 +11,7 @@ import java.util.Date;
 import org.springframework.stereotype.Service;
 
 import com.cq.common.enums.user.UserIdCardEnum;
-import com.cq.dto.user.UserDTO;
+import com.cq.dto.user.UserIdCardDTO;
 import com.cq.service.user.UserIdCardAnalyzeService;
 
 /**
@@ -26,10 +26,11 @@ import com.cq.service.user.UserIdCardAnalyzeService;
 public class UserIdCardAnalyzeServiceImpl implements UserIdCardAnalyzeService {
 
     @Override
-    public UserDTO getUser(UserDTO userDto) {
-        userDto.setBirthdate(getBirthByIdCard(userDto.getIdCardNo()));
-        userDto.setAge(getAgeByIdCard(userDto.getIdCardNo()));
-        userDto.setSex(getGenderByIdCard(userDto.getIdCardNo()));
+    public UserIdCardDTO getUser(String idCardNo) {
+        UserIdCardDTO userDto = new UserIdCardDTO();
+        userDto.setBirthdate(getBirthByIdCard(idCardNo));
+        userDto.setAge(getAgeByIdCard(idCardNo));
+        userDto.setSex(getGenderByIdCard(idCardNo));
         return userDto;
     }
 

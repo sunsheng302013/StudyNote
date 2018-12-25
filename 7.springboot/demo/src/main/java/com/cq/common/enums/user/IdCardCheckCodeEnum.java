@@ -88,9 +88,11 @@ public enum IdCardCheckCodeEnum implements CodeEnum {
      * @return code
      */
     public static Integer getCodeByMsg(String msg) {
-        for (IdCardCheckCodeEnum status : IdCardCheckCodeEnum.values()) {
-            if (msg.equals(status.getMsg())) {
-                return status.getCode();
+        if (null != msg && !"".equals(msg)) {
+            for (IdCardCheckCodeEnum status : IdCardCheckCodeEnum.values()) {
+                if (msg.equals(status.getMsg())) {
+                    return status.getCode();
+                }
             }
         }
         return null;
@@ -104,9 +106,11 @@ public enum IdCardCheckCodeEnum implements CodeEnum {
      * @return 信息
      */
     public static String getMsgByCode(Integer code) {
-        for (IdCardCheckCodeEnum status : IdCardCheckCodeEnum.values()) {
-            if (code.equals(status.getCode())) {
-                return status.getMsg();
+        if (null != code) {
+            for (IdCardCheckCodeEnum status : IdCardCheckCodeEnum.values()) {
+                if (code.equals(status.getCode())) {
+                    return status.getMsg();
+                }
             }
         }
         return null;

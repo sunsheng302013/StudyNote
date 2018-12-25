@@ -18,12 +18,12 @@ import com.cq.common.convert.ListHeaderConverter;
 import com.cq.common.enums.ResultCode;
 import com.cq.common.utils.DeserializationConverter;
 import com.cq.dto.user.UserDTO;
+import com.cq.dto.user.UserIdCardDTO;
 import com.cq.dto.user.UserQueryDTO;
 import com.cq.dto.user.UserTransferQueryDTO;
 import com.cq.dto.user.UserTransferResultDTO;
 import com.cq.dto.user.UserUpdateBatchDTO;
 import com.cq.model.user.UserLog;
-import com.cq.model.user.UserSpecialInfo;
 import com.cq.service.user.UserLogService;
 import com.cq.service.user.UserService;
 
@@ -62,17 +62,29 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 选择未建档人员(选择未归档人员，解析身份信息，不保存)
+     * 查询人员档案基本信息
      *
-     * @param user
-     *            人员档案Json串
+     * @param userId
+     *            人员ID
+     * @return 职位list
+     */
+    @GetMapping("/get")
+    public JackYunResponse<Object> getUser(Long userId) {
+        List<UserDTO> userList = userService.getUser(userId);
+        return sendSuccessData(userList);
+    }
+
+    /**
+     * 解析身份信息
+     *
+     * @param idCardNo
+     *            人员身份证
      * @return 新建人员档案
      */
     @PostMapping("/select")
-    public JackYunResponse<Object> selectUser(String user) {
-        UserDTO userDto = DeserializationConverter.jsonToEntity(user, UserDTO.class);
-        userDto = userService.selectUser(userDto);
-        return sendSuccessData(userDto);
+    public JackYunResponse<Object> selectUser(String idCardNo) {
+        UserIdCardDTO userIdCardDTO = userService.selectUser(idCardNo);
+        return sendSuccessData(userIdCardDTO);
     }
 
     /**
@@ -134,17 +146,6 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 查询技能特长
-     *
-     * @return 技能特长
-     */
-    @GetMapping("/special")
-    public JackYunResponse<Object> listUserSpecial() {
-        List<UserSpecialInfo> logList = userService.listUserSpecial();
-        return sendSuccessData(logList);
-    }
-
-    /**
      * 人事调动时查询人员信息
      *
      * @param userTransferQueryDto
@@ -152,8 +153,8 @@ public class UserController extends BaseController {
      * @return 人员信息
      */
     @GetMapping("/transfer")
-    public JackYunResponse<Object> transferList(UserTransferQueryDTO userTransferQueryDto) {
-        List<UserTransferResultDTO> userTransferResultDtoList = userService.transferList(userTransferQueryDto);
+    public JackYunResponse<Object> transferList(UserTransferQueryDTO userTransferQueryDto, PageInfo page) {
+        List<UserTransferResultDTO> userTransferResultDtoList = userService.transferList(page, userTransferQueryDto);
         return sendSuccessData(userTransferResultDtoList);
     }
 }

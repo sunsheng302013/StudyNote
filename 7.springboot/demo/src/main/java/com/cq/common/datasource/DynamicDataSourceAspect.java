@@ -13,7 +13,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import com.cq.common.annotation.DS;
+import com.cq.common.annotation.DFDatasourceSwitcher;
 
 /**
  * 自定义注解 + AOP的方式实现数据源动态切换。 Created by pure on 2018-05-06.
@@ -27,11 +27,11 @@ public class DynamicDataSourceAspect {
      * 
      * @param point
      *            切点
-     * @param ds
+     * @param DFDatasourceSwitcher
      *            注解
      */
-    @Before("@annotation(ds)")
-    public void beforeSwitchDS(JoinPoint point, DS ds) {
+    @Before("@annotation(DFDatasourceSwitcher)")
+    public void beforeSwitchDS(JoinPoint point, DFDatasourceSwitcher DFDatasourceSwitcher) {
         // 获得当前访问的class
         Class<?> className = point.getTarget().getClass();
         // 获得访问的方法名
@@ -43,8 +43,8 @@ public class DynamicDataSourceAspect {
             // 得到访问的方法对象
             Method method = className.getMethod(methodName, argClass);
             // 判断是否存在@DS注解
-            if (method.isAnnotationPresent(DS.class)) {
-                DS annotation = method.getAnnotation(DS.class);
+            if (method.isAnnotationPresent(DFDatasourceSwitcher.class)) {
+                DFDatasourceSwitcher annotation = method.getAnnotation(DFDatasourceSwitcher.class);
                 // 取出注解中的数据源名
                 dataSource = annotation.value();
             }
@@ -60,11 +60,11 @@ public class DynamicDataSourceAspect {
      * 
      * @param point
      *            切点
-     * @param ds
+     * @param DFDatasourceSwitcher
      *            注解
      */
-    @After("@annotation(ds)")
-    public void afterSwitchDS(JoinPoint point, DS ds) {
+    @After("@annotation(DFDatasourceSwitcher)")
+    public void afterSwitchDS(JoinPoint point, DFDatasourceSwitcher DFDatasourceSwitcher) {
         DataSourceContextHolder.clearDB();
     }
 }

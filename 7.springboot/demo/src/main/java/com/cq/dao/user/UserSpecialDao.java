@@ -40,11 +40,13 @@ public interface UserSpecialDao {
     /**
      * 插入技能特长
      *
+     * @param userId
+     *            人员ID
      * @param userSpecialList
      *            技能特长
      * @return 插入行数
      */
-    int insert(List<UserSpecialDTO> userSpecialList);
+    int insert(@Param(value = "userId") Long userId, @Param(value = "userSpecialList") List<UserSpecialDTO> userSpecialList);
 
     /**
      * 根据UserId查询技能特长

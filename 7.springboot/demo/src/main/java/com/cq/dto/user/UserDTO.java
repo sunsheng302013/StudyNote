@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.cq.common.convert.DateConverter;
+import com.cq.common.convert.DateConverterPlus;
 import com.cq.model.file.File;
-import com.cq.model.user.UserLeaderInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -25,6 +24,9 @@ public class UserDTO implements Serializable {
 
     /** 主键ID */
     private Integer id;
+
+    /** 操作类别 0新增用户，1修改用户 **/
+    private Integer operatorType;
 
     /** 人员档案id */
     private Long userId;
@@ -47,17 +49,11 @@ public class UserDTO implements Serializable {
     /** 用户头像key */
     private String imgKey;
 
-    /** 证件类型 默认0 0身份证 1护照 */
-    private Integer idCardType;
-
     /** 证件号 */
     private String idCardNo;
 
-    /** 出生日期类型 默认0 0阳历 1阴历 */
-    private Integer birthdateType;
-
     /** 出生日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date birthdate;
 
     /** 年龄 */
@@ -65,6 +61,7 @@ public class UserDTO implements Serializable {
 
     /** 性别默认0 男0、女1 */
     private Integer sex;
+    private String sexName;
 
     /** 工号（系统账号） */
     private String userCode;
@@ -88,7 +85,7 @@ public class UserDTO implements Serializable {
     private String className;
 
     /** 入职日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date entryDate;
 
     /** 司龄 */
@@ -101,15 +98,15 @@ public class UserDTO implements Serializable {
     private Integer delayDay;
 
     /** 转正日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date regularDate;
 
     /** 离职日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date leaveDate;
 
     /** 参加工作日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date startworkDate;
 
     /** 社会工龄 */
@@ -117,21 +114,29 @@ public class UserDTO implements Serializable {
 
     /** 任职类型 默认0 全职0、兼职1、实习2 */
     private Integer jobCategory;
+    private String jobCategoryName;
 
     /** 人员类别 默认0 正式工0、合同工1、临时工2、退休返聘3、劳务派遣4 */
     private Integer userCategory;
+    private String userCategoryName;
 
     /** 婚姻情况 默认0 未婚0、已婚1、离婚2、丧偶3、不详4 */
     private Integer maritalStatus;
+    private String maritalStatusName;
 
     /** 孕育状况 默认0 未育0、已育1 */
     private Integer pregnantStatus;
+    private String pregnantStatusName;
 
     /** 户口类别 默认0 本地城镇0、外地城镇1、本地农村2、外地农村3 */
     private Integer accountCategory;
+    private String accountCategoryName;
 
     /** 户口地址 */
     private String accountAddress;
+
+    /** 籍贯 **/
+    private String birthPlace;
 
     /** 民族 */
     private String nation;
@@ -144,9 +149,10 @@ public class UserDTO implements Serializable {
 
     /** 政治面貌 默认0 群众0、共青团员1、中共党员2、中共预备党员3、民主党派4 */
     private Integer politicsStatus;
+    private String politicsStatusName;
 
     /** 入党日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date joinPartyDate;
 
     /** 技能特长 **/
@@ -164,14 +170,8 @@ public class UserDTO implements Serializable {
     /** 办公号码 */
     private String officePhone;
 
-    /** 内线电话 */
-    private String housePhone;
-
     /** 邮箱 */
     private String mail;
-
-    /** 个人网址 */
-    private String profileUrl;
 
     /** 现居住地址 */
     private String address;
@@ -180,15 +180,20 @@ public class UserDTO implements Serializable {
     private String homeAddress;
 
     /** 入职体检日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date physicalDate;
 
     /** 入职培训日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date trainDate;
 
-    /** 网络招聘0、校园招聘1、招聘会2、内推3、猎头4、其他5 */
+    /** 招聘渠道：招聘网站0、官方邮箱1、内推2、同业推荐3、猎头4、招聘会5、宣讲会6 */
+    private Integer recruitChannel;
+    private String recruitChannelName;
+
+    /** 招聘方式：0社招，1校招 */
     private Integer recruitType;
+    private String recruitTypeName;
 
     /** 内推人姓名 */
     private String pushUsername;
@@ -201,24 +206,22 @@ public class UserDTO implements Serializable {
 
     /** 是否在编 0不在编 1在编 */
     private Integer isOrganised;
+    private String isOrganisedName;
 
     /** 人员状态 0在职 1不在职 2停职 3离职 4退休 5借调 */
     private Integer userStatus;
-
-    /** 直接上级职位（任职人） **/
-    private List<UserLeaderInfo> parentPosition;
-
-    /** 直接管理职位（任职人） **/
-    private List<UserLeaderInfo> subPosition;
+    private String userStatusName;
 
     /** 上下级关系 0上级，1下级 **/
-    private List<UserLeaderInfo> userLeaderList;
+    private List<UserLeaderInfoDTO> leaderAndSubordinate;
 
     /** 学历状态 **/
     private Integer eduStatus;
+    private String eduStatusName;
 
     /** 最高学历 **/
     private Integer educationLevel;
+    private String educationLevelName;
 
     /** 专业 **/
     private String major;
@@ -227,15 +230,16 @@ public class UserDTO implements Serializable {
     private String school;
 
     /** 毕业时间 **/
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date endDate;
 
     /** 近期合同到期时间 **/
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date labourContractDate;
 
     /** 合同签订情况 **/
     private String labourContractType;
+    private String labourContractTypeName;
 
     /** 个人附件ID **/
     private Long fileId;
@@ -244,11 +248,11 @@ public class UserDTO implements Serializable {
     private List<File> fileList;
 
     /** */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date gmtCreate;
 
     /** */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date gmtModified;
 
     /**
@@ -279,6 +283,21 @@ public class UserDTO implements Serializable {
      */
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    /**
+     * @return the operatorType
+     */
+    public Integer getOperatorType() {
+        return operatorType;
+    }
+
+    /**
+     * @param operatorType
+     *            要设置的 operatorType
+     */
+    public void setOperatorType(Integer operatorType) {
+        this.operatorType = operatorType;
     }
 
     /**
@@ -372,21 +391,6 @@ public class UserDTO implements Serializable {
     }
 
     /**
-     * @return the idCardType
-     */
-    public Integer getIdCardType() {
-        return idCardType;
-    }
-
-    /**
-     * @param idCardType
-     *            要设置的 idCardType
-     */
-    public void setIdCardType(Integer idCardType) {
-        this.idCardType = idCardType;
-    }
-
-    /**
      * @return the idCardNo
      */
     public String getIdCardNo() {
@@ -399,21 +403,6 @@ public class UserDTO implements Serializable {
      */
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
-    }
-
-    /**
-     * @return the birthdateType
-     */
-    public Integer getBirthdateType() {
-        return birthdateType;
-    }
-
-    /**
-     * @param birthdateType
-     *            要设置的 birthdateType
-     */
-    public void setBirthdateType(Integer birthdateType) {
-        this.birthdateType = birthdateType;
     }
 
     /**
@@ -537,18 +526,18 @@ public class UserDTO implements Serializable {
     }
 
     /**
-     * @return the userLeaderList
+     * @return the leaderAndSubordinate
      */
-    public List<UserLeaderInfo> getUserLeaderList() {
-        return userLeaderList;
+    public List<UserLeaderInfoDTO> getLeaderAndSubordinate() {
+        return leaderAndSubordinate;
     }
 
     /**
-     * @param userLeaderList
-     *            要设置的 userLeaderList
+     * @param leaderAndSubordinate
+     *            要设置的 leaderAndSubordinate
      */
-    public void setUserLeaderList(List<UserLeaderInfo> userLeaderList) {
-        this.userLeaderList = userLeaderList;
+    public void setLeaderAndSubordinate(List<UserLeaderInfoDTO> leaderAndSubordinate) {
+        this.leaderAndSubordinate = leaderAndSubordinate;
     }
 
     /**
@@ -762,6 +751,21 @@ public class UserDTO implements Serializable {
     }
 
     /**
+     * @return the birthPlace
+     */
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    /**
+     * @param birthPlace
+     *            要设置的 birthPlace
+     */
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    /**
      * @return the nation
      */
     public String getNation() {
@@ -897,21 +901,6 @@ public class UserDTO implements Serializable {
     }
 
     /**
-     * @return the housePhone
-     */
-    public String getHousePhone() {
-        return housePhone;
-    }
-
-    /**
-     * @param housePhone
-     *            要设置的 housePhone
-     */
-    public void setHousePhone(String housePhone) {
-        this.housePhone = housePhone;
-    }
-
-    /**
      * @return the mail
      */
     public String getMail() {
@@ -924,21 +913,6 @@ public class UserDTO implements Serializable {
      */
     public void setMail(String mail) {
         this.mail = mail;
-    }
-
-    /**
-     * @return the profileUrl
-     */
-    public String getProfileUrl() {
-        return profileUrl;
-    }
-
-    /**
-     * @param profileUrl
-     *            要设置的 profileUrl
-     */
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
     }
 
     /**
@@ -1122,36 +1096,6 @@ public class UserDTO implements Serializable {
     }
 
     /**
-     * @return the parentPosition
-     */
-    public List<UserLeaderInfo> getParentPosition() {
-        return parentPosition;
-    }
-
-    /**
-     * @param parentPosition
-     *            要设置的 parentPosition
-     */
-    public void setParentPosition(List<UserLeaderInfo> parentPosition) {
-        this.parentPosition = parentPosition;
-    }
-
-    /**
-     * @return the subPosition
-     */
-    public List<UserLeaderInfo> getSubPosition() {
-        return subPosition;
-    }
-
-    /**
-     * @param subPosition
-     *            要设置的 subPosition
-     */
-    public void setSubPosition(List<UserLeaderInfo> subPosition) {
-        this.subPosition = subPosition;
-    }
-
-    /**
      * @return the entryAge
      */
     public Double getEntryAge() {
@@ -1329,6 +1273,231 @@ public class UserDTO implements Serializable {
      */
     public void setFileList(List<File> fileList) {
         this.fileList = fileList;
+    }
+
+    /**
+     * @return the educationLevelName
+     */
+    public String getEducationLevelName() {
+        return educationLevelName;
+    }
+
+    /**
+     * @param educationLevelName
+     *            要设置的 educationLevelName
+     */
+    public void setEducationLevelName(String educationLevelName) {
+        this.educationLevelName = educationLevelName;
+    }
+
+    /**
+     * @return the recruitChannel
+     */
+    public Integer getRecruitChannel() {
+        return recruitChannel;
+    }
+
+    /**
+     * @param recruitChannel
+     *            要设置的 recruitChannel
+     */
+    public void setRecruitChannel(Integer recruitChannel) {
+        this.recruitChannel = recruitChannel;
+    }
+
+    /**
+     * @return the recruitChannelName
+     */
+    public String getRecruitChannelName() {
+        return recruitChannelName;
+    }
+
+    /**
+     * @param recruitChannelName
+     *            要设置的 recruitChannelName
+     */
+    public void setRecruitChannelName(String recruitChannelName) {
+        this.recruitChannelName = recruitChannelName;
+    }
+
+    /**
+     * @return the recruitTypeName
+     */
+    public String getRecruitTypeName() {
+        return recruitTypeName;
+    }
+
+    /**
+     * @param recruitTypeName
+     *            要设置的 recruitTypeName
+     */
+    public void setRecruitTypeName(String recruitTypeName) {
+        this.recruitTypeName = recruitTypeName;
+    }
+
+    /**
+     * @return the sexName
+     */
+    public String getSexName() {
+        return sexName;
+    }
+
+    /**
+     * @param sexName
+     *            要设置的 sexName
+     */
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
+    /**
+     * @return the jobCategoryName
+     */
+    public String getJobCategoryName() {
+        return jobCategoryName;
+    }
+
+    /**
+     * @param jobCategoryName
+     *            要设置的 jobCategoryName
+     */
+    public void setJobCategoryName(String jobCategoryName) {
+        this.jobCategoryName = jobCategoryName;
+    }
+
+    /**
+     * @return the userCategoryName
+     */
+    public String getUserCategoryName() {
+        return userCategoryName;
+    }
+
+    /**
+     * @param userCategoryName
+     *            要设置的 userCategoryName
+     */
+    public void setUserCategoryName(String userCategoryName) {
+        this.userCategoryName = userCategoryName;
+    }
+
+    /**
+     * @return the maritalStatusName
+     */
+    public String getMaritalStatusName() {
+        return maritalStatusName;
+    }
+
+    /**
+     * @param maritalStatusName
+     *            要设置的 maritalStatusName
+     */
+    public void setMaritalStatusName(String maritalStatusName) {
+        this.maritalStatusName = maritalStatusName;
+    }
+
+    /**
+     * @return the pregnantStatusName
+     */
+    public String getPregnantStatusName() {
+        return pregnantStatusName;
+    }
+
+    /**
+     * @param pregnantStatusName
+     *            要设置的 pregnantStatusName
+     */
+    public void setPregnantStatusName(String pregnantStatusName) {
+        this.pregnantStatusName = pregnantStatusName;
+    }
+
+    /**
+     * @return the accountCategoryName
+     */
+    public String getAccountCategoryName() {
+        return accountCategoryName;
+    }
+
+    /**
+     * @param accountCategoryName
+     *            要设置的 accountCategoryName
+     */
+    public void setAccountCategoryName(String accountCategoryName) {
+        this.accountCategoryName = accountCategoryName;
+    }
+
+    /**
+     * @return the politicsStatusName
+     */
+    public String getPoliticsStatusName() {
+        return politicsStatusName;
+    }
+
+    /**
+     * @param politicsStatusName
+     *            要设置的 politicsStatusName
+     */
+    public void setPoliticsStatusName(String politicsStatusName) {
+        this.politicsStatusName = politicsStatusName;
+    }
+
+    /**
+     * @return the isOrganisedName
+     */
+    public String getIsOrganisedName() {
+        return isOrganisedName;
+    }
+
+    /**
+     * @param isOrganisedName
+     *            要设置的 isOrganisedName
+     */
+    public void setIsOrganisedName(String isOrganisedName) {
+        this.isOrganisedName = isOrganisedName;
+    }
+
+    /**
+     * @return the userStatusName
+     */
+    public String getUserStatusName() {
+        return userStatusName;
+    }
+
+    /**
+     * @param userStatusName
+     *            要设置的 userStatusName
+     */
+    public void setUserStatusName(String userStatusName) {
+        this.userStatusName = userStatusName;
+    }
+
+    /**
+     * @return the eduStatusName
+     */
+    public String getEduStatusName() {
+        return eduStatusName;
+    }
+
+    /**
+     * @param eduStatusName
+     *            要设置的 eduStatusName
+     */
+    public void setEduStatusName(String eduStatusName) {
+        this.eduStatusName = eduStatusName;
+    }
+
+    /**
+     * @return the labourContractTypeName
+     */
+    public String getLabourContractTypeName() {
+        return labourContractTypeName;
+    }
+
+    /**
+     * @param labourContractTypeName
+     *            要设置的 labourContractTypeName
+     */
+    public void setLabourContractTypeName(String labourContractTypeName) {
+        this.labourContractTypeName = labourContractTypeName;
     }
 
 }

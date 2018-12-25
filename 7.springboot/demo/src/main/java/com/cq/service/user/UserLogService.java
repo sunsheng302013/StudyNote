@@ -4,7 +4,9 @@
 package com.cq.service.user;
 
 import java.util.List;
+import java.util.Map;
 
+import com.cq.dto.ImportExcelDTO;
 import com.cq.model.user.UserLog;
 
 /**
@@ -33,4 +35,10 @@ public interface UserLogService {
      * @return 人员档案操作日志list
      */
     List<UserLog> listUserLog(Long userId);
+
+    /**
+     * @param importDto
+     * @return
+     */
+    Map<String, Object> importUserLogCheck(ImportExcelDTO importDto);
 }

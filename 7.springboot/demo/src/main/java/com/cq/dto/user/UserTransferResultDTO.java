@@ -7,12 +7,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.cq.common.convert.DateConverter;
+import com.cq.common.convert.DateConverterPlus;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * <p>
- * 类描述:
+ * 类描述:人事调动查询人员档案返回信息
  * </p>
  *
  * @since 2018年11月13日
@@ -36,11 +36,12 @@ public class UserTransferResultDTO implements Serializable {
     private String userNo;
 
     /** 出生日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date birthdate;
 
     /** 性别默认0 男0、女1 */
     private Integer sex;
+    private String sexName;
 
     /** 所属公司ID */
     private Long companyId;
@@ -65,15 +66,18 @@ public class UserTransferResultDTO implements Serializable {
 
     /** 任职类型 全职0、兼职1、实习2 **/
     private Integer jobCategory;
+    private String jobCategoryName;
 
     /** 人员类别 正式工0、合同工1、临时工2、退休返聘3、劳务派遣4 **/
     private Integer userCategory;
+    private String userCategoryName;
 
     /** 人员状态 0在职 1不在职 2停职 3离职 4退休 5借调 **/
     private Integer userStatus;
+    private String userStatusName;
 
     /** 入职日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date entryDate;
 
     /** 试用期(月) */
@@ -83,8 +87,16 @@ public class UserTransferResultDTO implements Serializable {
     private Integer delayDay;
 
     /** 预期转正日期 */
-    @JsonSerialize(using = DateConverter.class)
+    @JsonSerialize(using = DateConverterPlus.class)
     private Date estimateRegularDate;
+
+    /** 转正日期 */
+    @JsonSerialize(using = DateConverterPlus.class)
+    private Date regularDate;
+
+    /** 合同有效期至 */
+    @JsonSerialize(using = DateConverterPlus.class)
+    private Date labourContractDate;
 
     /** 到期天数 **/
     private Integer maturityDay;
@@ -404,4 +416,93 @@ public class UserTransferResultDTO implements Serializable {
         this.userStatus = userStatus;
     }
 
+    /**
+     * @return the regularDate
+     */
+    public Date getRegularDate() {
+        return regularDate;
+    }
+
+    /**
+     * @param regularDate
+     *            要设置的 regularDate
+     */
+    public void setRegularDate(Date regularDate) {
+        this.regularDate = regularDate;
+    }
+
+    /**
+     * @return the labourContractDate
+     */
+    public Date getLabourContractDate() {
+        return labourContractDate;
+    }
+
+    /**
+     * @param labourContractDate
+     *            要设置的 labourContractDate
+     */
+    public void setLabourContractDate(Date labourContractDate) {
+        this.labourContractDate = labourContractDate;
+    }
+
+    /**
+     * @return the sexName
+     */
+    public String getSexName() {
+        return sexName;
+    }
+
+    /**
+     * @param sexName
+     *            要设置的 sexName
+     */
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
+    /**
+     * @return the jobCategoryName
+     */
+    public String getJobCategoryName() {
+        return jobCategoryName;
+    }
+
+    /**
+     * @param jobCategoryName
+     *            要设置的 jobCategoryName
+     */
+    public void setJobCategoryName(String jobCategoryName) {
+        this.jobCategoryName = jobCategoryName;
+    }
+
+    /**
+     * @return the userCategoryName
+     */
+    public String getUserCategoryName() {
+        return userCategoryName;
+    }
+
+    /**
+     * @param userCategoryName
+     *            要设置的 userCategoryName
+     */
+    public void setUserCategoryName(String userCategoryName) {
+        this.userCategoryName = userCategoryName;
+    }
+
+    /**
+     * @return the userStatusName
+     */
+    public String getUserStatusName() {
+        return userStatusName;
+    }
+
+    /**
+     * @param userStatusName
+     *            要设置的 userStatusName
+     */
+    public void setUserStatusName(String userStatusName) {
+        this.userStatusName = userStatusName;
+    }
 }

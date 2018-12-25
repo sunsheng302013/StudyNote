@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cq.dto.user.UserLeaderInfoDTO;
 import com.cq.model.user.UserLeaderInfo;
 
 /**
@@ -49,11 +50,13 @@ public interface UserLeaderInfoDao {
     /**
      * 插入直属上下级信息
      *
-     * @param userLeaderList
+     * @param userId
+     *            人员ID
+     * @param leaderAndSubordinate
      *            直属上下级信息
      * @return 插入行数
      */
-    int insert(List<UserLeaderInfo> userLeaderList);
+    int insert(@Param(value = "userId") Long userId, @Param(value = "leaderAndSubordinate") List<UserLeaderInfoDTO> leaderAndSubordinate);
 
     /**
      * 批量插入直属上下级信息

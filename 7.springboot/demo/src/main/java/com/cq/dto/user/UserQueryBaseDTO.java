@@ -4,8 +4,9 @@
 package com.cq.dto.user;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+
+import com.cq.common.annotation.DbTable;
 
 /**
  * <p>
@@ -23,18 +24,13 @@ public class UserQueryBaseDTO implements Serializable {
     /** 主键ID */
     private Integer id;
 
-    /** 左侧过滤-新增类型 **/
+    /** 左侧过滤-新增类型 今日新增0，昨日新增1，本周新增2， 本月新增3 **/
     private Integer addType;
-    /** 左侧过滤-新增时间 **/
-    private Date addDate;
-    /** > 大于 **/
-    private Date addDateGte;
-    /** < 小于 **/
-    private Date addDateLte;
 
     /** 人员档案id */
     private Long userId;
     private List<Long> userIds;
+    private List<Long> userIdList;
 
     /** erp用户id */
     private String erpUserId;
@@ -51,17 +47,9 @@ public class UserQueryBaseDTO implements Serializable {
     private String englishName;
     private String englishNameLike;
 
-    /** 证件类型 默认0 0身份证 1护照 */
-    private String idCardType;
-    private String idCardTypeIn;
-
     /** 证件号 */
     private String idCardNo;
     private String idCardNoLike;
-
-    /** 出生日期类型 默认0 0阳历 1阴历 */
-    private String birthdateType;
-    private String birthdateTypeIn;
 
     /** 出生日期 */
     private String birthdate;
@@ -148,11 +136,15 @@ public class UserQueryBaseDTO implements Serializable {
     private String leaveDateLt;
 
     /** 直属上级 **/
+    @DbTable(name = "j_oa_user_leader_info")
     private String parentPosition;
+    @DbTable(name = "j_oa_user_leader_info")
     private String parentPositionLike;
 
     /** 直属下级 **/
+    @DbTable(name = "j_oa_user_leader_info")
     private String subPosition;
+    @DbTable(name = "j_oa_user_leader_info")
     private String subPositionLike;
 
     /** 任职类型 默认0 全职0、兼职1、实习2 */
@@ -171,8 +163,14 @@ public class UserQueryBaseDTO implements Serializable {
     private String accountAddress;
     private String accountAddressLike;
 
+    /** 籍贯 */
+    private String birthPlace;
+    private String birthPlaceLike;
+
     /** 技能特长id */
+    @DbTable(name = "j_oa_user_special")
     private String specialId;
+    @DbTable(name = "j_oa_user_special")
     private String specialIdIn;
 
     /** 手机号码 */
@@ -187,32 +185,40 @@ public class UserQueryBaseDTO implements Serializable {
     private String officePhone;
     private String officePhoneLike;
 
-    /** 内线电话 */
-    private String housePhone;
-    private String housePhoneLike;
-
     /** 邮箱 */
     private String mail;
     private String mailLike;
 
     /** 最高学历 **/
+    @DbTable(name = "j_oa_user_education_info")
     private String educationLevel;
+    @DbTable(name = "j_oa_user_education_info")
     private String educationLevelIn;
 
     /** 专业 **/
+    @DbTable(name = "j_oa_user_education_info")
     private String major;
+    @DbTable(name = "j_oa_user_education_info")
     private String majorLike;
 
     /** 学校 **/
+    @DbTable(name = "j_oa_user_education_info")
     private String school;
+    @DbTable(name = "j_oa_user_education_info")
     private String schoolLike;
 
     /** 毕业时间 **/
+    @DbTable(name = "j_oa_user_education_info")
     private String endDate;
+    @DbTable(name = "j_oa_user_education_info")
     private String endDateEquals;
+    @DbTable(name = "j_oa_user_education_info")
     private String endDateGte;
+    @DbTable(name = "j_oa_user_education_info")
     private String endDateLte;
+    @DbTable(name = "j_oa_user_education_info")
     private String endDateGt;
+    @DbTable(name = "j_oa_user_education_info")
     private String endDateLt;
 
     /**
@@ -246,51 +252,6 @@ public class UserQueryBaseDTO implements Serializable {
     }
 
     /**
-     * @return the addDate
-     */
-    public Date getAddDate() {
-        return addDate;
-    }
-
-    /**
-     * @param addDate
-     *            要设置的 addDate
-     */
-    public void setAddDate(Date addDate) {
-        this.addDate = addDate;
-    }
-
-    /**
-     * @return the addDateGte
-     */
-    public Date getAddDateGte() {
-        return addDateGte;
-    }
-
-    /**
-     * @param addDateGte
-     *            要设置的 addDateGte
-     */
-    public void setAddDateGte(Date addDateGte) {
-        this.addDateGte = addDateGte;
-    }
-
-    /**
-     * @return the addDateLte
-     */
-    public Date getAddDateLte() {
-        return addDateLte;
-    }
-
-    /**
-     * @param addDateLte
-     *            要设置的 addDateLte
-     */
-    public void setAddDateLte(Date addDateLte) {
-        this.addDateLte = addDateLte;
-    }
-
-    /**
      * @return the userId
      */
     public Long getUserId() {
@@ -318,6 +279,21 @@ public class UserQueryBaseDTO implements Serializable {
      */
     public void setUserIds(List<Long> userIds) {
         this.userIds = userIds;
+    }
+
+    /**
+     * @return the userIdList
+     */
+    public List<Long> getUserIdList() {
+        return userIdList;
+    }
+
+    /**
+     * @param userIdList
+     *            要设置的 userIdList
+     */
+    public void setUserIdList(List<Long> userIdList) {
+        this.userIdList = userIdList;
     }
 
     /**
@@ -426,36 +402,6 @@ public class UserQueryBaseDTO implements Serializable {
     }
 
     /**
-     * @return the idCardType
-     */
-    public String getIdCardType() {
-        return idCardType;
-    }
-
-    /**
-     * @param idCardType
-     *            要设置的 idCardType
-     */
-    public void setIdCardType(String idCardType) {
-        this.idCardType = idCardType;
-    }
-
-    /**
-     * @return the idCardTypeIn
-     */
-    public String getIdCardTypeIn() {
-        return idCardTypeIn;
-    }
-
-    /**
-     * @param idCardTypeIn
-     *            要设置的 idCardTypeIn
-     */
-    public void setIdCardTypeIn(String idCardTypeIn) {
-        this.idCardTypeIn = idCardTypeIn;
-    }
-
-    /**
      * @return the idCardNo
      */
     public String getIdCardNo() {
@@ -483,21 +429,6 @@ public class UserQueryBaseDTO implements Serializable {
      */
     public void setIdCardNoLike(String idCardNoLike) {
         this.idCardNoLike = idCardNoLike;
-    }
-
-    /**
-     * @return the birthdateType
-     */
-    public String getBirthdateType() {
-        return birthdateType;
-    }
-
-    /**
-     * @param birthdateType
-     *            要设置的 birthdateType
-     */
-    public void setBirthdateType(String birthdateType) {
-        this.birthdateType = birthdateType;
     }
 
     /**
@@ -1476,6 +1407,36 @@ public class UserQueryBaseDTO implements Serializable {
     }
 
     /**
+     * @return the birthPlace
+     */
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    /**
+     * @param birthPlace
+     *            要设置的 birthPlace
+     */
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    /**
+     * @return the birthPlaceLike
+     */
+    public String getBirthPlaceLike() {
+        return birthPlaceLike;
+    }
+
+    /**
+     * @param birthPlaceLike
+     *            要设置的 birthPlaceLike
+     */
+    public void setBirthPlaceLike(String birthPlaceLike) {
+        this.birthPlaceLike = birthPlaceLike;
+    }
+
+    /**
      * @return the phone
      */
     public String getPhone() {
@@ -1563,36 +1524,6 @@ public class UserQueryBaseDTO implements Serializable {
      */
     public void setOfficePhoneLike(String officePhoneLike) {
         this.officePhoneLike = officePhoneLike;
-    }
-
-    /**
-     * @return the housePhone
-     */
-    public String getHousePhone() {
-        return housePhone;
-    }
-
-    /**
-     * @param housePhone
-     *            要设置的 housePhone
-     */
-    public void setHousePhone(String housePhone) {
-        this.housePhone = housePhone;
-    }
-
-    /**
-     * @return the housePhoneLike
-     */
-    public String getHousePhoneLike() {
-        return housePhoneLike;
-    }
-
-    /**
-     * @param housePhoneLike
-     *            要设置的 housePhoneLike
-     */
-    public void setHousePhoneLike(String housePhoneLike) {
-        this.housePhoneLike = housePhoneLike;
     }
 
     /**
@@ -1803,21 +1734,6 @@ public class UserQueryBaseDTO implements Serializable {
      */
     public void setEndDateLt(String endDateLt) {
         this.endDateLt = endDateLt;
-    }
-
-    /**
-     * @return the birthdateTypeIn
-     */
-    public String getBirthdateTypeIn() {
-        return birthdateTypeIn;
-    }
-
-    /**
-     * @param birthdateTypeIn
-     *            要设置的 birthdateTypeIn
-     */
-    public void setBirthdateTypeIn(String birthdateTypeIn) {
-        this.birthdateTypeIn = birthdateTypeIn;
     }
 
     /**

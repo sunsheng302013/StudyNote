@@ -40,9 +40,11 @@ public interface FileDao {
     /**
      * 插入附件信息
      *
+     * @param fileId
+     *            附件ID
      * @param fileList
      *            附件信息
      * @return 插入行数
      */
-    Integer insert(@Param(value = "fileList") List<File> fileList);
+    Integer insert(@Param(value = "fileId") Long fileId, @Param(value = "fileList") List<File> fileList);
 }

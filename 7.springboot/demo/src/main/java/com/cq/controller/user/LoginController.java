@@ -9,7 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +40,7 @@ public class LoginController extends BaseController {
      *            session信息
      * @return 登录验证结果
      */
-    @PostMapping("/login")
+    @GetMapping("/login")
     public JackYunResponse<Object> login(UserLogin user, HttpSession session) {
         List<UserLogin> list = userInfoService.login(user);
         if (list.size() == 0) {

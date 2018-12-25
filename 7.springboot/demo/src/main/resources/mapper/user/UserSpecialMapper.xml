@@ -42,11 +42,12 @@
 
   <insert id="insert" parameterType="object">
     insert into j_oa_user_special
-    (user_id, special_id)
+    (user_id, special_id, special_name)
       values
-      <foreach collection = "list" item="special" index = "index" separator = ",">
-      (#{special.userId},
-       #{special.specialId})
+      <foreach collection = "userSpecialList" item="special" index = "index" separator = ",">
+      (#{userId},
+       #{special.specialId},
+       #{special.specialName})
       </foreach>
   </insert>
 </mapper>

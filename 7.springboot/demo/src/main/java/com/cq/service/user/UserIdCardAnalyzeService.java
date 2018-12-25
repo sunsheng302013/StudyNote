@@ -3,7 +3,7 @@
  */
 package com.cq.service.user;
 
-import com.cq.dto.user.UserDTO;
+import com.cq.dto.user.UserIdCardDTO;
 
 /**
  * <p>
@@ -18,9 +18,9 @@ public interface UserIdCardAnalyzeService {
     /**
      * 根据身份证解析用户信息
      *
-     * @param userDto
-     *            人员档案对象
+     * @param idCardNo
+     *            身份证号
      * @return 用户信息
      */
-    UserDTO getUser(UserDTO userDto);
+    UserIdCardDTO getUser(String idCardNo);
 }

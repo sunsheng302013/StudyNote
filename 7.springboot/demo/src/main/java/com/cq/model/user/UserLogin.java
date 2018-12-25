@@ -20,7 +20,7 @@ public class UserLogin implements Serializable {
     private String password;
 
     /** 是否删除，0不删除，1删除 */
-    private Byte isDeleted;
+    private Integer isDeleted;
 
     /**
      * @return the id
@@ -85,7 +85,7 @@ public class UserLogin implements Serializable {
     /**
      * @return the isDeleted
      */
-    public Byte getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
@@ -93,7 +93,7 @@ public class UserLogin implements Serializable {
      * @param isDeleted
      *            要设置的 isDeleted
      */
-    public void setIsDeleted(Byte isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 

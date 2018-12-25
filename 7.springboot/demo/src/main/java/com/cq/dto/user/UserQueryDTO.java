@@ -3,6 +3,8 @@ package com.cq.dto.user;
 import java.io.Serializable;
 import java.util.List;
 
+import com.cq.common.annotation.DbTable;
+
 /**
  *
  * <p>
@@ -33,6 +35,7 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     /** 是否在编过滤 0否，1是 **/
     private Integer isOrganisedLeft;
     /** 是否领导过滤 0否，1是 **/
+    @DbTable(name = "j_oa_user_leader_info")
     private Integer isLeaderLeft;
     /** 是否内推过滤 0否，1是 **/
     private Integer isPushLeft;
@@ -47,7 +50,8 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     /** 所属班组 **/
     private List<Long> classIds;
     /** 直属上级 **/
-    private List<Integer> leaders;
+    @DbTable(name = "j_oa_user_leader_info")
+    private List<Long> leaders;
     /** 任职类型 **/
     private List<Integer> jobCategorys;
     /** 人员类别 **/
@@ -57,9 +61,18 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     /** 省份 **/
     private List<String> provinces;
     /** 技能特长 **/
+    @DbTable(name = "j_oa_user_special")
     private List<Long> specialIds;
     /** 招聘方式 **/
     private List<Integer> recruitTypes;
+    /** 招聘渠道 **/
+    private List<Integer> recruitChannels;
+    /** 职称 **/
+    @DbTable(name = "j_oa_user_skill_info")
+    private String skillNameLike;
+    /** 工作单位 **/
+    @DbTable(name = "j_oa_user_work_experience_info")
+    private String workUnitLike;
     /** 是否内推 0否，1是，2所有 **/
     private Integer isPushType;
     /** 职务 erp岗位 **/
@@ -69,12 +82,15 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     /** 学历 **/
     private List<Integer> educationLevels;
     /** 合同签订情况 **/
+    @DbTable(name = "j_oa_user_labour_contract")
     private List<String> labourContractTypes;
     /** 入职日期 **/
     private String startEntryDate;
     private String endEntryDate;
     /** 近期合同到期时间 **/
+    @DbTable(name = "j_oa_user_labour_contract")
     private String startLabourContractDate;
+    @DbTable(name = "j_oa_user_labour_contract")
     private String endLabourContractDate;
     /** 离职日期 **/
     private String startLeaveDate;
@@ -146,10 +162,6 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     private String hobby;
     private String hobbyLike;
 
-    /** 个人网址 */
-    private String profileUrl;
-    private String profileUrlLike;
-
     /** 现居住地址 */
     private String address;
     private String addressLike;
@@ -174,7 +186,11 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     private String trainDateGt;
     private String trainDateLt;
 
-    /** 网络招聘0、校园招聘1、招聘会2、内推3、猎头4、其他5 */
+    /** 招聘渠道：0社招，1校招 */
+    private String recruitChannel;
+    private String recruitChannelIn;
+
+    /** 招聘方式：招聘网站0、官方邮箱1、内推2、同业推荐3、猎头4、招聘会5、宣讲会6 */
     private String recruitType;
     private String recruitTypeIn;
 
@@ -193,6 +209,7 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     /** 省 */
     private String province;
     private String provinceIn;
+    private String provinceLike;
 
     /** 市 */
     private String city;
@@ -795,36 +812,6 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
      */
     public void setHobbyLike(String hobbyLike) {
         this.hobbyLike = hobbyLike;
-    }
-
-    /**
-     * @return the profileUrl
-     */
-    public String getProfileUrl() {
-        return profileUrl;
-    }
-
-    /**
-     * @param profileUrl
-     *            要设置的 profileUrl
-     */
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
-    }
-
-    /**
-     * @return the profileUrlLike
-     */
-    public String getProfileUrlLike() {
-        return profileUrlLike;
-    }
-
-    /**
-     * @param profileUrlLike
-     *            要设置的 profileUrlLike
-     */
-    public void setProfileUrlLike(String profileUrlLike) {
-        this.profileUrlLike = profileUrlLike;
     }
 
     /**
@@ -1475,7 +1462,7 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
     /**
      * @return the leaders
      */
-    public List<Integer> getLeaders() {
+    public List<Long> getLeaders() {
         return leaders;
     }
 
@@ -1483,7 +1470,7 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
      * @param leaders
      *            要设置的 leaders
      */
-    public void setLeaders(List<Integer> leaders) {
+    public void setLeaders(List<Long> leaders) {
         this.leaders = leaders;
     }
 
@@ -1742,4 +1729,93 @@ public class UserQueryDTO extends UserQueryBaseDTO implements Serializable {
         this.positionIdList = positionIdList;
     }
 
+    /**
+     * @return the recruitChannel
+     */
+    public String getRecruitChannel() {
+        return recruitChannel;
+    }
+
+    /**
+     * @param recruitChannel
+     *            要设置的 recruitChannel
+     */
+    public void setRecruitChannel(String recruitChannel) {
+        this.recruitChannel = recruitChannel;
+    }
+
+    /**
+     * @return the recruitChannelIn
+     */
+    public String getRecruitChannelIn() {
+        return recruitChannelIn;
+    }
+
+    /**
+     * @param recruitChannelIn
+     *            要设置的 recruitChannelIn
+     */
+    public void setRecruitChannelIn(String recruitChannelIn) {
+        this.recruitChannelIn = recruitChannelIn;
+    }
+
+    /**
+     * @return the recruitChannels
+     */
+    public List<Integer> getRecruitChannels() {
+        return recruitChannels;
+    }
+
+    /**
+     * @param recruitChannels
+     *            要设置的 recruitChannels
+     */
+    public void setRecruitChannels(List<Integer> recruitChannels) {
+        this.recruitChannels = recruitChannels;
+    }
+
+    /**
+     * @return the skillNameLike
+     */
+    public String getSkillNameLike() {
+        return skillNameLike;
+    }
+
+    /**
+     * @param skillNameLike
+     *            要设置的 skillNameLike
+     */
+    public void setSkillNameLike(String skillNameLike) {
+        this.skillNameLike = skillNameLike;
+    }
+
+    /**
+     * @return the workUnitLike
+     */
+    public String getWorkUnitLike() {
+        return workUnitLike;
+    }
+
+    /**
+     * @param workUnitLike
+     *            要设置的 workUnitLike
+     */
+    public void setWorkUnitLike(String workUnitLike) {
+        this.workUnitLike = workUnitLike;
+    }
+
+    /**
+     * @return the provinceLike
+     */
+    public String getProvinceLike() {
+        return provinceLike;
+    }
+
+    /**
+     * @param provinceLike
+     *            要设置的 provinceLike
+     */
+    public void setProvinceLike(String provinceLike) {
+        this.provinceLike = provinceLike;
+    }
 }

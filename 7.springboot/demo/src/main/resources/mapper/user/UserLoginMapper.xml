@@ -18,6 +18,13 @@
     from j_oa_user_login
     where user_login_id = #{userLoginId,jdbcType=BIGINT}
     and password = #{password,jdbcType=VARCHAR}
+    and is_deleted = 0
+  </select>
+  
+  <select id="list" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from j_oa_user_login where is_deleted = 0
   </select>
   
   <insert id="insert" parameterType="com.cq.model.user.UserLogin" >

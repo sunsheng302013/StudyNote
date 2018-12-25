@@ -1,1392 +1,1536 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cq.dao.user.UserDao" >
-  <resultMap id="TransferResultMap" type="com.cq.dto.user.UserTransferResultDTO" >
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="erp_user_id" property="erpUserId" jdbcType="BIGINT" />
-    <result column="user_no" property="userNo" jdbcType="VARCHAR" />
-    <result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
-    <result column="sex" property="sex" jdbcType="TINYINT" />
-    <result column="company_id" property="companyId" jdbcType="BIGINT" />
-    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
-    <result column="main_depart_id" property="mainDepartId" jdbcType="BIGINT" />
-    <result column="main_depart_name" property="mainDepartName" jdbcType="VARCHAR" />
-    <result column="class_id" property="classId" jdbcType="BIGINT" />
-    <result column="class_name" property="className" jdbcType="VARCHAR" />
-    <result column="entry_date" property="entryDate" jdbcType="TIMESTAMP" />
-    <result column="probationary_period" property="probationaryPeriod" jdbcType="TINYINT" />
-    <result column="delay_day" property="delayDay" jdbcType="TINYINT" />
-    <result column="estimate_regular_date" property="estimateRegularDate" jdbcType="TIMESTAMP" />
-    <result column="maturity_day" property="maturityDay" jdbcType="TINYINT" />
-    <result column="regular_date" property="regularDate" jdbcType="TIMESTAMP" />
-    <result column="date" property="labourContractDate" jdbcType="TIMESTAMP" />
-    <result column="job_category" property="jobCategory" jdbcType="TINYINT" />
-    <result column="user_category" property="userCategory" jdbcType="TINYINT" />
-    <result column="user_status" property="userStatus" jdbcType="TINYINT" />
-    <collection property="positionList" javaType="ArrayList"
-            ofType="com.cq.dto.user.ReinstatementUserPositionDTO"
-            fetchType="eager" resultMap="reinstatementUserPositionInfo">
-    </collection>
-  </resultMap>
+<mapper namespace="com.cq.dao.user.UserDao">
+	<resultMap id="TransferResultMap" type="com.cq.dto.user.UserTransferResultDTO">
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="erp_user_id" property="erpUserId" jdbcType="BIGINT" />
+		<result column="user_no" property="userNo" jdbcType="VARCHAR" />
+		<result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
+		<result column="sex" property="sex" jdbcType="TINYINT" />
+		<result column="company_id" property="companyId" jdbcType="BIGINT" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+		<result column="main_depart_id" property="mainDepartId" jdbcType="BIGINT" />
+		<result column="main_depart_name" property="mainDepartName" jdbcType="VARCHAR" />
+		<result column="class_id" property="classId" jdbcType="BIGINT" />
+		<result column="class_name" property="className" jdbcType="VARCHAR" />
+		<result column="entry_date" property="entryDate" jdbcType="TIMESTAMP" />
+		<result column="probationary_period" property="probationaryPeriod" jdbcType="TINYINT" />
+		<result column="delay_day" property="delayDay" jdbcType="TINYINT" />
+		<result column="estimate_regular_date" property="estimateRegularDate" jdbcType="TIMESTAMP" />
+		<result column="maturity_day" property="maturityDay" jdbcType="TINYINT" />
+		<result column="regular_date" property="regularDate" jdbcType="TIMESTAMP" />
+		<result column="date" property="labourContractDate" jdbcType="TIMESTAMP" />
+		<result column="job_category" property="jobCategory" jdbcType="TINYINT" />
+		<result column="user_category" property="userCategory" jdbcType="TINYINT" />
+		<result column="user_status" property="userStatus" jdbcType="TINYINT" />
+		<collection property="positionList" javaType="ArrayList" ofType="com.cq.dto.user.ReinstatementUserPositionDTO"
+			fetchType="eager" resultMap="reinstatementUserPositionInfo">
+		</collection>
+	</resultMap>
 
-<!-- 人员档案-复职查询时职位列表 -->
-  <resultMap id="reinstatementUserPositionInfo" type="com.cq.dto.user.ReinstatementUserPositionDTO" >
-    <result column="position_id" property="positionId" jdbcType="BIGINT" />
-    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
-    <result column="erp_position_id" property="erpPositionId" jdbcType="BIGINT" />
-    <result column="erp_position_name" property="erpPositionName" jdbcType="VARCHAR" />
-    <result column="rank_id" property="rankId" jdbcType="BIGINT" />
-    <result column="rank_name" property="rankName" jdbcType="VARCHAR" />
-  </resultMap>
-  
-  <resultMap id="UserDtoMap" type="com.cq.dto.user.UserDTO" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="erp_user_id" property="erpUserId" jdbcType="BIGINT" />
-    <result column="user_no" property="userNo" jdbcType="VARCHAR" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="english_name" property="englishName" jdbcType="VARCHAR" />
-    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
-    <result column="img_key" property="imgKey" jdbcType="VARCHAR" />
-    <result column="id_card_type" property="idCardType" jdbcType="TINYINT" />
-    <result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
-    <result column="birthdate_type" property="birthdateType" jdbcType="TINYINT" />
-    <result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
-    <result column="age" property="age" jdbcType="TINYINT" />
-    <result column="sex" property="sex" jdbcType="TINYINT" />
-    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
-    <result column="company_id" property="companyId" jdbcType="BIGINT" />
-    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
-    <result column="main_depart_id" property="mainDepartId" jdbcType="BIGINT" />
-    <result column="main_depart_name" property="mainDepartName" jdbcType="VARCHAR" />
-    <result column="class_id" property="classId" jdbcType="BIGINT" />
-    <result column="class_name" property="className" jdbcType="VARCHAR" />
-    <result column="entry_date" property="entryDate" jdbcType="TIMESTAMP" />
-    <result column="entry_age" property="entryAge" jdbcType="TINYINT" />
-    <result column="probationary_period" property="probationaryPeriod" jdbcType="TINYINT" />
-    <result column="delay_day" property="delayDay" jdbcType="TINYINT" />
-    <result column="regular_date" property="regularDate" jdbcType="TIMESTAMP" />
-    <result column="leave_date" property="leaveDate" jdbcType="TIMESTAMP" />
-    <result column="startwork_date" property="startworkDate" jdbcType="TIMESTAMP" />
-    <result column="social_age" property="socialAge" jdbcType="TINYINT" />
-    <result column="job_category" property="jobCategory" jdbcType="TINYINT" />
-    <result column="user_category" property="userCategory" jdbcType="TINYINT" />
-    <result column="marital_status" property="maritalStatus" jdbcType="TINYINT" />
-    <result column="pregnant_status" property="pregnantStatus" jdbcType="TINYINT" />
-    <result column="account_category" property="accountCategory" jdbcType="TINYINT" />
-    <result column="account_address" property="accountAddress" jdbcType="VARCHAR" />
-    <result column="nation" property="nation" jdbcType="VARCHAR" />
-    <result column="province" property="province" jdbcType="VARCHAR" />
-    <result column="city" property="city" jdbcType="VARCHAR" />
-    <result column="politics_status" property="politicsStatus" jdbcType="TINYINT" />
-    <result column="join_party_date" property="joinPartyDate" jdbcType="TIMESTAMP" />
-    <result column="hobby" property="hobby" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="QQ" property="qq" jdbcType="VARCHAR" />
-    <result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
-    <result column="house_phone" property="housePhone" jdbcType="VARCHAR" />
-    <result column="mail" property="mail" jdbcType="VARCHAR" />
-    <result column="profile_url" property="profileUrl" jdbcType="VARCHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
-    <result column="physical_date" property="physicalDate" jdbcType="TIMESTAMP" />
-    <result column="train_date" property="trainDate" jdbcType="TIMESTAMP" />
-    <result column="recruit_type" property="recruitType" jdbcType="TINYINT" />
-    <result column="push_username" property="pushUsername" jdbcType="VARCHAR" />
-    <result column="push_relation" property="pushRelation" jdbcType="VARCHAR" />
-    <result column="memo" property="memo" jdbcType="VARCHAR" />
-    <result column="is_organised" property="isOrganised" jdbcType="TINYINT" />
-    <result column="user_status" property="userStatus" jdbcType="TINYINT" />
-    <result column="uei_status" property="eduStatus" jdbcType="TINYINT" />
-    <result column="education_level" property="educationLevel" jdbcType="TINYINT" />
-    <result column="major" property="major" jdbcType="VARCHAR" />
-    <result column="school" property="school" jdbcType="VARCHAR" />
-    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
-    <result column="ulc_date" property="labourContractDate" jdbcType="TIMESTAMP" />
-    <result column="ulc_type" property="labourContractType" jdbcType="VARCHAR" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
-    <collection property="userSpecialList" javaType="ArrayList"
-            ofType="com.cq.dto.user.UserSpecialDTO"
-            fetchType="eager" resultMap="UserSpecialInfo">
-    </collection> 
-    <collection property="parentPosition" javaType="ArrayList"
-            ofType="com.cq.model.user.UserLeaderInfo"
-            fetchType="eager" resultMap="parentPositionInfo">
-    </collection>
-    <collection property="subPosition" javaType="ArrayList"
-            ofType="com.cq.model.user.UserLeaderInfo"
-            fetchType="eager" resultMap="subPositionInfo">
-    </collection>
-    <collection property="fileList" javaType="ArrayList"
-            ofType="com.cq.model.file.File"
-            fetchType="eager" resultMap="file">
-    </collection>
-  </resultMap>
-  <!-- 人员档案-人员和特长关系表 -->
-  <resultMap id="UserSpecialInfo" type="com.cq.dto.user.UserSpecialDTO" >
-    <id column="us_id" property="id" jdbcType="INTEGER" />
-    <result column="us_user_id" property="userId" jdbcType="BIGINT" />
-    <result column="special_id" property="specialId" jdbcType="BIGINT" />
-    <result column="special_name" property="specialName" jdbcType="VARCHAR" />
-  </resultMap>
-  <!-- 人员档案-上下级人员关系 上级主管 -->
-  <resultMap id="parentPositionInfo" type="com.cq.model.user.UserLeaderInfo" >
-    <id column="uli_id" property="id" jdbcType="INTEGER" />
-    <result column="uli_type" property="type" jdbcType="TINYINT" />
-    <result column="uli_user_id" property="userId" jdbcType="BIGINT" />
-    <result column="uli_erp_user_id" property="erpUserId" jdbcType="INTEGER" />
-    <result column="uli_erp_user_name" property="erpUserName" jdbcType="VARCHAR" />
-  </resultMap>
-  <!-- 人员档案-上下级人员关系 下级管理人员 -->
-  <resultMap id="subPositionInfo" type="com.cq.model.user.UserLeaderInfo" >
-    <id column="uli2_id" property="id" jdbcType="INTEGER" />
-    <result column="uli2_type" property="type" jdbcType="TINYINT" />
-    <result column="uli2_user_id" property="userId" jdbcType="BIGINT" />
-    <result column="uli2_erp_user_id" property="erpUserId" jdbcType="INTEGER" />
-    <result column="uli2_erp_user_name" property="erpUserName" jdbcType="VARCHAR" />
-  </resultMap>
-  <!-- 人员档案-附件信息 -->
-  <resultMap id="file" type="com.cq.model.file.File" >
-    <id column="f_id" property="id" jdbcType="INTEGER" />
-    <result column="foreign_id" property="foreignId" jdbcType="BIGINT" />
-    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
-    <result column="file_key" property="fileKey" jdbcType="VARCHAR" />
-    <result column="f_gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-  </resultMap>
-  
-  <sql id="user_query_List" >
-    u.id, u.user_id, u.erp_user_id, u.user_no, u.user_name, u.english_name, u.img_url, u.img_key, u.id_card_type,
-    u.id_card_no, u.birthdate_type, u.birthdate, u.age, u.sex, u.user_code, u.company_id, u.company_name,
-    u.main_depart_id, u.main_depart_name, u.class_id, u.class_name, u.entry_date, u.entry_age, u.probationary_period,
-    u.delay_day, u.regular_date, u.leave_date, u.startwork_date, u.social_age, u.job_category, u.user_category,
-    u.marital_status, u.pregnant_status, u.account_category, u.account_address, u.nation, u.province,
-    u.city, u.politics_status, u.join_party_date, u.hobby, u.phone, u.QQ, u.office_phone,
-    u.house_phone, u.mail, u.profile_url, u.address, u.home_address, u.physical_date, u.train_date,
-    u.recruit_type, u.push_username, u.push_relation, u.memo, u.is_organised, u.user_status, u.file_id,
-    u.gmt_create, u.gmt_modified,
-    uei.status as uei_status, uei.education_level, uei.major, uei.school, uei.end_date,
-    ulc.date as ulc_date, ulc.type as ulc_type,
-    us.id as us_id, us.user_id as us_user_id, us.special_id, usi.special_name,
-    uli.id as uli_id, uli.user_id as uli_user_id, uli.type as uli_type, uli.erp_user_id as uli_erp_user_id, uli.erp_user_name as uli_erp_user_name,
-    uli2.id as uli2_id, uli2.user_id as uli2_user_id, uli2.type as uli2_type, uli2.erp_user_id as uli2_erp_user_id, uli2.erp_user_name as uli2_erp_user_name,
-    f.id as f_id, f.foreign_id, f.file_url, f.file_key, f.gmt_create as f_gmt_create
-  </sql>
+	<!-- 人员档案-复职查询时职位列表 -->
+	<resultMap id="reinstatementUserPositionInfo" type="com.cq.dto.user.ReinstatementUserPositionDTO">
+		<result column="position_id" property="positionId" jdbcType="BIGINT" />
+		<result column="position_name" property="positionName" jdbcType="VARCHAR" />
+		<result column="erp_position_id" property="erpPositionId" jdbcType="BIGINT" />
+		<result column="erp_position_name" property="erpPositionName" jdbcType="VARCHAR" />
+		<result column="rank_id" property="rankId" jdbcType="BIGINT" />
+		<result column="rank_name" property="rankName" jdbcType="VARCHAR" />
+	</resultMap>
 
-<!-- 表头查询-左侧过滤-左侧筛选 -->
-  <select id="select" resultMap="UserDtoMap" parameterType="com.cq.dto.user.UserQueryDTO" >
-    select 
-    <include refid="user_query_List" />
-    from (select * from j_oa_user order by user_no asc
-    <if test="page.pageIndex != null and page.pageSize != null">
-            limit #{page.offset}, #{page.pageSize}
-    </if>) u
-    left join j_oa_user_special us on u.user_id = us.user_id
-    left join j_oa_user_special_info usi on us.special_id = usi.special_id
-    left join j_oa_user_leader_info uli on u.user_id = uli.user_id and uli.type = 0
-    left join j_oa_user_leader_info uli2 on u.user_id = uli2.user_id and uli2.type = 1
-    left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
-    left join j_oa_user_education_info uei on u.user_id = uei.user_id and uei.status = 2
-    left join j_oa_file f on u.file_id = f.foreign_id
-    where 1 = 1 and u.is_delete = 0
-    <include refid="whereQuery"></include>
-    <if test="page!=null">
-        <if test="page.sortField != null and page.sortField != '' ">
-            order by ${page.sortField}
-            <if test="page.sortOrder != null and page.sortOrder != '' ">
-                ${page.sortOrder}
-            </if>
-        </if>
-        <if test="page.sortField == null or page.sortField == '' ">
-            order by user_no asc
-        </if>
-    </if>
-  </select>
+	<!-- 子页面顶部人员信息 -->
+	<resultMap id="UserBaseDtoMap" type="com.cq.dto.user.UserBaseResultDTO">
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="img_key" property="imgKey" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="TINYINT" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+		<result column="main_depart_name" property="mainDepartName" jdbcType="VARCHAR" />
+	</resultMap>
 
-  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.cq.dto.user.UserQueryDTO" >
-    select count(distinct u.user_id)
-    from j_oa_user u
-    left join j_oa_user_special us on u.user_id = us.user_id
-    left join j_oa_user_special_info usi on us.special_id = usi.special_id
-    left join j_oa_user_leader_info uli on u.user_id = uli.user_id and uli.type = 0
-    left join j_oa_user_leader_info uli2 on u.user_id = uli2.user_id and uli2.type = 1
-    left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
-    left join j_oa_user_education_info uei on u.user_id = uei.user_id and uei.status = 2
-    left join j_oa_file f on u.file_id = f.foreign_id
-    where 1 = 1 and u.is_delete = 0
-    <include refid="whereQuery"></include>
-  </select>
-  
-<sql id="whereQuery">
-    <if test="userQueryDto !=null">
-    <!-- 左侧过滤 -->
-        <!-- 根据新增日期查询-入职日期 -->
-        <if test="userQueryDto.addDateGte != null and userQueryDto.addType != null">
-            AND u.entry_date &gt;= #{userQueryDto.addDateGte}
-        </if>
-        <if test="userQueryDto.addDateLte != null and userQueryDto.addType != null">
-            AND u.entry_date &lt; #{userQueryDto.addDateLte}
-        </if>
-        <!-- 组织机构过滤 -->
-        <!-- 公司 -->
-        <if test="userQueryDto.companyIdLeft != null and userQueryDto.companyIdLeft != ''">
-            AND u.company_id = #{userQueryDto.companyIdLeft}
-        </if>
-        <!-- 部门 -->
-        <if test="userQueryDto.departIdLeft != null and userQueryDto.departIdLeft != ''">
-            AND u.main_depart_id = #{userQueryDto.departIdLeft}
-        </if>
-        <!-- 班组 -->
-        <if test="userQueryDto.classIdLeft != null and userQueryDto.classIdLeft != ''">
-            AND u.class_id = #{userQueryDto.classIdLeft}
-        </if>
-        <!-- 任职类型过滤 -->
-        <if test="userQueryDto.jobCategoryLeft != null">
-            AND u.job_category = #{userQueryDto.jobCategoryLeft}
-        </if>
-        <!-- 人员类别过滤 -->
-        <if test="userQueryDto.userCategoryLeft != null">
-            AND u.user_category = #{userQueryDto.userCategoryLeft}
-        </if>
-        <!-- 人员状态 -->
-        <if test="userQueryDto.userStatusLeft != null">
-            AND u.user_status = #{userQueryDto.userStatusLeft}
-        </if>
-        <!-- 是否在编 -->
-        <if test="userQueryDto.isOrganisedLeft != null">
-            AND u.is_organised = #{userQueryDto.isOrganisedLeft}
-        </if>
-        <!-- 是否领导 -->
-        <if test="userQueryDto.isLeaderLeft != null and userQueryDto.isLeaderLeft == 1">
-            AND u.user_id in (select user_id from j_oa_user_leader_info where type = #{userQueryDto.isLeaderLeft})
-        </if>
-        <if test="userQueryDto.isLeaderLeft != null and userQueryDto.isLeaderLeft == 0">
-            AND u.user_id not in (select user_id from j_oa_user_leader_info where type = 1)
-        </if>
-        <!-- 是否内推 -->
-        <if test="userQueryDto.isPushLeft != null and userQueryDto.isPushLeft == 1">
-            AND u.recruit_type = 3
-        </if>
-        <if test="userQueryDto.isPushLeft != null and userQueryDto.isPushLeft == 0">
-            AND u.recruit_type != 3
-        </if>
-    <!-- 左侧筛选 -->
-        <!-- 是否有小孩 0否，1是，2所有 暂时不做
-        <if test="userQueryDto.childrenType != null and userQueryDto.childrenType == 1">
-            AND u.user_id in (select distinct user_id from j_oa_user_family_info where relation in (7,8)
-            and CONCAT(DATE_FORMAT(NOW(), '%Y') - 14, DATE_FORMAT(NOW(), '-%m-%d')) &lt;= birth_date)
-        </if>
-        <if test="userQueryDto.childrenType != null and userQueryDto.childrenType == 0">
-            AND u.user_id not in (select distinct user_id from j_oa_user_family_info where relation in (7,8)
-            and CONCAT(DATE_FORMAT(NOW(), '%Y') - 14, DATE_FORMAT(NOW(), '-%m-%d')) &lt;= birth_date)
-        </if>
-        -->
-        <!-- 是否在编 -->
-        <if test="userQueryDto.isOrganiseds != null and userQueryDto.isOrganiseds.size != 0">
-            and u.is_organised IN
-            <foreach collection="userQueryDto.isOrganiseds" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 所属公司 -->
-        <if test="userQueryDto.companyIds != null and userQueryDto.companyIds.size != 0">
-            and u.company_id IN
-            <foreach collection="userQueryDto.companyIds" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 所属部门 -->
-        <if test="userQueryDto.departIds != null and userQueryDto.departIds.size != 0">
-            and u.main_depart_id IN
-            <foreach collection="userQueryDto.departIds" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 所属班组 -->
-        <if test="userQueryDto.classIds != null and userQueryDto.classIds.size != 0">
-            and u.class_id IN
-            <foreach collection="userQueryDto.classIds" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 直属上级 -->
-        <if test="userQueryDto.leaders != null and userQueryDto.leaders.size != 0">
-            and uli.erp_user_id IN
-            <foreach collection="userQueryDto.leaders" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-            and uli.type = 0
-        </if>
-        <!-- 任职类型 -->
-        <if test="userQueryDto.jobCategorys != null and userQueryDto.jobCategorys.size != 0">
-            and u.job_category IN
-            <foreach collection="userQueryDto.jobCategorys" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 人员类别 -->
-        <if test="userQueryDto.userCategorys != null and userQueryDto.userCategorys.size != 0">
-            and u.user_category IN
-            <foreach collection="userQueryDto.userCategorys" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 人员状态 -->
-        <if test="userQueryDto.userStatusList != null and userQueryDto.userStatusList.size != 0">
-            and u.user_status IN
-            <foreach collection="userQueryDto.userStatusList" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 省份 -->
-        <if test="userQueryDto.provinces != null and userQueryDto.provinces.size != 0">
-            and u.province IN
-            <foreach collection="userQueryDto.provinces" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 技能特长 -->
-        <if test="userQueryDto.specialIds != null and userQueryDto.specialIds.size != 0">
-            and us.special_id IN
-            <foreach collection="userQueryDto.specialIds" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 招聘方式 -->
-        <if test="userQueryDto.recruitTypes != null and userQueryDto.recruitTypes.size != 0">
-            and u.recruit_type IN
-            <foreach collection="userQueryDto.recruitTypes" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 是否内推 0否，1是，2所有-->
-        <if test="userQueryDto.isPushType != null and userQueryDto.isPushType == 1">
-            and u.recruit_type = 3
-        </if>
-        <if test="userQueryDto.isPushType != null and userQueryDto.isPushType == 0">
-            and u.recruit_type != 3
-        </if>
-        <!-- 职务筛选 -->
-        <if test="userQueryDto.erpPositionIdList != null and userQueryDto.erpPositionIdList.size != 0">
-            and u.user_id in (select user_id from j_oa_user_position_info where erp_position_id IN
-            <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-            )
-        </if>
-        <!-- 职位筛选 -->
-        <if test="userQueryDto.positionIdList != null and userQueryDto.positionIdList.size != 0">
-            and u.user_id in (select user_id from j_oa_user_position_info where position_id In
-            <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-            )
-        </if>
-        <!-- 学历 -->
-        <if test="userQueryDto.educationLevels != null and userQueryDto.educationLevels.size != 0">
-            and uei.education_level IN
-            <foreach collection="userQueryDto.educationLevels" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 合同签订情况 -->
-        <if test="userQueryDto.labourContractTypes != null and userQueryDto.labourContractTypes.size != 0">
-            and ulc.type IN
-            <foreach collection="userQueryDto.labourContractTypes" item="item" index="index" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 入职日期筛选 -->
-        <if test="userQueryDto.startEntryDate != null and userQueryDto.startEntryDate != ''">
-            AND u.entry_date &gt;= #{userQueryDto.startEntryDate}
-        </if>
-        <if test="userQueryDto.endEntryDate != null and userQueryDto.endEntryDate != ''">
-            AND u.entry_date &lt; #{userQueryDto.endEntryDate}
-        </if>
-        <!-- 近期合同那个到期时间筛选 -->
-        <if test="userQueryDto.startLabourContractDate != null and userQueryDto.startLabourContractDate != ''">
-            AND ulc.date &gt;= #{userQueryDto.startLabourContractDate}
-        </if>
-        <if test="userQueryDto.endLabourContractDate != null and userQueryDto.endLabourContractDate != ''">
-            AND ulc.date &lt; #{userQueryDto.endLabourContractDate}
-        </if>
-        <!-- 离职日期筛选 -->
-        <if test="userQueryDto.startLeaveDate != null and userQueryDto.startLeaveDate != ''">
-            AND u.leave_date &gt;= #{userQueryDto.startLeaveDate}
-        </if>
-        <if test="userQueryDto.endLeaveDate != null and userQueryDto.endLeaveDate != ''">
-            AND u.leave_date &lt; #{userQueryDto.endLeaveDate}
-        </if>
-        <!-- 导出筛选 -->
-        <if test="userQueryDto.userIds != null and userQueryDto.userIds.size != 0">
-            AND u.user_id IN
-            <foreach collection="userQueryDto.userIds" separator="," open="(" close=")" item="item" index="index">
-                #{item}
-            </foreach>
-        </if>
-        <!-- 当前登录人相关查询-->
-        <if test="userQueryDto.userId != null">
-            AND u.user_id = #{userQueryDto.userId}
-        </if>
-    <!-- 显示列表头查询 -->
-        <!-- 员工编号-模糊查询 -->
-        <if test="userQueryDto.userNoLike != null and userQueryDto.userNoLike != ''">
-            and u.user_no like '%${userQueryDto.userNoLike}%'
-        </if>
-        <!-- 中文姓名-模糊查询 -->
-        <if test="userQueryDto.userNameLike != null and userQueryDto.userNameLike != ''">
-            and u.user_Name like '%${userQueryDto.userNameLike}%'
-        </if>
-        <!-- 花名/英文名-模糊查询 -->
-        <if test="userQueryDto.englishName != null and userQueryDto.englishName != ''">
-            and u.english_Name like '%${userQueryDto.englishName}%'
-        </if>
-        <!-- 证件类型 默认0 0身份证 1护照  -->
-        <if test="userQueryDto.idCardTypeIn != null">
-            and u.id_card_type in ${userQueryDto.idCardTypeIn}
-        </if>
-        <!-- 证件号-模糊查询 -->
-        <if test="userQueryDto.idCardNoLike != null and userQueryDto.idCardNoLike != ''">
-            and u.id_card_no like '%${userQueryDto.idCardNoLike}%'
-        </if>
-        <!-- Erp人员ID -->
-        <if test="userQueryDto.erpUserId != null and userQueryDto.erpUserId != ''">
-            and u.erp_user_id = ${userQueryDto.erpUserId}
-        </if>
-        <!-- 出生日期类型 默认0 0阳历 1阴历 -->
-        <if test="userQueryDto.birthdateTypeIn != null">
-            and u.birthdate_type in %${userQueryDto.birthdateTypeIn}%
-        </if>
-        <!-- 出生日期 -->
-        <if test="userQueryDto.birthdateEquals != null">
-            and u.birthdate = #{userQueryDto.birthdateEquals}
-        </if>
-        <if test="userQueryDto.birthdateGte != null">
-            and u.birthdate &gt;= #{userQueryDto.birthdateGte}
-        </if>
-        <if test="userQueryDto.birthdateLte != null">
-            and u.birthdate &lt;= #{userQueryDto.birthdateLte}
-        </if>
-        <if test="userQueryDto.birthdateGt != null">
-            and u.birthdate &gt; #{userQueryDto.birthdateGt}
-        </if>
-        <if test="userQueryDto.birthdateLt != null">
-            and u.birthdate &lt; #{userQueryDto.birthdateLt}
-        </if>
-        <!-- 性别默认0 男0、女1 -->
-        <if test="userQueryDto.sexIn != null">
-            and u.sex in ${userQueryDto.sexIn}
-        </if>
-        <!-- 工号（系统账号）-模糊查询 -->
-        <if test="userQueryDto.userCodeLike != null and userQueryDto.userCodeLike != ''">
-            and u.user_code like '%${userQueryDto.userCodeLike}%'
-        </if>
-        <!-- 所属公司 -->
-        <if test="userQueryDto.companyIdIn != null">
-            and u.company_id in ${userQueryDto.companyIdIn}
-        </if>
-        <if test="userQueryDto.companyId != null and userQueryDto.companyId != ''">
-            and u.company_id = ${userQueryDto.companyId}
-        </if>
-        <!-- 所属部门 -->
-        <if test="userQueryDto.departIdIn != null">
-            and u.main_depart_id.depart_id in ${userQueryDto.departIdIn}
-        </if>
-        <!-- 班组 -->
-        <if test="userQueryDto.classIdIn != null">
-            and u.class_id in ${userQueryDto.classIdIn}
-        </if>
-        <!-- 入职日期 -->
-        <if test="userQueryDto.entryDateEquals != null">
-            and u.entry_date = #{userQueryDto.entryDateEquals}
-        </if>
-        <if test="userQueryDto.entryDateGte != null">
-            and u.entry_date &gt;= #{userQueryDto.entryDateGte}
-        </if>
-        <if test="userQueryDto.entryDateLte != null">
-            and u.entry_date &lt;= #{userQueryDto.entryDateLte}
-        </if>
-        <if test="userQueryDto.entryDateGt != null">
-            and u.entry_date &gt; #{userQueryDto.entryDateGt}
-        </if>
-        <if test="userQueryDto.entryDateLt != null">
-            and u.entry_date &lt; #{userQueryDto.entryDateLt}
-        </if>
-        <!-- 试用期(月) -->
-        <if test="userQueryDto.probationaryPeriodEquals != null">
-            and u.probationary_period = #{userQueryDto.probationaryPeriodEquals}
-        </if>
-        <if test="userQueryDto.probationaryPeriodGte != null">
-            and u.probationary_period &gt;= #{userQueryDto.probationaryPeriodGte}
-        </if>
-        <if test="userQueryDto.probationaryPeriodLte != null">
-            and u.probationary_period &lt;= #{userQueryDto.probationaryPeriodLte}
-        </if>
-        <if test="userQueryDto.probationaryPeriodGt != null">
-            and u.probationary_period &gt; #{userQueryDto.probationaryPeriodGt}
-        </if>
-        <if test="userQueryDto.probationaryPeriodLt != null">
-            and u.probationary_period &lt; #{userQueryDto.probationaryPeriodLt}
-        </if>
-        <!-- 延迟转正(天) -->
-        <if test="userQueryDto.delayDayEquals != null">
-            and u.delay_day = #{userQueryDto.delayDayEquals}
-        </if>
-        <if test="userQueryDto.delayDayGte != null">
-            and u.delay_day &gt;= #{userQueryDto.delayDayGte}
-        </if>
-        <if test="userQueryDto.delayDayLte != null">
-            and u.delay_day &lt;= #{userQueryDto.delayDayLte}
-        </if>
-        <if test="userQueryDto.delayDayGt != null">
-            and u.delay_day &gt; #{userQueryDto.delayDayGt}
-        </if>
-        <if test="userQueryDto.delayDayLt != null">
-            and u.delay_day &lt; #{userQueryDto.delayDayLt}
-        </if>
-        <!-- 转正日期 -->
-        <if test="userQueryDto.regularDateEquals != null">
-            and u.regular_date = #{userQueryDto.regularDateEquals}
-        </if>
-        <if test="userQueryDto.regularDateGte != null">
-            and u.regular_date &gt;= #{userQueryDto.regularDateGte}
-        </if>
-        <if test="userQueryDto.regularDateLte != null">
-            and u.regular_date &lt;= #{userQueryDto.regularDateLte}
-        </if>
-        <if test="userQueryDto.regularDateGt != null">
-            and u.regular_date &gt; #{userQueryDto.regularDateGt}
-        </if>
-        <if test="userQueryDto.regularDateLt != null">
-            and u.regular_date &lt; #{userQueryDto.regularDateLt}
-        </if>
-        <!-- 是否在编 0不在编 1在编 -->
-        <if test="userQueryDto.isOrganIsedIn != null">
-            and u.is_organised in ${userQueryDto.isOrganIsedIn}
-        </if>
-        <!-- 离职日期 -->
-        <if test="userQueryDto.leaveDateEquals != null">
-            and u.leave_date = #{userQueryDto.leaveDateEquals}
-        </if>
-        <if test="userQueryDto.leaveDateGte != null">
-            and u.leave_date &gt;= #{userQueryDto.leaveDateGte}
-        </if>
-        <if test="userQueryDto.leaveDateLte != null">
-            and u.leave_date &lt;= #{userQueryDto.leaveDateLte}
-        </if>
-        <if test="userQueryDto.leaveDateGt != null">
-            and u.leave_date &gt; #{userQueryDto.leaveDateGt}
-        </if>
-        <if test="userQueryDto.leaveDateLt != null">
-            and u.leave_date &lt; #{userQueryDto.leaveDateLt}
-        </if>
-        <!-- 直属上级 -->
-        <if test="userQueryDto.parentPositionLike != null">
-            and uli.erp_user_name like '%${userQueryDto.parentPositionLike}%'
-            and uli.type = 0
-        </if>
-        <!-- 直属下级 -->
-        <if test="userQueryDto.subPositionLike != null">
-            and uli.erp_user_name like '%${userQueryDto.subPositionLike}%'
-            and uli.type = 1
-        </if>
-        <!-- 任职类型 默认0 全职0、兼职1、实习2 -->
-        <if test="userQueryDto.jobCategoryIn != null">
-            and u.job_category in ${userQueryDto.jobCategoryIn}
-        </if>
-        <!-- 人员类别 默认0 正式工0、合同工1、临时工2、退休返聘3、劳务派遣4 -->
-        <if test="userQueryDto.userCategoryIn != null">
-            and u.user_category in ${userQueryDto.userCategoryIn}
-        </if>
-        <!-- 人员状态 0在职 1不在职 2停职 3离职 4退休 5借调 -->
-        <if test="userQueryDto.userStatusIn != null">
-            and u.user_status in ${userQueryDto.userStatusIn}
-        </if>
-        <!-- 户口地址-模糊查询 -->
-        <if test="userQueryDto.accountAddressLike != null">
-            and u.account_address like '%${userQueryDto.accountAddressLike}%'
-        </if>
-        <!-- 技能特长id -->
-        <if test="userQueryDto.specialIdIn != null">
-            and us.special_id in ${userQueryDto.specialIdIn}
-        </if>
-        <!-- 手机号码-模糊查询 -->
-        <if test="userQueryDto.phoneLike != null and userQueryDto.phoneLike != ''">
-            and u.phone like '%${userQueryDto.phoneLike}%'
-        </if>
-        <!-- QQ号-模糊查询 -->
-        <if test="userQueryDto.qqLike != null">
-            and u.QQ like '%${userQueryDto.qqLike}%'
-        </if>
-        <!-- 办公号码-模糊查询 -->
-        <if test="userQueryDto.officePhoneLike != null">
-            and u.office_phone like '%${userQueryDto.officePhoneLike}%'
-        </if>
-        <!-- 内线电话-模糊查询 -->
-        <if test="userQueryDto.housePhoneLike != null">
-            and u.house_phone like '%${userQueryDto.housePhoneLike}%'
-        </if>
-        <!-- 邮箱-模糊查询 -->
-        <if test="userQueryDto.mailLike != null">
-            and u.mail like '%${userQueryDto.mailLike}%'
-        </if>
-        <!-- 最高学历 -->
-        <if test="userQueryDto.educationLevelIn != null">
-            and uei.education_level in %${userQueryDto.educationLevelIn}%
-            and uei.status = 2
-        </if>
-        <!-- 专业 模糊查询 -->
-        <if test="userQueryDto.majorLike != null and userQueryDto.majorLike != ''">
-            and uei.major like '%${userQueryDto.majorLike}%'
-            and uei.status = 2
-        </if>
-        <!-- 学校-模糊查询 -->
-        <if test="userQueryDto.schoolLike != null and userQueryDto.schoolLike != ''">
-            and uei.school like '%${userQueryDto.schoolLike}%'
-            and uei.status = 2
-        </if>
-        <!-- 毕业时间 -->
-        <if test="userQueryDto.endDateEquals != null">
-            and uei.end_date = #{userQueryDto.endDateEquals}
-            and uei.status = 2
-        </if>
-        <if test="userQueryDto.endDateGte != null">
-            and uei.end_date &gt;= #{userQueryDto.endDateGte}
-            and uei.status = 2
-        </if>
-        <if test="userQueryDto.endDateLte != null">
-            and uei.end_date &lt;= #{userQueryDto.endDateLte}
-            and uei.status = 2
-        </if>
-        <if test="userQueryDto.endDateGt != null">
-            and uei.end_date &gt; #{userQueryDto.endDateGt}
-            and uei.status = 2
-        </if>
-        <if test="userQueryDto.endDateLt != null">
-            and uei.end_date &lt; #{userQueryDto.endDateLt}
-            and uei.status = 2
-        </if>
-    <!-- 隐藏字段表头查询 -->
-        <!-- 年龄 -->
-        <if test="userQueryDto.ageEquals != null">
-            and u.age = #{userQueryDto.ageEquals}
-        </if>
-        <if test="userQueryDto.ageGte != null">
-            and u.age &gt;= #{userQueryDto.ageGte}
-        </if>
-        <if test="userQueryDto.ageLte != null">
-            and u.age &lt;= #{userQueryDto.ageLte}
-        </if>
-        <if test="userQueryDto.ageGt != null">
-            and u.age &gt; #{userQueryDto.ageGt}
-        </if>
-        <if test="userQueryDto.ageLt != null">
-            and u.age &lt; #{userQueryDto.ageLt}
-        </if>
-        <!-- 司龄 -->
-        <if test="userQueryDto.entryAgeEquals != null">
-            and u.entry_age = #{userQueryDto.entryAgeEquals}
-        </if>
-        <if test="userQueryDto.entryAgeGte != null">
-            and u.entry_age &gt;= #{userQueryDto.entryAgeGte}
-        </if>
-        <if test="userQueryDto.entryAgeLte != null">
-            and u.entry_age &lt;= #{userQueryDto.entryAgeLte}
-        </if>
-        <if test="userQueryDto.entryAgeGt != null">
-            and u.entry_age &gt; #{userQueryDto.entryAgeGt}
-        </if>
-        <if test="userQueryDto.entryAgeLt != null">
-            and u.entry_age &lt; #{userQueryDto.entryAgeLt}
-        </if>
-        <!-- 参加工作日期 -->
-        <if test="userQueryDto.startworkDateEquals != null">
-            and u.startwork_date = #{userQueryDto.startworkDateEquals}
-        </if>
-        <if test="userQueryDto.startworkDateGte != null">
-            and u.startwork_date &gt;= #{userQueryDto.startworkDateGte}
-        </if>
-        <if test="userQueryDto.startworkDateLte != null">
-            and u.startwork_date &lt;= #{userQueryDto.startworkDateLte}
-        </if>
-        <if test="userQueryDto.startworkDateGt != null">
-            and u.startwork_date &gt; #{userQueryDto.startworkDateGt}
-        </if>
-        <if test="userQueryDto.startworkDateLt != null">
-            and u.startwork_date &lt; #{userQueryDto.startworkDateLt}
-        </if>
-        <!-- 社会工龄 -->
-        <if test="userQueryDto.socialAgeEquals != null">
-            and u.social_age = #{userQueryDto.socialAgeEquals}
-        </if>
-        <if test="userQueryDto.socialAgeGte != null">
-            and u.social_age &gt;= #{userQueryDto.socialAgeGte}
-        </if>
-        <if test="userQueryDto.socialAgeLte != null">
-            and u.social_age &lt;= #{userQueryDto.socialAgeLte}
-        </if>
-        <if test="userQueryDto.socialAgeGt != null">
-            and u.social_age &gt; #{userQueryDto.socialAgeGt}
-        </if>
-        <if test="userQueryDto.socialAgeLt != null">
-            and u.social_age &lt; #{userQueryDto.socialAgeLt}
-        </if>
-        <!-- 婚姻情况 默认0 未婚0、已婚1、离婚2、丧偶3、不详4 -->
-        <if test="userQueryDto.maritalStatusIn != null">
-            and u.marital_status in %${userQueryDto.maritalStatusIn}%
-        </if>
-        <!-- 孕育状况 默认0 未育0、已育1 -->
-        <if test="userQueryDto.pregnantStatusIn != null">
-            and u.pregnant_status in %${userQueryDto.pregnantStatusIn}%
-        </if>
-        <!-- 户口类别 默认0 本地城镇0、外地城镇1、本地农村2、外地农村3 -->
-        <if test="userQueryDto.pregnantStatusIn != null">
-            and u.pregnant_status in %${userQueryDto.pregnantStatusIn}%
-        </if>
-        <!-- 民族 -->
-        <if test="userQueryDto.nationLike != null">
-            and u.nation like '%${userQueryDto.nationLike}%'
-        </if>
-        <!-- 政治面貌  默认0 群众0、共青团员1、中共党员2、中共预备党员3、民主党派4 -->
-        <if test="userQueryDto.pregnantStatusIn != null">
-            and u.pregnant_status in %${userQueryDto.pregnantStatusIn}%
-        </if>
-        <!-- 入党日期 -->
-        <if test="userQueryDto.joinPartyDateEquals != null">
-            and u.join_party_date = #{userQueryDto.joinPartyDateEquals}
-        </if>
-        <if test="userQueryDto.joinPartyDateGte != null">
-            and u.join_party_date &gt;= #{userQueryDto.joinPartyDateGte}
-        </if>
-        <if test="userQueryDto.joinPartyDateLte != null">
-            and u.join_party_date &lt;= #{userQueryDto.joinPartyDateLte}
-        </if>
-        <if test="userQueryDto.joinPartyDateGt != null">
-            and u.join_party_date &gt; #{userQueryDto.joinPartyDateGt}
-        </if>
-        <if test="userQueryDto.joinPartyDateLt != null">
-            and u.join_party_date &lt; #{userQueryDto.joinPartyDateLt}
-        </if>
-        <!-- 兴趣爱好 -->
-        <if test="userQueryDto.hobbyLike != null">
-            and u.hobby like '%${userQueryDto.hobbyLike}%'
-        </if>
-        <!-- 个人网址 -->
-        <if test="userQueryDto.profileUrlLike != null">
-            and u.profile_url like '%${userQueryDto.profileUrlLike}%'
-        </if>
-        <!-- 现居住地址 -->
-        <if test="userQueryDto.homeAddressLike != null">
-            and u.home_address like '%${userQueryDto.homeAddressLike}%'
-        </if>
-        <!-- 家庭地址 -->
-        <if test="userQueryDto.addressLike != null">
-            and u.address like '%${userQueryDto.addressLike}%'
-        </if>
-        <!-- 入职体检日期 -->
-        <if test="userQueryDto.physicalDateEquals != null">
-            and u.physical_date = #{userQueryDto.physicalDateEquals}
-        </if>
-        <if test="userQueryDto.physicalDateGte != null">
-            and u.physical_date &gt;= #{userQueryDto.physicalDateGte}
-        </if>
-        <if test="userQueryDto.physicalDateLte != null">
-            and u.physical_date &lt;= #{userQueryDto.physicalDateLte}
-        </if>
-        <if test="userQueryDto.physicalDateGt != null">
-            and u.physical_date &gt; #{userQueryDto.physicalDateGt}
-        </if>
-        <if test="userQueryDto.physicalDateLt != null">
-            and u.physical_date &lt; #{userQueryDto.physicalDateLt}
-        </if>
-        <!-- 入职培训日期 -->
-        <if test="userQueryDto.trainDateEquals != null">
-            and u.train_date = #{userQueryDto.trainDateEquals}
-        </if>
-        <if test="userQueryDto.trainDateGte != null">
-            and u.train_date &gt;= #{userQueryDto.trainDateGte}
-        </if>
-        <if test="userQueryDto.trainDateLte != null">
-            and u.train_date &lt;= #{userQueryDto.trainDateLte}
-        </if>
-        <if test="userQueryDto.trainDateGt != null">
-            and u.train_date &gt; #{userQueryDto.trainDateGt}
-        </if>
-        <if test="userQueryDto.trainDateLt != null">
-            and u.train_date &lt; #{userQueryDto.trainDateLt}
-        </if>
-        <!-- 网络招聘0、校园招聘1、招聘会2、内推3、猎头4、其他5 -->
-        <if test="userQueryDto.recruitTypeIn != null">
-            and u.recruit_type in %${userQueryDto.recruitTypeIn}%
-        </if>
-        <!-- 内推人姓名 -->
-        <if test="userQueryDto.pushUsernameLike != null">
-            and u.push_username like '%${userQueryDto.pushUsernameLike}%'
-        </if>
-        <!-- 与内推人关系 -->
-        <if test="userQueryDto.pushRelationLike != null">
-            and u.push_relation like '%${userQueryDto.pushRelationLike}%'
-        </if>
-        <!-- 备注 -->
-        <if test="userQueryDto.memoLike != null and userQueryDto.memoLike != ''">
-            and u.memo like '%${userQueryDto.memoLike}%'
-        </if>
-        <!-- 省 -->
-        <if test="userQueryDto.provinceIn != null">
-            and u.province in %${userQueryDto.provinceIn}%
-        </if>
-    </if>
-</sql>
+	<resultMap id="UserDtoMap" type="com.cq.dto.user.UserDTO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="erp_user_id" property="erpUserId" jdbcType="BIGINT" />
+		<result column="user_no" property="userNo" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="english_name" property="englishName" jdbcType="VARCHAR" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="img_key" property="imgKey" jdbcType="VARCHAR" />
+		<result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
+		<result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
+		<result column="age" property="age" jdbcType="TINYINT" />
+		<result column="sex" property="sex" jdbcType="TINYINT" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="company_id" property="companyId" jdbcType="BIGINT" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+		<result column="main_depart_id" property="mainDepartId" jdbcType="BIGINT" />
+		<result column="main_depart_name" property="mainDepartName" jdbcType="VARCHAR" />
+		<result column="class_id" property="classId" jdbcType="BIGINT" />
+		<result column="class_name" property="className" jdbcType="VARCHAR" />
+		<result column="entry_date" property="entryDate" jdbcType="TIMESTAMP" />
+		<result column="entry_age" property="entryAge" jdbcType="TINYINT" />
+		<result column="probationary_period" property="probationaryPeriod" jdbcType="TINYINT" />
+		<result column="delay_day" property="delayDay" jdbcType="TINYINT" />
+		<result column="regular_date" property="regularDate" jdbcType="TIMESTAMP" />
+		<result column="leave_date" property="leaveDate" jdbcType="TIMESTAMP" />
+		<result column="startwork_date" property="startworkDate" jdbcType="TIMESTAMP" />
+		<result column="social_age" property="socialAge" jdbcType="TINYINT" />
+		<result column="job_category" property="jobCategory" jdbcType="TINYINT" />
+		<result column="user_category" property="userCategory" jdbcType="TINYINT" />
+		<result column="marital_status" property="maritalStatus" jdbcType="TINYINT" />
+		<result column="pregnant_status" property="pregnantStatus" jdbcType="TINYINT" />
+		<result column="account_category" property="accountCategory" jdbcType="TINYINT" />
+		<result column="account_address" property="accountAddress" jdbcType="VARCHAR" />
+		<result column="birth_place" property="birthPlace" jdbcType="VARCHAR" />
+		<result column="nation" property="nation" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="politics_status" property="politicsStatus" jdbcType="TINYINT" />
+		<result column="join_party_date" property="joinPartyDate" jdbcType="TIMESTAMP" />
+		<result column="hobby" property="hobby" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="QQ" property="qq" jdbcType="VARCHAR" />
+		<result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
+		<result column="mail" property="mail" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+		<result column="physical_date" property="physicalDate" jdbcType="TIMESTAMP" />
+		<result column="train_date" property="trainDate" jdbcType="TIMESTAMP" />
+		<result column="recruit_channel" property="recruitChannel" jdbcType="TINYINT" />
+		<result column="recruit_type" property="recruitType" jdbcType="TINYINT" />
+		<result column="push_username" property="pushUsername" jdbcType="VARCHAR" />
+		<result column="push_relation" property="pushRelation" jdbcType="VARCHAR" />
+		<result column="memo" property="memo" jdbcType="VARCHAR" />
+		<result column="is_organised" property="isOrganised" jdbcType="TINYINT" />
+		<result column="user_status" property="userStatus" jdbcType="TINYINT" />
+		<result column="uei_status" property="eduStatus" jdbcType="TINYINT" />
+		<result column="education_level" property="educationLevel" jdbcType="TINYINT" />
+		<result column="major" property="major" jdbcType="VARCHAR" />
+		<result column="school" property="school" jdbcType="VARCHAR" />
+		<result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="ulc_date" property="labourContractDate" jdbcType="TIMESTAMP" />
+		<result column="ulc_type" property="labourContractType" jdbcType="VARCHAR" />
+		<result column="file_id" property="fileId" jdbcType="BIGINT" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+		<collection property="userSpecialList" javaType="ArrayList" ofType="com.cq.dto.user.UserSpecialDTO"
+			fetchType="eager" resultMap="UserSpecialInfo">
+		</collection>
+		<collection property="leaderAndSubordinate" javaType="ArrayList" ofType="com.cq.dto.user.UserLeaderInfoDTO"
+			fetchType="eager" resultMap="positionInfo">
+		</collection>
+		<collection property="fileList" javaType="ArrayList" ofType="com.cq.model.file.File"
+			fetchType="eager" resultMap="file">
+		</collection>
+	</resultMap>
+	<!-- 人员档案-人员和特长关系表 -->
+	<resultMap id="UserSpecialInfo" type="com.cq.dto.user.UserSpecialDTO">
+		<id column="us_id" property="id" jdbcType="INTEGER" />
+		<result column="us_user_id" property="userId" jdbcType="BIGINT" />
+		<result column="special_id" property="specialId" jdbcType="BIGINT" />
+		<result column="special_name" property="specialName" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 人员档案-上下级人员关系 -->
+	<resultMap id="positionInfo" type="com.cq.dto.user.UserLeaderInfoDTO">
+		<result column="uli_type" property="type" jdbcType="TINYINT" />
+		<result column="uli_relation" property="relation" jdbcType="VARCHAR" />
+		<result column="uli_erp_user_id" property="erpUserId" jdbcType="INTEGER" />
+		<result column="uli_erp_user_id" property="userId" jdbcType="INTEGER" />
+		<result column="uli_erp_user_name" property="erpUserName" jdbcType="VARCHAR" />
+		<result column="uli_erp_user_name" property="realName" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 人员档案-附件信息 -->
+	<resultMap id="file" type="com.cq.model.file.File">
+		<id column="f_id" property="id" jdbcType="INTEGER" />
+		<result column="foreign_id" property="foreignId" jdbcType="BIGINT" />
+		<result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+		<result column="file_key" property="fileKey" jdbcType="VARCHAR" />
+		<result column="file_name" property="fileName" jdbcType="VARCHAR" />
+		<result column="f_gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+	</resultMap>
 
-  <!-- 身份信息唯一性校验 -->
-  <select id = "uniquenessCheck" resultType="java.lang.Integer" parameterType="com.cq.dto.user.UserDTO" >
-    select count(*) from j_oa_user where id_card_type = #{idCardType}
-    and id_card_no = #{idCardNo}
-  </select>
-  
-  <!-- 删除单个用户 -->
-  <delete id="delete" parameterType="java.lang.Long" >
-    delete from j_oa_user
-    where user_id = #{userId}
-  </delete>
-  
-  <!-- 真实删除 -->
-  <delete id="deleteBatch" parameterType="object" >
-    delete from j_oa_user
-    where user_id IN
-    <foreach collection="list" separator="," open="(" close=")" item="item" index="index">
-            #{item}
-     </foreach>
-  </delete>
+	<sql id="Base_Column_List">
+		id, user_id, erp_user_id, user_no, user_name, english_name, img_url, img_key, id_card_no,
+		birthdate, age, sex, user_code, company_id, company_name, main_depart_id, main_depart_name,
+		class_id, class_name, entry_date, entry_age, probationary_period, delay_day, regular_date,
+		leave_date, startwork_date, social_age, job_category, user_category, marital_status,
+		pregnant_status, account_category, account_address, birth_place, nation, province,
+		city, politics_status, join_party_date, hobby, phone, QQ, office_phone, mail, address,
+		home_address, physical_date, train_date, recruit_channel, recruit_type, push_username,
+		push_relation, memo, is_organised, user_status, file_id, is_delete, gmt_create, gmt_modified
+	</sql>
 
-  <!-- 伪删除·update -->
-  <update id="fakeDelete" parameterType="object" >
-    update j_oa_user set is_delete = 1 where user_id IN
-    <foreach collection="list" separator="," open="(" close=")" item="item" index="index">
-            #{item}
-    </foreach>
-  </update>
+	<sql id="Base_Info_List">
+		u.id, u.user_id, u.erp_user_id, u.user_no, u.user_name, u.english_name, u.img_url, u.img_key,
+		u.id_card_no, u.birthdate, u.age, u.sex, u.user_code, u.company_id, u.company_name,
+		u.main_depart_id, u.main_depart_name, u.class_id, u.class_name, u.entry_date, u.entry_age, u.probationary_period,
+		u.delay_day, u.regular_date, u.leave_date, u.startwork_date, u.social_age, u.job_category, u.user_category,
+		u.marital_status, u.pregnant_status, u.account_category, u.account_address, u.birth_place, u.nation, u.province,
+		u.city, u.politics_status, u.join_party_date, u.hobby, u.phone, u.QQ, u.office_phone, u.recruit_channel,
+		u.mail, u.address, u.home_address, u.physical_date, u.train_date, u.recruit_type, u.push_username, u.push_relation,
+		u.memo, u.is_organised, u.user_status, u.file_id, u.gmt_create, u.gmt_modified,
+		us.id as us_id, us.user_id as us_user_id, us.special_id, us.special_name,
+		uli.id as uli_id, uli.user_id as uli_user_id, uli.type as uli_type, uli.relation as uli_relation, uli.erp_user_id as
+		uli_erp_user_id, uli.erp_user_name as uli_erp_user_name,
+		f.id as f_id, f.foreign_id, f.file_url, f.file_key, f.file_name, f.gmt_create as f_gmt_create
+	</sql>
 
-<!-- 根据userId批量更新用户人员状态，人员类别，工作类别 -->
-  <update id="updateBatch" parameterType="com.cq.dto.user.UserUpdateBatchDTO" >
-    update j_oa_user
-    <set >
-      <if test="userStatus != null" >
-        user_status = #{userStatus,jdbcType=TINYINT},
-      </if>
-      <if test="jobCategory != null" >
-        job_category = #{jobCategory,jdbcType=TINYINT},
-      </if>
-      <if test="userCategory != null" >
-        user_category = #{userCategory,jdbcType=TINYINT},
-      </if>
-    </set>
-    where user_id IN
-    <foreach collection="userIds" separator="," open="(" close=")" item="item" index="index">
-            #{item}
-    </foreach>
-  </update>
-  
-  <update id="updateEntryAge">
-  	update j_oa_user set entry_age = format(datediff(now(),entry_date)/365,2) where entry_age is not null
-  </update>
-  
-  <update id="updateSocialAge">
-  	update j_oa_user set social_age = format(datediff(now(),startwork_date)/365,2) where startwork_date is not null
-  </update>
-  
-  <update id="updateAge">
-  	update j_oa_user user,j_oa_user_family_info info set info.age =info.age +1, user.age = user.age +1 
-  </update>
-  
-  <!-- 人事调动时查询相应人员 -->
-  <sql id="Transfer_Sql">
-      u.user_id, u.erp_user_id,
-      <if test="userTransferQueryDto.transferType != null and userTransferQueryDto.transferType == 1">
-          DATE_ADD(DATE_ADD(u.entry_date,INTERVAL u.probationary_period month),INTERVAL u.delay_day day) as estimate_regular_date,
-          datediff(DATE_ADD(DATE_ADD(u.entry_date,INTERVAL u.probationary_period month),INTERVAL u.delay_day day), now()) AS maturity_day,
-      </if>
-      <if test="userTransferQueryDto.transferType != null and userTransferQueryDto.transferType == 4">
-          upi.position_id, up.position_name, upi.erp_position_id, upi.erp_position_name, upi.rank_id, ur.rank_name,
-      </if>
-      <if test="userTransferQueryDto.transferType != null and userTransferQueryDto.transferType == 2">
-          ulc.date,
-      </if>
-      u.user_no, u.user_name, u.birthdate, u.sex, u.company_id, u.company_name, u.main_depart_id,
-      u.main_depart_name, u.class_id, u.class_name, u.entry_date,u.probationary_period, u.delay_day, u.job_category, u.user_category, u.user_status
-  </sql>
-  <sql id="TransferQuerySql">
-      <if test="userTransferQueryDto != null">
-          <!-- 根据人员状态查询 -->
-          <if test="userTransferQueryDto.userStatusList != null and userTransferQueryDto.userStatusList.size != 0">
-              and u.user_status IN
-              <foreach collection="userTransferQueryDto.userStatusList" separator="," open="(" close=")" item="item" index="index">
-                  #{item}
-              </foreach>
-          </if>
-          <!-- 根据当前登录人查询 -->
-          <if test="userTransferQueryDto.erpUserId != null">
-              and u.erp_user_id = #{userTransferQueryDto.erpUserId}
-          </if>
-          <!-- 左侧过滤 部门过滤 -->
-          <if test="userTransferQueryDto.departId != null">
-              and u.main_depart_id = #{userTransferQueryDto.departId}
-          </if>
-          <!-- 左侧筛选-姓名筛选 -->
-          <if test="userTransferQueryDto.userNameLike != null and userTransferQueryDto.userNameLike != ''">
-              and u.user_name like '%${userTransferQueryDto.userNameLike}%'
-          </if>
-          <!-- 左侧筛选-公司筛选 -->
-          <if test="userTransferQueryDto.companyIds != null and userTransferQueryDto.companyIds.size != 0">
-              and u.company_id IN
-              <foreach collection="userTransferQueryDto.companyIds" separator="," open="(" close=")" item="item" index="index">
-                  #{item}
-              </foreach>
-          </if>
-          <!-- 左侧筛选-部门筛选 -->
-          <if test="userTransferQueryDto.departIds != null and userTransferQueryDto.departIds.size != 0">
-              and u.main_depart_id IN
-              <foreach collection="userTransferQueryDto.departIds" separator="," open="(" close=")" item="item" index="index">
-                  #{item}
-              </foreach>
-          </if>
-      <!-- 特殊情况 -->
-          <!-- 当转正申请时，查询无转正日期的数据 -->
-          <if test="userTransferQueryDto.transferType == 1">
-              and u.regular_date is null
-          </if>
-          <!-- 当前复职查询时，按照人员ID升序，任职开始事件降序 -->
-          <if test="userTransferQueryDto.transferType == 4">
-              order by u.user_id asc, upi.start_date desc
-          </if>
-      </if>
-  </sql>
-  <!--人事调动 查询人员档案-->
-  <select id="transferList" resultMap="TransferResultMap" parameterType="com.cq.dto.user.UserTransferQueryDTO">
-      SELECT <include refid="Transfer_Sql"/>
-      FROM j_oa_user u
-      <if test="userTransferQueryDto.transferType == 4">
-          left join j_oa_user_position_info upi on u.user_id = upi.user_id
-          left join j_oa_user_position up on upi.position_id = up.position_id
-          left join j_oa_user_rank ur on upi.rank_id = ur.rank_id
-      </if>
-      <if test="userTransferQueryDto.transferType == 2">
-          left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
-      </if>
-      where 1 = 1 and u.is_delete = 0
-      <include refid="TransferQuerySql"/>
-  </select>
-  
-  <select id="getUserIdByErpUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
-      select distinct user_id from j_oa_user where erp_user_id = #{erpUserId}
-  </select>
-  
-  <!-- 根据erpUserIds 更新人员状态 -->
-  <update id="updateBatchUserStatusByErpUserId">
-      update j_oa_user user set user_status = #{userStatus} where erp_user_id IN
-      <foreach collection="erpUserIds" separator="," open="(" close=")" item="item" index="index">
-            #{item}
-      </foreach>
-  </update>
-  
-  <!-- 根据erpUserIds 更新人员状态 -->
-  <update id="updateUserStatusByErpUserId">
-      update j_oa_user user set user_status = #{userStatus} where erp_user_id = #{erpUserId}
-  </update>
-  
-  	<!-- 根据erpUserId 更新转正日期 -->
-  	<update id="updateRegularDateByErpUserId">
-  	    update j_oa_user user set regular_date = #{regularDate} where erp_user_id = #{erpUserId}
-  	</update>
-  	
-  	<!-- 根据erpUserId 更新离职日期 -->
-  	<update id="updateLeaveDateByErpUserId">
-      	update j_oa_user user set leave_date = ${leaveDate} where erp_user_id = #{erpUserId}
-  	</update>
-  
-  <insert id="insert" parameterType="com.cq.dto.user.UserDTO" >
-    insert into j_oa_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="erpUserId != null" >
-        erp_user_id,
-      </if>
-      <if test="userNo != null" >
-        user_no,
-      </if>
-      <if test="userName != null" >
-        user_name,
-      </if>
-      <if test="englishName != null" >
-        english_name,
-      </if>
-      <if test="imgUrl != null" >
-        img_url,
-      </if>
-      <if test="imgKey != null" >
-        img_key,
-      </if>
-      <if test="idCardType != null" >
-        id_card_type,
-      </if>
-      <if test="idCardNo != null" >
-        id_card_no,
-      </if>
-      <if test="birthdateType != null" >
-        birthdate_type,
-      </if>
-      <if test="birthdate != null" >
-        birthdate,
-      </if>
-      <if test="age != null" >
-        age,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="userCode != null" >
-        user_code,
-      </if>
-      <if test="companyId != null" >
-        company_id,
-      </if>
-      <if test="companyName != null" >
-        company_name,
-      </if>
-      <if test="mainDepartId != null" >
-        main_depart_id,
-      </if>
-      <if test="mainDepartName != null" >
-        main_depart_name,
-      </if>
-      <if test="classId != null" >
-        class_id,
-      </if>
-      <if test="className != null" >
-        class_name,
-      </if>
-      <if test="entryDate != null" >
-        entry_date,
-      </if>
-      <if test="entryAge != null" >
-        entry_age,
-      </if>
-      <if test="probationaryPeriod != null" >
-        probationary_period,
-      </if>
-      <if test="delayDay != null" >
-        delay_day,
-      </if>
-      <if test="regularDate != null" >
-        regular_date,
-      </if>
-      <if test="leaveDate != null" >
-        leave_date,
-      </if>
-      <if test="startworkDate != null" >
-        startwork_date,
-      </if>
-      <if test="socialAge != null" >
-        social_age,
-      </if>
-      <if test="jobCategory != null" >
-        job_category,
-      </if>
-      <if test="userCategory != null" >
-        user_category,
-      </if>
-      <if test="maritalStatus != null" >
-        marital_status,
-      </if>
-      <if test="pregnantStatus != null" >
-        pregnant_status,
-      </if>
-      <if test="accountCategory != null" >
-        account_category,
-      </if>
-      <if test="accountAddress != null" >
-        account_address,
-      </if>
-      <if test="nation != null" >
-        nation,
-      </if>
-      <if test="province != null" >
-        province,
-      </if>
-      <if test="city != null" >
-        city,
-      </if>
-      <if test="politicsStatus != null" >
-        politics_status,
-      </if>
-      <if test="joinPartyDate != null" >
-        join_party_date,
-      </if>
-      <if test="hobby != null" >
-        hobby,
-      </if>
-      <if test="phone != null" >
-        phone,
-      </if>
-      <if test="qq != null" >
-        QQ,
-      </if>
-      <if test="officePhone != null" >
-        office_phone,
-      </if>
-      <if test="housePhone != null" >
-        house_phone,
-      </if>
-      <if test="mail != null" >
-        mail,
-      </if>
-      <if test="profileUrl != null" >
-        profile_url,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="homeAddress != null" >
-        home_address,
-      </if>
-      <if test="physicalDate != null" >
-        physical_date,
-      </if>
-      <if test="trainDate != null" >
-        train_date,
-      </if>
-      <if test="recruitType != null" >
-        recruit_type,
-      </if>
-      <if test="pushUsername != null" >
-        push_username,
-      </if>
-      <if test="pushRelation != null" >
-        push_relation,
-      </if>
-      <if test="memo != null" >
-        memo,
-      </if>
-      <if test="isOrganised != null" >
-        is_organised,
-      </if>
-      <if test="userStatus != null" >
-        user_status,
-      </if>
-      <if test="fileId != null" >
-        file_id,
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create,
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="erpUserId != null" >
-        #{erpUserId,jdbcType=BIGINT},
-      </if>
-      <if test="userNo != null" >
-        #{userNo,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="englishName != null" >
-        #{englishName,jdbcType=VARCHAR},
-      </if>
-      <if test="imgUrl != null" >
-        #{imgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="imgKey != null" >
-        #{imgKey,jdbcType=VARCHAR},
-      </if>
-      <if test="idCardType != null" >
-        #{idCardType,jdbcType=TINYINT},
-      </if>
-      <if test="idCardNo != null" >
-        #{idCardNo,jdbcType=VARCHAR},
-      </if>
-      <if test="birthdateType != null" >
-        #{birthdateType,jdbcType=TINYINT},
-      </if>
-      <if test="birthdate != null" >
-        #{birthdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="age != null" >
-        #{age,jdbcType=TINYINT},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=TINYINT},
-      </if>
-      <if test="userCode != null" >
-        #{userCode,jdbcType=VARCHAR},
-      </if>
-      <if test="companyId != null" >
-        #{companyId,jdbcType=BIGINT},
-      </if>
-      <if test="companyName != null" >
-        #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="mainDepartId != null" >
-        #{mainDepartId,jdbcType=BIGINT},
-      </if>
-      <if test="mainDepartName != null" >
-        #{mainDepartName,jdbcType=VARCHAR},
-      </if>
-      <if test="classId != null" >
-        #{classId,jdbcType=BIGINT},
-      </if>
-      <if test="className != null" >
-        #{className,jdbcType=VARCHAR},
-      </if>
-      <if test="entryDate != null" >
-        #{entryDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="entryAge != null" >
-        #{entryAge,jdbcType=TINYINT},
-      </if>
-      <if test="probationaryPeriod != null" >
-        #{probationaryPeriod,jdbcType=TINYINT},
-      </if>
-      <if test="delayDay != null" >
-        #{delayDay,jdbcType=TINYINT},
-      </if>
-      <if test="regularDate != null" >
-        #{regularDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="leaveDate != null" >
-        #{leaveDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="startworkDate != null" >
-        #{startworkDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="socialAge != null" >
-        #{socialAge,jdbcType=TINYINT},
-      </if>
-      <if test="jobCategory != null" >
-        #{jobCategory,jdbcType=TINYINT},
-      </if>
-      <if test="userCategory != null" >
-        #{userCategory,jdbcType=TINYINT},
-      </if>
-      <if test="maritalStatus != null" >
-        #{maritalStatus,jdbcType=TINYINT},
-      </if>
-      <if test="pregnantStatus != null" >
-        #{pregnantStatus,jdbcType=TINYINT},
-      </if>
-      <if test="accountCategory != null" >
-        #{accountCategory,jdbcType=TINYINT},
-      </if>
-      <if test="accountAddress != null" >
-        #{accountAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null" >
-        #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        #{province,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null" >
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="politicsStatus != null" >
-        #{politicsStatus,jdbcType=TINYINT},
-      </if>
-      <if test="joinPartyDate != null" >
-        #{joinPartyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="hobby != null" >
-        #{hobby,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="qq != null" >
-        #{qq,jdbcType=VARCHAR},
-      </if>
-      <if test="officePhone != null" >
-        #{officePhone,jdbcType=VARCHAR},
-      </if>
-      <if test="housePhone != null" >
-        #{housePhone,jdbcType=VARCHAR},
-      </if>
-      <if test="mail != null" >
-        #{mail,jdbcType=VARCHAR},
-      </if>
-      <if test="profileUrl != null" >
-        #{profileUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="homeAddress != null" >
-        #{homeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="physicalDate != null" >
-        #{physicalDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="trainDate != null" >
-        #{trainDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="recruitType != null" >
-        #{recruitType,jdbcType=TINYINT},
-      </if>
-      <if test="pushUsername != null" >
-        #{pushUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="pushRelation != null" >
-        #{pushRelation,jdbcType=VARCHAR},
-      </if>
-      <if test="memo != null" >
-        #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="isOrganised != null" >
-        #{isOrganised,jdbcType=TINYINT},
-      </if>
-      <if test="userStatus != null" >
-        #{userStatus,jdbcType=TINYINT},
-      </if>
-      <if test="fileId != null" >
-        #{fileId,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  
-    <!-- 根据erpUserId修改人员信息 -->
-    <update id="updateByErpUserId" parameterType="com.cq.model.user.User" >
-    	update j_oa_user
-    	<set >
-    		<if test="leaveDate != null" >
-        		leave_date = #{leaveDate,jdbcType=TIMESTAMP},
-      		</if>
-      		<if test="regularDate != null" >
-        		regular_date = #{regularDate,jdbcType=TIMESTAMP},
-      		</if>
-      		<if test="userStatus != null" >
-        		user_status = #{userStatus,jdbcType=TINYINT},
-      		</if>
-    	</set>
-    	where erp_user_id = #{erpUserId,jdbcType=BIGINT}
-    </update>
+	<sql id="user_query_List">
+		u.id, u.user_id, u.erp_user_id, u.user_no, u.user_name, u.english_name, u.img_url, u.img_key,
+		u.id_card_no, u.birthdate, u.age, u.sex, u.user_code, u.company_id, u.company_name,
+		u.main_depart_id, u.main_depart_name, u.class_id, u.class_name, u.entry_date, u.entry_age, u.probationary_period,
+		u.delay_day, u.regular_date, u.leave_date, u.startwork_date, u.social_age, u.job_category, u.user_category,
+		u.marital_status, u.pregnant_status, u.account_category, u.account_address, u.birth_place, u.nation, u.province,
+		u.city, u.politics_status, u.join_party_date, u.hobby, u.phone, u.QQ, u.office_phone, u.recruit_channel,
+		u.mail, u.address, u.home_address, u.physical_date, u.train_date, u.recruit_type, u.push_username, u.push_relation,
+		u.memo, u.is_organised, u.user_status, u.file_id, u.gmt_create, u.gmt_modified,
+		uei.status as uei_status, uei.education_level, uei.major, uei.school, uei.end_date,
+		ulc.date as ulc_date, ulc.type as ulc_type
+	</sql>
+
+	<!-- 表头查询-左侧过滤-左侧筛选 -->
+	<select id="list" resultMap="UserDtoMap" parameterType="com.cq.dto.user.UserQueryDTO">
+		select
+		<include refid="user_query_List" />
+		from (select <include refid="Base_Column_List" /> from j_oa_user where user_id IN
+		<foreach collection="userQueryDto.userIdList" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+		<if test="page.pageIndex != null and page.pageSize != null">
+			limit #{page.offset}, #{page.pageSize}
+		</if>) u
+		left join j_oa_user_special us on u.user_id = us.user_id
+		left join j_oa_user_leader_info uli on u.user_id = uli.user_id
+		left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
+		left join j_oa_user_education_info uei on u.user_id = uei.user_id and uei.status = 2
+		where 1 = 1 and u.is_delete = 0
+		<if test="page!=null">
+			<if test="page.sortField != null and page.sortField != '' ">
+				order by ${page.sortField}
+				<if test="page.sortOrder != null and page.sortOrder != '' ">
+					${page.sortOrder}
+				</if>
+			</if>
+			<if test="page.sortField == null or page.sortField == '' ">
+				order by u.user_no asc, u.id desc
+			</if>
+		</if>
+	</select>
+
+	<!-- 获取人员基本信息 -->
+	<select id="getUser" resultMap="UserDtoMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Info_List" />
+		from j_oa_user u
+		left join j_oa_user_special us on u.user_id = us.user_id
+		left join j_oa_user_leader_info uli on u.user_id = uli.user_id
+		left join j_oa_file f on u.file_id = f.foreign_id
+		where 1 = 1 and u.is_delete = 0
+		and u.user_id = #{userId}
+	</select>
+
+	<select id="listCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select distinct u.user_id
+		from j_oa_user u
+		<if test="isHaveSpecial == 1">
+			left join j_oa_user_special us on u.user_id = us.user_id
+		</if>
+		<if test="isHaveLeader == 1">
+			left join j_oa_user_leader_info uli on u.user_id = uli.user_id and uli.type = 0
+		</if>
+		<if test="isHaveLabourContract == 1">
+			left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
+		</if>
+		<if test="isHaveEducation == 1">
+			left join j_oa_user_education_info uei on u.user_id = uei.user_id and uei.status = 2
+		</if>
+		<if test="userQueryDto.skillNameLike != null and userQueryDto.skillNameLike != ''">
+			left join j_oa_user_skill_info usi on u.user_id = usi.user_id
+		</if>
+		<if test="userQueryDto.workUnitLike != null and userQueryDto.workUnitLike != ''">
+			left join j_oa_user_work_experience_info uwei on u.user_id = uwei.user_id
+		</if>
+		where 1 = 1 and u.is_delete = 0
+		<include refid="whereQuery"></include>
+	</select>
+
+	<!-- 子页面顶部人员信息 -->
+	<select id="get" resultMap="UserBaseDtoMap" parameterType="java.lang.Long">
+		select u.img_key, u.img_url, u.user_name, u.sex, u.company_name, u.main_depart_name from j_oa_user u
+		where u.user_id = #{userId}
+	</select>
+
+	<!--人事调动 查询人员档案 -->
+	<select id="transferList" resultMap="TransferResultMap">
+		SELECT
+		<include refid="Transfer_Sql" />
+		FROM (select * from j_oa_user where user_id IN
+		<foreach collection="userQueryDto.userIdList" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+		<if test="page.pageIndex != null and page.pageSize != null">
+			limit #{page.offset}, #{page.pageSize}
+		</if>) u
+		<if test="userTransferQueryDto.transferType == 4">
+			left join j_oa_user_position_info upi on u.user_id = upi.user_id
+			left join j_oa_user_position up on upi.position_id = up.position_id
+			left join j_oa_user_rank ur on upi.rank_id = ur.rank_id
+		</if>
+		<if test="userTransferQueryDto.transferType == 2">
+			left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
+		</if>
+		where 1 = 1 and u.is_delete = 0
+		<include refid="TransferQuerySql" />
+		<if test="page!=null">
+			<if test="page.sortField != null and page.sortField != '' ">
+				order by ${page.sortField}
+				<if test="page.sortOrder != null and page.sortOrder != '' ">
+					${page.sortOrder}
+				</if>
+			</if>
+			<if test="page.sortField == null or page.sortField == '' ">
+				<if test="userTransferQueryDto.transferType != 4">
+					order by u.user_no asc
+				</if>
+			</if>
+		</if>
+	</select>
+
+	<!--人事调动 查询人员档案总数 -->
+	<select id="transferListCount" resultType="java.lang.Long">
+		SELECT distinct u.user_id
+		FROM j_oa_user u
+		<if test="userTransferQueryDto.transferType == 4">
+			left join j_oa_user_position_info upi on u.user_id = upi.user_id
+			left join j_oa_user_position up on upi.position_id = up.position_id
+			left join j_oa_user_rank ur on upi.rank_id = ur.rank_id
+		</if>
+		<if test="userTransferQueryDto.transferType == 2">
+			left join j_oa_user_labour_contract ulc on u.user_id = ulc.user_id
+		</if>
+		where 1 = 1 and u.is_delete = 0
+		<include refid="TransferQuerySql" />
+	</select>
+
+	<!-- 根据人员ID查询erp人员ID -->
+	<select id="getErpUserIdByUserId" parameterType="object" resultType="object">
+		select distinct erp_user_id from j_oa_user where user_id IN
+		<foreach collection="list" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="getUserIdByErpUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
+		select distinct user_id from j_oa_user where erp_user_id = #{erpUserId}
+	</select>
+
+	<!-- 身份信息唯一性校验 -->
+	<select id="uniquenessCheck" resultType="java.lang.Integer">
+		select count(1) from j_oa_user where id_card_no = #{idCardNo} and is_delete = 0
+	</select>
+
+	<!-- 身份信息唯一性校验 不校验自己-->
+	<select id="uniquenessCheckExceptOneSelf" parameterType="com.cq.dto.user.UserDTO" resultType="java.lang.Integer">
+		select count(1) from j_oa_user where id_card_no = #{userDto.idCardNo} and is_delete = 0
+		<if test="userDto.userId != null">
+			and user_id != #{userDto.userId}
+		</if>
+	</select>
+
+	<!-- 删除单个用户 -->
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from j_oa_user
+		where user_id = #{userId}
+	</delete>
+
+	<!-- 真实删除 -->
+	<delete id="deleteBatch" parameterType="object">
+		delete from j_oa_user
+		where user_id IN
+		<foreach collection="list" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!-- 伪删除·update -->
+	<update id="fakeDelete" parameterType="object">
+		update j_oa_user set is_delete = 1 where user_id IN
+		<foreach collection="list" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+	</update>
+
+	<!-- 根据userId批量更新用户人员状态，人员类别，工作类别 -->
+	<update id="updateBatch" parameterType="com.cq.dto.user.UserUpdateBatchDTO">
+		update j_oa_user
+		<set>
+			<if test="userStatus != null">
+				user_status = #{userStatus,jdbcType=TINYINT},
+			</if>
+			<if test="jobCategory != null">
+				job_category = #{jobCategory,jdbcType=TINYINT},
+			</if>
+			<if test="userCategory != null">
+				user_category = #{userCategory,jdbcType=TINYINT},
+			</if>
+		</set>
+		where user_id IN
+		<foreach collection="userIds" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="updateEntryAge">
+		update j_oa_user set entry_age = format(datediff(now(),entry_date)/365,2) where entry_date is not null
+	</update>
+
+	<update id="updateSocialAge">
+		update j_oa_user set social_age = format(datediff(now(),startwork_date)/365,2) where startwork_date is not null
+	</update>
+
+	<update id="updateAge">
+		update j_oa_user user,j_oa_user_family_info info set info.age =info.age +1, user.age = user.age +1
+	</update>
+
+	<!-- 人事调动时查询相应人员 -->
+	<sql id="Transfer_Sql">
+		u.user_id, u.erp_user_id,
+		<if test="userTransferQueryDto.transferType != null and userTransferQueryDto.transferType == 1">
+			DATE_ADD(DATE_ADD(u.entry_date,INTERVAL u.probationary_period month),INTERVAL u.delay_day day) as estimate_regular_date,
+			datediff(DATE_ADD(DATE_ADD(u.entry_date,INTERVAL u.probationary_period month),INTERVAL u.delay_day day), now()) AS
+			maturity_day,
+		</if>
+		<if test="userTransferQueryDto.transferType != null and userTransferQueryDto.transferType == 4">
+			upi.position_id, up.position_name, upi.erp_position_id, upi.erp_position_name, upi.rank_id, ur.rank_name,
+		</if>
+		<if test="userTransferQueryDto.transferType != null and userTransferQueryDto.transferType == 2">
+			ulc.date,
+		</if>
+		u.user_no, u.user_name, u.birthdate, u.sex, u.company_id, u.company_name, u.main_depart_id,
+		u.main_depart_name, u.class_id, u.class_name, u.entry_date,u.probationary_period, u.delay_day, u.job_category, u.user_category,
+		u.user_status
+	</sql>
+
+	<!-- 根据erpUserIds 更新人员状态 -->
+	<update id="updateBatchUserStatusByErpUserId">
+		update j_oa_user user set user_status = #{userStatus} where erp_user_id IN
+		<foreach collection="erpUserIds" separator="," open="(" close=")" item="item" index="index">
+			#{item}
+		</foreach>
+	</update>
+
+	<!-- 根据erpUserIds 更新人员状态 -->
+	<update id="updateUserStatusByErpUserId">
+		update j_oa_user user set user_status = #{userStatus} where erp_user_id = #{erpUserId}
+	</update>
+
+	<!-- 根据erpUserId 更新转正日期 -->
+	<update id="updateRegularDateByErpUserId">
+		update j_oa_user user set regular_date = #{regularDate} where erp_user_id = #{erpUserId}
+	</update>
+
+	<!-- 根据erpUserId 更新离职日期 -->
+	<update id="updateLeaveDateByErpUserId">
+		update j_oa_user user set leave_date = #{leaveDate} 
+		where erp_user_id = #{erpUserId}
+	</update>
+
+	<!-- 根据erpUserId修改人员信息 -->
+	<update id="updateByErpUserId" parameterType="com.cq.model.user.User">
+		update j_oa_user
+		<set>
+			<if test="leaveDate != null">
+				leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="regularDate != null">
+				regular_date = #{regularDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userStatus != null">
+				user_status = #{userStatus,jdbcType=TINYINT},
+			</if>
+		</set>
+		where erp_user_id = #{erpUserId,jdbcType=BIGINT}
+	</update>
+
+	<insert id="insert" parameterType="com.cq.dto.user.UserDTO">
+		insert into j_oa_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="erpUserId != null">
+				erp_user_id,
+			</if>
+			<if test="userNo != null">
+				user_no,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="englishName != null">
+				english_name,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="imgKey != null">
+				img_key,
+			</if>
+			<if test="idCardNo != null">
+				id_card_no,
+			</if>
+			<if test="birthdate != null">
+				birthdate,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="userCode != null">
+				user_code,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="companyName != null">
+				company_name,
+			</if>
+			<if test="mainDepartId != null">
+				main_depart_id,
+			</if>
+			<if test="mainDepartName != null">
+				main_depart_name,
+			</if>
+			<if test="classId != null">
+				class_id,
+			</if>
+			<if test="className != null">
+				class_name,
+			</if>
+			<if test="entryDate != null">
+				entry_date,
+			</if>
+			<if test="entryAge != null">
+				entry_age,
+			</if>
+			<if test="probationaryPeriod != null">
+				probationary_period,
+			</if>
+			<if test="delayDay != null">
+				delay_day,
+			</if>
+			<if test="regularDate != null">
+				regular_date,
+			</if>
+			<if test="leaveDate != null">
+				leave_date,
+			</if>
+			<if test="startworkDate != null">
+				startwork_date,
+			</if>
+			<if test="socialAge != null">
+				social_age,
+			</if>
+			<if test="jobCategory != null">
+				job_category,
+			</if>
+			<if test="userCategory != null">
+				user_category,
+			</if>
+			<if test="maritalStatus != null">
+				marital_status,
+			</if>
+			<if test="pregnantStatus != null">
+				pregnant_status,
+			</if>
+			<if test="accountCategory != null">
+				account_category,
+			</if>
+			<if test="accountAddress != null">
+				account_address,
+			</if>
+			<if test="birthPlace != null">
+				birth_place,
+			</if>
+			<if test="nation != null">
+				nation,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="politicsStatus != null">
+				politics_status,
+			</if>
+			<if test="joinPartyDate != null">
+				join_party_date,
+			</if>
+			<if test="hobby != null">
+				hobby,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="qq != null">
+				QQ,
+			</if>
+			<if test="officePhone != null">
+				office_phone,
+			</if>
+			<if test="mail != null">
+				mail,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="homeAddress != null">
+				home_address,
+			</if>
+			<if test="physicalDate != null">
+				physical_date,
+			</if>
+			<if test="trainDate != null">
+				train_date,
+			</if>
+			<if test="recruitChannel != null">
+				recruit_channel,
+			</if>
+			<if test="recruitType != null">
+				recruit_type,
+			</if>
+			<if test="pushUsername != null">
+				push_username,
+			</if>
+			<if test="pushRelation != null">
+				push_relation,
+			</if>
+			<if test="memo != null">
+				memo,
+			</if>
+			<if test="isOrganised != null">
+				is_organised,
+			</if>
+			<if test="userStatus != null">
+				user_status,
+			</if>
+			<if test="fileId != null">
+				file_id,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="erpUserId != null">
+				#{erpUserId,jdbcType=BIGINT},
+			</if>
+			<if test="userNo != null">
+				#{userNo,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="englishName != null">
+				#{englishName,jdbcType=VARCHAR},
+			</if>
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="imgKey != null">
+				#{imgKey,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardNo != null">
+				#{idCardNo,jdbcType=VARCHAR},
+			</if>
+			<if test="birthdate != null">
+				#{birthdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=TINYINT},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=TINYINT},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=BIGINT},
+			</if>
+			<if test="companyName != null">
+				#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="mainDepartId != null">
+				#{mainDepartId,jdbcType=BIGINT},
+			</if>
+			<if test="mainDepartName != null">
+				#{mainDepartName,jdbcType=VARCHAR},
+			</if>
+			<if test="classId != null">
+				#{classId,jdbcType=BIGINT},
+			</if>
+			<if test="className != null">
+				#{className,jdbcType=VARCHAR},
+			</if>
+			<if test="entryDate != null">
+				#{entryDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="entryAge != null">
+				#{entryAge,jdbcType=TINYINT},
+			</if>
+			<if test="probationaryPeriod != null">
+				#{probationaryPeriod,jdbcType=TINYINT},
+			</if>
+			<if test="delayDay != null">
+				#{delayDay,jdbcType=TINYINT},
+			</if>
+			<if test="regularDate != null">
+				#{regularDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="leaveDate != null">
+				#{leaveDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startworkDate != null">
+				#{startworkDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="socialAge != null">
+				#{socialAge,jdbcType=TINYINT},
+			</if>
+			<if test="jobCategory != null">
+				#{jobCategory,jdbcType=TINYINT},
+			</if>
+			<if test="userCategory != null">
+				#{userCategory,jdbcType=TINYINT},
+			</if>
+			<if test="maritalStatus != null">
+				#{maritalStatus,jdbcType=TINYINT},
+			</if>
+			<if test="pregnantStatus != null">
+				#{pregnantStatus,jdbcType=TINYINT},
+			</if>
+			<if test="accountCategory != null">
+				#{accountCategory,jdbcType=TINYINT},
+			</if>
+			<if test="accountAddress != null">
+				#{accountAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="birthPlace != null">
+				#{birthPlace,jdbcType=VARCHAR},
+			</if>
+			<if test="nation != null">
+				#{nation,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="politicsStatus != null">
+				#{politicsStatus,jdbcType=TINYINT},
+			</if>
+			<if test="joinPartyDate != null">
+				#{joinPartyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="hobby != null">
+				#{hobby,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null">
+				#{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="officePhone != null">
+				#{officePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="mail != null">
+				#{mail,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="homeAddress != null">
+				#{homeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="physicalDate != null">
+				#{physicalDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="trainDate != null">
+				#{trainDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="recruitChannel != null">
+				#{recruitChannel,jdbcType=TINYINT},
+			</if>
+			<if test="recruitType != null">
+				#{recruitType,jdbcType=TINYINT},
+			</if>
+			<if test="pushUsername != null">
+				#{pushUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="pushRelation != null">
+				#{pushRelation,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="isOrganised != null">
+				#{isOrganised,jdbcType=TINYINT},
+			</if>
+			<if test="userStatus != null">
+				#{userStatus,jdbcType=TINYINT},
+			</if>
+			<if test="fileId != null">
+				#{fileId,jdbcType=BIGINT},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 职称和工作单位子表只在查询查询职称和工作单位时使用 -->
+	<sql id="skillAndWorkQuery">
+		<if test="userQueryDto !=null">
+			<!-- 职称 -->
+			<if test="userQueryDto.skillNameLike != null and userQueryDto.skillNameLike != ''">
+				left join j_oa_user_skill_info usi on u.user_id = usi.user_id
+			</if>
+			<!-- 工作单位 -->
+			<if test="userQueryDto.workUnitLike != null and userQueryDto.workUnitLike != ''">
+				left join j_oa_user_work_experience_info uwei on u.user_id = uwei.user_id
+			</if>
+		</if>
+	</sql>
+
+	<sql id="whereQuery">
+		<if test="userQueryDto !=null">
+			<!-- 左侧过滤 -->
+			<!-- 今日新增 -->
+			<if test="userQueryDto.addType !=null and userQueryDto.addType == 0">
+				and (u.entry_date &gt;= CURDATE() AND
+				u.entry_date &lt;
+				DATE_ADD(CURDATE(),INTERVAL 1 DAY))
+			</if>
+			<!-- 昨日新增 -->
+			<if test="userQueryDto.addType !=null and userQueryDto.addType == 1">
+				and (u.entry_date &gt;= DATE_SUB(CURDATE(),INTERVAL 1 DAY) AND
+				u.entry_date &lt; CURDATE())
+			</if>
+			<!-- 本周新增 -->
+			<if test="userQueryDto.addType !=null and userQueryDto.addType == 2">
+				and YEARWEEK(date_format(u.entry_date,'%Y-%m-%d')) = YEARWEEK(now())
+			</if>
+			<!-- 本月新增 -->
+			<if test="userQueryDto.addType !=null and userQueryDto.addType == 3">
+				and date_format(u.entry_date,'%Y-%m') = date_format(now(),'%Y-%m')
+			</if>
+			<!-- 组织机构过滤 -->
+			<!-- 公司 -->
+			<if test="userQueryDto.companyIdLeft != null and userQueryDto.companyIdLeft != ''">
+				AND u.company_id = #{userQueryDto.companyIdLeft}
+			</if>
+			<!-- 部门 -->
+			<if test="userQueryDto.departIdLeft != null and userQueryDto.departIdLeft != ''">
+				AND u.main_depart_id = #{userQueryDto.departIdLeft}
+			</if>
+			<!-- 任职类型过滤 -->
+			<if test="userQueryDto.jobCategoryLeft != null">
+				AND u.job_category = #{userQueryDto.jobCategoryLeft}
+			</if>
+			<!-- 人员类别过滤 -->
+			<if test="userQueryDto.userCategoryLeft != null">
+				AND u.user_category = #{userQueryDto.userCategoryLeft}
+			</if>
+			<!-- 人员状态 -->
+			<if test="userQueryDto.userStatusLeft != null">
+				AND u.user_status = #{userQueryDto.userStatusLeft}
+			</if>
+			<!-- 是否在编 -->
+			<if test="userQueryDto.isOrganisedLeft != null">
+				AND u.is_organised = #{userQueryDto.isOrganisedLeft}
+			</if>
+			<!-- 是否内推 -->
+			<if test="userQueryDto.isPushLeft != null and userQueryDto.isPushLeft == 1">
+				AND u.recruit_channel = 2
+			</if>
+			<if test="userQueryDto.isPushLeft != null and userQueryDto.isPushLeft == 0">
+				AND u.recruit_channel != 2
+			</if>
+			<!-- 是否在编 -->
+			<if test="userQueryDto.isOrganiseds != null and userQueryDto.isOrganiseds.size != 0">
+				and u.is_organised IN
+				<foreach collection="userQueryDto.isOrganiseds" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 所属公司 -->
+			<if test="userQueryDto.companyIds != null and userQueryDto.companyIds.size != 0">
+				and u.company_id IN
+				<foreach collection="userQueryDto.companyIds" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+			</if>
+			<!-- 所属部门 -->
+			<if test="userQueryDto.departIds != null and userQueryDto.departIds.size != 0">
+				and u.main_depart_id IN
+				<foreach collection="userQueryDto.departIds" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 所属班组 -->
+			<if test="userQueryDto.classIds != null and userQueryDto.classIds.size != 0">
+				and u.class_id IN
+				<foreach collection="userQueryDto.classIds" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 任职类型 -->
+			<if test="userQueryDto.jobCategorys != null and userQueryDto.jobCategorys.size != 0">
+				and u.job_category IN
+				<foreach collection="userQueryDto.jobCategorys" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 人员类别 -->
+			<if test="userQueryDto.userCategorys != null and userQueryDto.userCategorys.size != 0">
+				and u.user_category IN
+				<foreach collection="userQueryDto.userCategorys" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 人员状态 -->
+			<if test="userQueryDto.userStatusList != null and userQueryDto.userStatusList.size != 0">
+				and u.user_status IN
+				<foreach collection="userQueryDto.userStatusList" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 省份 -->
+			<if test="userQueryDto.provinces != null and userQueryDto.provinces.size != 0">
+				and u.province IN
+				<foreach collection="userQueryDto.provinces" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 招聘方式 -->
+			<if test="userQueryDto.recruitTypes != null and userQueryDto.recruitTypes.size != 0">
+				and u.recruit_type IN
+				<foreach collection="userQueryDto.recruitTypes" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 招聘渠道 -->
+			<if test="userQueryDto.recruitChannels != null and userQueryDto.recruitChannels.size != 0">
+				and u.recruit_channel IN
+				<foreach collection="userQueryDto.recruitChannels" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 是否内推 0否，1是，2所有 -->
+			<if test="userQueryDto.isPushType != null and userQueryDto.isPushType == 1">
+				and u.recruit_type = 3
+			</if>
+			<if test="userQueryDto.isPushType != null and userQueryDto.isPushType == 0">
+				and u.recruit_type != 3
+			</if>
+			<!-- 职务筛选 -->
+			<if test="userQueryDto.erpPositionIdList != null and userQueryDto.erpPositionIdList.size != 0">
+				and u.user_id in (select user_id from j_oa_user_position_info where erp_position_id IN
+				<foreach collection="userQueryDto.erpPositionIdList" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<!-- 职位筛选 -->
+			<if test="userQueryDto.positionIdList != null and userQueryDto.positionIdList.size != 0">
+				and u.user_id in (select user_id from j_oa_user_position_info where position_id In
+				<foreach collection="userQueryDto.positionIdList" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+				)
+			</if>
+			<!-- 学历 -->
+			<if test="userQueryDto.educationLevels != null and userQueryDto.educationLevels.size != 0">
+				and uei.education_level IN
+				<foreach collection="userQueryDto.educationLevels" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 合同签订情况 -->
+			<if test="userQueryDto.labourContractTypes != null and userQueryDto.labourContractTypes.size != 0">
+				and ulc.type IN
+				<foreach collection="userQueryDto.labourContractTypes" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 入职日期筛选 -->
+			<if test="userQueryDto.startEntryDate != null and userQueryDto.startEntryDate != ''">
+				AND u.entry_date &gt;= #{userQueryDto.startEntryDate}
+			</if>
+			<if test="userQueryDto.endEntryDate != null and userQueryDto.endEntryDate != ''">
+				AND u.entry_date &lt; #{userQueryDto.endEntryDate}
+			</if>
+			<!-- 近期合同那个到期时间筛选 -->
+			<if test="userQueryDto.startLabourContractDate != null and userQueryDto.startLabourContractDate != ''">
+				AND ulc.date &gt;= #{userQueryDto.startLabourContractDate}
+			</if>
+			<if test="userQueryDto.endLabourContractDate != null and userQueryDto.endLabourContractDate != ''">
+				AND ulc.date &lt; #{userQueryDto.endLabourContractDate}
+			</if>
+			<!-- 离职日期筛选 -->
+			<if test="userQueryDto.startLeaveDate != null and userQueryDto.startLeaveDate != ''">
+				AND u.leave_date &gt;= #{userQueryDto.startLeaveDate}
+			</if>
+			<if test="userQueryDto.endLeaveDate != null and userQueryDto.endLeaveDate != ''">
+				AND u.leave_date &lt; #{userQueryDto.endLeaveDate}
+			</if>
+			<!-- 导出筛选 -->
+			<if test="userQueryDto.userIds != null and userQueryDto.userIds.size != 0">
+				AND u.user_id IN
+				<foreach collection="userQueryDto.userIds" separator="," open="(" close=")" item="item" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 当前登录人相关查询 -->
+			<if test="userQueryDto.userId != null">
+				AND u.user_id = #{userQueryDto.userId}
+			</if>
+			<!-- 显示列表头查询 -->
+			<!-- 员工编号-模糊查询 -->
+			<if test="userQueryDto.userNoLike != null and userQueryDto.userNoLike != ''">
+				and u.user_no like '%${userQueryDto.userNoLike}%'
+			</if>
+			<!-- 中文姓名-模糊查询 -->
+			<if test="userQueryDto.userNameLike != null and userQueryDto.userNameLike != ''">
+				and u.user_Name like '%${userQueryDto.userNameLike}%'
+			</if>
+			<!-- 花名/英文名-模糊查询 -->
+			<if test="userQueryDto.englishNameLike != null and userQueryDto.englishNameLike != ''">
+				and u.english_Name like '%${userQueryDto.englishNameLike}%'
+			</if>
+			<!-- 证件号-模糊查询 -->
+			<if test="userQueryDto.idCardNoLike != null and userQueryDto.idCardNoLike != ''">
+				and u.id_card_no like '%${userQueryDto.idCardNoLike}%'
+			</if>
+			<!-- Erp人员ID -->
+			<if test="userQueryDto.erpUserId != null and userQueryDto.erpUserId != ''">
+				and u.erp_user_id = ${userQueryDto.erpUserId}
+			</if>
+			<!-- 出生日期 -->
+			<if test="userQueryDto.birthdateEquals != null">
+				and u.birthdate = #{userQueryDto.birthdateEquals}
+			</if>
+			<if test="userQueryDto.birthdateGte != null">
+				and u.birthdate &gt;= #{userQueryDto.birthdateGte}
+			</if>
+			<if test="userQueryDto.birthdateLte != null">
+				and u.birthdate &lt;= #{userQueryDto.birthdateLte}
+			</if>
+			<if test="userQueryDto.birthdateGt != null">
+				and u.birthdate &gt;= #{userQueryDto.birthdateGt}
+			</if>
+			<if test="userQueryDto.birthdateLt != null">
+				and u.birthdate &lt;= #{userQueryDto.birthdateLt}
+			</if>
+			<!-- 性别默认0 男0、女1 -->
+			<if test="userQueryDto.sexIn != null">
+				and u.sex in ${userQueryDto.sexIn}
+			</if>
+			<!-- 工号（系统账号）-模糊查询 -->
+			<if test="userQueryDto.userCodeLike != null and userQueryDto.userCodeLike != ''">
+				and u.user_code like '%${userQueryDto.userCodeLike}%'
+			</if>
+			<!-- 所属公司 -->
+			<if test="userQueryDto.companyIdIn != null">
+				and u.company_id in ${userQueryDto.companyIdIn}
+			</if>
+			<if test="userQueryDto.companyId != null and userQueryDto.companyId != '' and userQueryDto.companyId != '[]'">
+				and u.company_id = ${userQueryDto.companyId}
+			</if>
+			<if test="userQueryDto.companyNameLike != null and userQueryDto.companyNameLike != ''">
+				and u.company_name like '%${userQueryDto.companyNameLike}%'
+			</if>
+			<!-- 所属部门 -->
+			<if test="userQueryDto.departIdIn != null">
+				and u.main_depart_id in ${userQueryDto.departIdIn}
+			</if>
+			<if test="userQueryDto.departNameLike != null and userQueryDto.departNameLike != ''">
+				and u.main_depart_name like '%${userQueryDto.departNameLike}%'
+			</if>
+			<!-- 班组 -->
+			<if test="userQueryDto.classIdIn != null">
+				and u.class_id in ${userQueryDto.classIdIn}
+			</if>
+			<if test="userQueryDto.classNameLike != null and userQueryDto.classNameLike != ''">
+				and u.class_name like '%${userQueryDto.classNameLike}%'
+			</if>
+			<!-- 入职日期 -->
+			<if test="userQueryDto.entryDateEquals != null">
+				and u.entry_date = #{userQueryDto.entryDateEquals}
+			</if>
+			<if test="userQueryDto.entryDateGte != null">
+				and u.entry_date &gt;= #{userQueryDto.entryDateGte}
+			</if>
+			<if test="userQueryDto.entryDateLte != null">
+				and u.entry_date &lt;= #{userQueryDto.entryDateLte}
+			</if>
+			<if test="userQueryDto.entryDateGt != null">
+				and u.entry_date &gt;= #{userQueryDto.entryDateGt}
+			</if>
+			<if test="userQueryDto.entryDateLt != null">
+				and u.entry_date &lt;= #{userQueryDto.entryDateLt}
+			</if>
+			<!-- 试用期(月) -->
+			<if test="userQueryDto.probationaryPeriodEquals != null">
+				and u.probationary_period = #{userQueryDto.probationaryPeriodEquals}
+			</if>
+			<if test="userQueryDto.probationaryPeriodGte != null">
+				and u.probationary_period &gt;= #{userQueryDto.probationaryPeriodGte}
+			</if>
+			<if test="userQueryDto.probationaryPeriodLte != null">
+				and u.probationary_period &lt;= #{userQueryDto.probationaryPeriodLte}
+			</if>
+			<if test="userQueryDto.probationaryPeriodGt != null">
+				and u.probationary_period &gt; #{userQueryDto.probationaryPeriodGt}
+			</if>
+			<if test="userQueryDto.probationaryPeriodLt != null">
+				and u.probationary_period &lt; #{userQueryDto.probationaryPeriodLt}
+			</if>
+			<!-- 延迟转正(天) -->
+			<if test="userQueryDto.delayDayEquals != null">
+				and u.delay_day = #{userQueryDto.delayDayEquals}
+			</if>
+			<if test="userQueryDto.delayDayGte != null">
+				and u.delay_day &gt;= #{userQueryDto.delayDayGte}
+			</if>
+			<if test="userQueryDto.delayDayLte != null">
+				and u.delay_day &lt;= #{userQueryDto.delayDayLte}
+			</if>
+			<if test="userQueryDto.delayDayGt != null">
+				and u.delay_day &gt; #{userQueryDto.delayDayGt}
+			</if>
+			<if test="userQueryDto.delayDayLt != null">
+				and u.delay_day &lt; #{userQueryDto.delayDayLt}
+			</if>
+			<!-- 转正日期 -->
+			<if test="userQueryDto.regularDateEquals != null">
+				and u.regular_date = #{userQueryDto.regularDateEquals}
+			</if>
+			<if test="userQueryDto.regularDateGte != null">
+				and u.regular_date &gt;= #{userQueryDto.regularDateGte}
+			</if>
+			<if test="userQueryDto.regularDateLte != null">
+				and u.regular_date &lt;= #{userQueryDto.regularDateLte}
+			</if>
+			<if test="userQueryDto.regularDateGt != null">
+				and u.regular_date &gt;= #{userQueryDto.regularDateGt}
+			</if>
+			<if test="userQueryDto.regularDateLt != null">
+				and u.regular_date &lt;= #{userQueryDto.regularDateLt}
+			</if>
+			<!-- 是否在编 0不在编 1在编 -->
+			<if test="userQueryDto.isOrganIsedIn != null">
+				and u.is_organised in ${userQueryDto.isOrganIsedIn}
+			</if>
+			<!-- 离职日期 -->
+			<if test="userQueryDto.leaveDateEquals != null">
+				and u.leave_date = #{userQueryDto.leaveDateEquals}
+			</if>
+			<if test="userQueryDto.leaveDateGte != null">
+				and u.leave_date &gt;= #{userQueryDto.leaveDateGte}
+			</if>
+			<if test="userQueryDto.leaveDateLte != null">
+				and u.leave_date &lt;= #{userQueryDto.leaveDateLte}
+			</if>
+			<if test="userQueryDto.leaveDateGt != null">
+				and u.leave_date &gt;= #{userQueryDto.leaveDateGt}
+			</if>
+			<if test="userQueryDto.leaveDateLt != null">
+				and u.leave_date &lt;= #{userQueryDto.leaveDateLt}
+			</if>
+			<!-- 任职类型 默认0 全职0、兼职1、实习2 -->
+			<if test="userQueryDto.jobCategoryIn != null">
+				and u.job_category in ${userQueryDto.jobCategoryIn}
+			</if>
+			<!-- 人员类别 默认0 正式工0、合同工1、临时工2、退休返聘3、劳务派遣4 -->
+			<if test="userQueryDto.userCategoryIn != null">
+				and u.user_category in ${userQueryDto.userCategoryIn}
+			</if>
+			<!-- 人员状态 0在职 1不在职 2停职 3离职 4退休 5借调 -->
+			<if test="userQueryDto.userStatusIn != null">
+				and u.user_status in ${userQueryDto.userStatusIn}
+			</if>
+			<!-- 户口地址-模糊查询 -->
+			<if test="userQueryDto.accountAddressLike != null and userQueryDto.accountAddressLike != ''">
+				and u.account_address like '%${userQueryDto.accountAddressLike}%'
+			</if>
+			<!-- 籍贯-模糊查询 -->
+			<if test="userQueryDto.birthPlaceLike != null and userQueryDto.birthPlaceLike != ''">
+				and u.birth_place like '%${userQueryDto.birthPlaceLike}%'
+			</if>
+			<!-- 手机号码-模糊查询 -->
+			<if test="userQueryDto.phoneLike != null and userQueryDto.phoneLike != ''">
+				and u.phone like '%${userQueryDto.phoneLike}%'
+			</if>
+			<!-- QQ号-模糊查询 -->
+			<if test="userQueryDto.qqLike != null and userQueryDto.qqLike != ''">
+				and u.QQ like '%${userQueryDto.qqLike}%'
+			</if>
+			<!-- 办公号码-模糊查询 -->
+			<if test="userQueryDto.officePhoneLike != null and userQueryDto.officePhoneLike != ''">
+				and u.office_phone like '%${userQueryDto.officePhoneLike}%'
+			</if>
+			<!-- 邮箱-模糊查询 -->
+			<if test="userQueryDto.mailLike != null and userQueryDto.mailLike != ''">
+				and u.mail like '%${userQueryDto.mailLike}%'
+			</if>
+			<!-- 最高学历 -->
+			<if test="userQueryDto.educationLevelIn != null">
+				and uei.education_level in ${userQueryDto.educationLevelIn}
+				and uei.status = 2
+			</if>
+			<!-- 专业 模糊查询 -->
+			<if test="userQueryDto.majorLike != null and userQueryDto.majorLike != ''">
+				and uei.major like '%${userQueryDto.majorLike}%'
+				and uei.status = 2
+			</if>
+			<!-- 学校-模糊查询 -->
+			<if test="userQueryDto.schoolLike != null and userQueryDto.schoolLike != ''">
+				and uei.school like '%${userQueryDto.schoolLike}%'
+				and uei.status = 2
+			</if>
+			<!-- 毕业时间 -->
+			<if test="userQueryDto.endDateEquals != null">
+				and uei.end_date = #{userQueryDto.endDateEquals}
+				and uei.status = 2
+			</if>
+			<if test="userQueryDto.endDateGte != null">
+				and uei.end_date &gt;= #{userQueryDto.endDateGte}
+				and uei.status = 2
+			</if>
+			<if test="userQueryDto.endDateLte != null">
+				and uei.end_date &lt;= #{userQueryDto.endDateLte}
+				and uei.status = 2
+			</if>
+			<if test="userQueryDto.endDateGt != null">
+				and uei.end_date &gt; #{userQueryDto.endDateGt}
+				and uei.status = 2
+			</if>
+			<if test="userQueryDto.endDateLt != null">
+				and uei.end_date &lt; #{userQueryDto.endDateLt}
+				and uei.status = 2
+			</if>
+			<!-- 隐藏字段表头查询 -->
+			<!-- 年龄 -->
+			<if test="userQueryDto.ageEquals != null">
+				and u.age = #{userQueryDto.ageEquals}
+			</if>
+			<if test="userQueryDto.ageGte != null">
+				and u.age &gt;= #{userQueryDto.ageGte}
+			</if>
+			<if test="userQueryDto.ageLte != null">
+				and u.age &lt;= #{userQueryDto.ageLte}
+			</if>
+			<if test="userQueryDto.ageGt != null">
+				and u.age &gt; #{userQueryDto.ageGt}
+			</if>
+			<if test="userQueryDto.ageLt != null">
+				and u.age &lt; #{userQueryDto.ageLt}
+			</if>
+			<!-- 司龄 -->
+			<if test="userQueryDto.entryAgeEquals != null">
+				and u.entry_age like #{userQueryDto.entryAgeEquals}
+			</if>
+			<if test="userQueryDto.entryAgeGte != null">
+				and u.entry_age &gt;= #{userQueryDto.entryAgeGte}
+			</if>
+			<if test="userQueryDto.entryAgeLte != null">
+				and u.entry_age &lt;= #{userQueryDto.entryAgeLte}
+			</if>
+			<if test="userQueryDto.entryAgeGt != null">
+				and u.entry_age &gt; #{userQueryDto.entryAgeGt}
+			</if>
+			<if test="userQueryDto.entryAgeLt != null">
+				and u.entry_age &lt; #{userQueryDto.entryAgeLt}
+			</if>
+			<!-- 参加工作日期 -->
+			<if test="userQueryDto.startworkDateEquals != null">
+				and u.startwork_date = #{userQueryDto.startworkDateEquals}
+			</if>
+			<if test="userQueryDto.startworkDateGte != null">
+				and u.startwork_date &gt;= #{userQueryDto.startworkDateGte}
+			</if>
+			<if test="userQueryDto.startworkDateLte != null">
+				and u.startwork_date &lt;= #{userQueryDto.startworkDateLte}
+			</if>
+			<if test="userQueryDto.startworkDateGt != null">
+				and u.startwork_date &gt;= #{userQueryDto.startworkDateGt}
+			</if>
+			<if test="userQueryDto.startworkDateLt != null">
+				and u.startwork_date &lt;= #{userQueryDto.startworkDateLt}
+			</if>
+			<!-- 社会工龄 -->
+			<if test="userQueryDto.socialAgeEquals != null">
+				and u.social_age like #{userQueryDto.socialAgeEquals}
+			</if>
+			<if test="userQueryDto.socialAgeGte != null">
+				and u.social_age &gt;= #{userQueryDto.socialAgeGte}
+			</if>
+			<if test="userQueryDto.socialAgeLte != null">
+				and u.social_age &lt;= #{userQueryDto.socialAgeLte}
+			</if>
+			<if test="userQueryDto.socialAgeGt != null">
+				and u.social_age &gt; #{userQueryDto.socialAgeGt}
+			</if>
+			<if test="userQueryDto.socialAgeLt != null">
+				and u.social_age &lt; #{userQueryDto.socialAgeLt}
+			</if>
+			<!-- 婚姻情况 默认0 未婚0、已婚1、离婚2、丧偶3、不详4 -->
+			<if test="userQueryDto.maritalStatusIn != null">
+				and u.marital_status in ${userQueryDto.maritalStatusIn}
+			</if>
+			<!-- 孕育状况 默认0 未育0、已育1 -->
+			<if test="userQueryDto.pregnantStatusIn != null">
+				and u.pregnant_status in ${userQueryDto.pregnantStatusIn}
+			</if>
+			<!-- 户口类别 默认0 本地城镇0、外地城镇1、本地农村2、外地农村3 -->
+			<if test="userQueryDto.accountCategoryIn != null">
+					and u.account_category in ${userQueryDto.accountCategoryIn}
+			</if>
+			<!-- 民族 -->
+			<if test="userQueryDto.nationLike != null and userQueryDto.nationLike != ''">
+				and u.nation like '%${userQueryDto.nationLike}%'
+			</if>
+			<!-- 政治面貌	默认0 群众0、共青团员1、中共党员2、中共预备党员3、民主党派4 -->
+			<if test="userQueryDto.politicsStatusIn != null">
+				and u.politics_status in ${userQueryDto.politicsStatusIn}
+			</if>
+			<!-- 入党日期 -->
+			<if test="userQueryDto.joinPartyDateEquals != null">
+				and u.join_party_date = #{userQueryDto.joinPartyDateEquals}
+				</if>
+			<if test="userQueryDto.joinPartyDateGte != null">
+				and u.join_party_date &gt;= #{userQueryDto.joinPartyDateGte}
+			</if>
+			<if test="userQueryDto.joinPartyDateLte != null">
+				and u.join_party_date &lt;= #{userQueryDto.joinPartyDateLte}
+			</if>
+			<if test="userQueryDto.joinPartyDateGt != null">
+				and u.join_party_date &gt;= #{userQueryDto.joinPartyDateGt}
+			</if>
+			<if test="userQueryDto.joinPartyDateLt != null">
+				and u.join_party_date &lt;= #{userQueryDto.joinPartyDateLt}
+				</if>
+			<!-- 兴趣爱好 -->
+			<if test="userQueryDto.hobbyLike != null and userQueryDto.hobbyLike != ''">
+				and u.hobby like '%${userQueryDto.hobbyLike}%'
+			</if>
+			<!-- 现居住地址 -->
+			<if test="userQueryDto.homeAddressLike != null and userQueryDto.homeAddressLike != ''">
+				and u.home_address like '%${userQueryDto.homeAddressLike}%'
+			</if>
+			<!-- 家庭地址 -->
+			<if test="userQueryDto.addressLike != null and userQueryDto.addressLike != ''">
+				and u.address like '%${userQueryDto.addressLike}%'
+			</if>
+			<!-- 入职体检日期 -->
+			<if test="userQueryDto.physicalDateEquals != null">
+				and u.physical_date = #{userQueryDto.physicalDateEquals}
+			</if>
+			<if test="userQueryDto.physicalDateGte != null">
+				and u.physical_date &gt;= #{userQueryDto.physicalDateGte}
+			</if>
+			<if test="userQueryDto.physicalDateLte != null">
+				and u.physical_date &lt;= #{userQueryDto.physicalDateLte}
+			</if>
+			<if test="userQueryDto.physicalDateGt != null">
+				and u.physical_date &gt;= #{userQueryDto.physicalDateGt}
+			</if>
+			<if test="userQueryDto.physicalDateLt != null">
+				and u.physical_date &lt;= #{userQueryDto.physicalDateLt}
+			</if>
+			<!-- 入职培训日期 -->
+			<if test="userQueryDto.trainDateEquals != null">
+				and u.train_date = #{userQueryDto.trainDateEquals}
+			</if>
+			<if test="userQueryDto.trainDateGte != null">
+				and u.train_date &gt;= #{userQueryDto.trainDateGte}
+			</if>
+			<if test="userQueryDto.trainDateLte != null">
+				and u.train_date &lt;= #{userQueryDto.trainDateLte}
+			</if>
+			<if test="userQueryDto.trainDateGt != null">
+				and u.train_date &gt;= #{userQueryDto.trainDateGt}
+			</if>
+			<if test="userQueryDto.trainDateLt != null">
+				and u.train_date &lt;= #{userQueryDto.trainDateLt}
+			</if>
+			<!-- 招聘方式：招聘网站0、官方邮箱1、内推2、同业推荐3、猎头4、招聘会5、宣讲会6 -->
+			<if test="userQueryDto.recruitTypeIn != null">
+				and u.recruit_type in ${userQueryDto.recruitTypeIn}
+			</if>
+			<!-- 招聘渠道：0社招，1校招 -->
+			<if test="userQueryDto.recruitChannelIn != null">
+				and u.recruit_channel in ${userQueryDto.recruitChannelIn}
+			</if>
+			<!-- 内推人姓名 -->
+			<if test="userQueryDto.pushUsernameLike != null and userQueryDto.pushUsernameLike != ''">
+				and u.push_username like '%${userQueryDto.pushUsernameLike}%'
+			</if>
+			<!-- 与内推人关系 -->
+			<if test="userQueryDto.pushRelationLike != null and userQueryDto.pushRelationLike != ''">
+				and u.push_relation like '%${userQueryDto.pushRelationLike}%'
+			</if>
+			<!-- 备注 -->
+			<if test="userQueryDto.memoLike != null and userQueryDto.memoLike != ''">
+				and u.memo like '%${userQueryDto.memoLike}%'
+			</if>
+			<!-- 省 -->
+			<if test="userQueryDto.provinceLike != null and userQueryDto.provinceLike != ''">
+				and u.province like '%${userQueryDto.provinceLike}%'
+			</if>
+			<!-- 职称 -->
+			<if test="userQueryDto.skillNameLike != null and userQueryDto.skillNameLike != ''">
+				and usi.skill_name like '%${userQueryDto.skillNameLike}%'
+			</if>
+			<!-- 工作单位 -->
+			<if test="userQueryDto.workUnitLike != null and userQueryDto.workUnitLike != ''">
+				and uwei.work_unit like '%${userQueryDto.workUnitLike}%'
+			</if>
+		</if>
+	</sql>
+
+	<sql id="TransferQuerySql">
+		<if test="userTransferQueryDto != null">
+			<!-- 根据人员状态查询 -->
+			<if test="userTransferQueryDto.userStatusList != null and userTransferQueryDto.userStatusList.size != 0">
+				and u.user_status IN
+				<foreach collection="userTransferQueryDto.userStatusList" separator="," open="(" close=")" item="item"
+					index="index">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 根据当前登录人查询 -->
+			<if test="userTransferQueryDto.erpUserId != null">
+				and u.erp_user_id = #{userTransferQueryDto.erpUserId}
+			</if>
+			<!-- 左侧过滤 公司过滤 -->
+			<if test="userTransferQueryDto.companyId != null">
+				and u.company_id = #{userTransferQueryDto.companyId}
+			</if>
+			<!-- 左侧过滤 部门过滤 -->
+			<if test="userTransferQueryDto.departId != null">
+				and u.main_depart_id = #{userTransferQueryDto.departId}
+			</if>
+			<!-- 左侧筛选-姓名筛选 -->
+			<if test="userTransferQueryDto.userNameLike != null and userTransferQueryDto.userNameLike != ''">
+				and u.user_name like '%${userTransferQueryDto.userNameLike}%'
+			</if>
+			<!-- 左侧筛选-公司筛选 -->
+			<if test="userTransferQueryDto.companyIds != null and userTransferQueryDto.companyIds.size != 0">
+				and u.company_id IN
+				<foreach collection="userTransferQueryDto.companyIds" separator="," open="(" close=")" item="item" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 左侧筛选-部门筛选 -->
+			<if test="userTransferQueryDto.departIds != null and userTransferQueryDto.departIds.size != 0">
+				and u.main_depart_id IN
+				<foreach collection="userTransferQueryDto.departIds" separator="," open="(" close=")" item="item" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<!-- 特殊情况 -->
+			<!-- 当转正申请时，查询无转正日期的数据 -->
+			<if test="userTransferQueryDto.transferType == 1">
+				and u.regular_date is null
+			</if>
+			<!-- 当前复职查询时，按照人员ID升序，任职开始事件降序 -->
+			<if test="userTransferQueryDto.transferType == 4">
+				order by u.user_id asc, upi.start_date desc
+			</if>
+			<!-- 任职情况新增时查询人员 -->
+			<if test="userTransferQueryDto.transferType == null">
+				and u.user_status != 3
+			</if>
+		</if>
+	</sql>
+
+	<update id="update" parameterType="com.cq.dto.user.UserDTO">
+		update j_oa_user
+		<set>
+			user_id = #{userId,jdbcType=BIGINT},
+			erp_user_id = #{erpUserId,jdbcType=BIGINT},
+			user_no = #{userNo,jdbcType=VARCHAR},
+			user_name = #{userName,jdbcType=VARCHAR},
+			english_name = #{englishName,jdbcType=VARCHAR},
+			img_url = #{imgUrl,jdbcType=VARCHAR},
+			img_key = #{imgKey,jdbcType=VARCHAR},
+			id_card_no = #{idCardNo,jdbcType=VARCHAR},
+			birthdate = #{birthdate,jdbcType=TIMESTAMP},
+			age = #{age,jdbcType=TINYINT},
+			sex = #{sex,jdbcType=TINYINT},
+			user_code = #{userCode,jdbcType=VARCHAR},
+			company_id = #{companyId,jdbcType=BIGINT},
+			company_name = #{companyName,jdbcType=VARCHAR},
+			main_depart_id = #{mainDepartId,jdbcType=BIGINT},
+			main_depart_name = #{mainDepartName,jdbcType=VARCHAR},
+			class_id = #{classId,jdbcType=BIGINT},
+			class_name = #{className,jdbcType=VARCHAR},
+			entry_date = #{entryDate,jdbcType=TIMESTAMP},
+			entry_age = #{entryAge,jdbcType=REAL},
+			probationary_period = #{probationaryPeriod,jdbcType=TINYINT},
+			delay_day = #{delayDay,jdbcType=TINYINT},
+			regular_date = #{regularDate,jdbcType=TIMESTAMP},
+			leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+			startwork_date = #{startworkDate,jdbcType=TIMESTAMP},
+			social_age = #{socialAge,jdbcType=REAL},
+			job_category = #{jobCategory,jdbcType=TINYINT},
+			user_category = #{userCategory,jdbcType=TINYINT},
+			marital_status = #{maritalStatus,jdbcType=TINYINT},
+			pregnant_status = #{pregnantStatus,jdbcType=TINYINT},
+			account_category = #{accountCategory,jdbcType=TINYINT},
+			account_address = #{accountAddress,jdbcType=VARCHAR},
+			birth_place = #{birthPlace,jdbcType=VARCHAR},
+			nation = #{nation,jdbcType=VARCHAR},
+			province = #{province,jdbcType=VARCHAR},
+			city = #{city,jdbcType=VARCHAR},
+			politics_status = #{politicsStatus,jdbcType=TINYINT},
+			join_party_date = #{joinPartyDate,jdbcType=TIMESTAMP},
+			hobby = #{hobby,jdbcType=VARCHAR},
+			phone = #{phone,jdbcType=VARCHAR},
+			QQ = #{qq,jdbcType=VARCHAR},
+			office_phone = #{officePhone,jdbcType=VARCHAR},
+			mail = #{mail,jdbcType=VARCHAR},
+			address = #{address,jdbcType=VARCHAR},
+			home_address = #{homeAddress,jdbcType=VARCHAR},
+			physical_date = #{physicalDate,jdbcType=TIMESTAMP},
+			train_date = #{trainDate,jdbcType=TIMESTAMP},
+			recruit_channel = #{recruitChannel,jdbcType=TINYINT},
+			recruit_type = #{recruitType,jdbcType=TINYINT},
+			push_username = #{pushUsername,jdbcType=VARCHAR},
+			push_relation = #{pushRelation,jdbcType=VARCHAR},
+			memo = #{memo,jdbcType=VARCHAR},
+			is_organised = #{isOrganised,jdbcType=TINYINT},
+			user_status = #{userStatus,jdbcType=TINYINT},
+			file_id = #{fileId,jdbcType=BIGINT}
+		</set>
+		where user_id = #{userId,jdbcType=BIGINT}
+	</update>
 </mapper>

@@ -4,7 +4,9 @@
 package com.cq.service.common;
 
 import java.util.List;
+import java.util.Map;
 
+import com.cq.dto.ImportExcelDTO;
 import com.cq.model.user.UserLogin;
 
 /**
@@ -26,6 +28,15 @@ public interface UserInfoService {
     List<UserLogin> login(UserLogin user);
 
     /**
+     * 获取登录人信息
+     *
+     * @param user
+     *            人员信息
+     * @return 人员信息
+     */
+    List<UserLogin> list();
+
+    /**
      * 获取当前用户的姓名
      *
      * @return 用户名
@@ -39,4 +50,11 @@ public interface UserInfoService {
      */
     Long getCurrentUserId();
 
+    /**
+     * 人员登录信息导入
+     *
+     * @param importDto
+     * @return
+     */
+    Map<String, String> importUserInfoCheck(ImportExcelDTO importDto);
 }

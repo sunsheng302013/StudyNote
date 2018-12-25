@@ -17,16 +17,22 @@ public class MemberInfo implements Serializable {
 
     /** serialVersionUID */
     private static final long serialVersionUID = 1146038678822932856L;
+
     /** 用户ID **/
     private String userId;
+
     /** 用户名 **/
     private String userName;
+
     /** 集群ID **/
     private String groupId;
+
     /** 会员ID **/
     private String memberId;
+
     /** 会员名 **/
     private String memberName;
+
     /** 用户所拥有的权限 **/
     private String userRoles;
 

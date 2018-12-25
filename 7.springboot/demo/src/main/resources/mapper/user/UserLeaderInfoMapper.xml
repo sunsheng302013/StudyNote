@@ -51,15 +51,16 @@
 	 </foreach>
   </delete>
 
-  <insert id="insert" parameterType="com.cq.model.user.UserLeaderInfo" >
+  <insert id="insert">
     insert into j_oa_user_leader_info
-    (type, user_id, erp_user_id, erp_user_name)
+    (type, relation, user_id, erp_user_id, erp_user_name)
       values
-      <foreach collection = "list" item="leader" index = "index" separator = ",">
+      <foreach collection = "leaderAndSubordinate" item="leader" index = "index" separator = ",">
       (#{leader.type},
+       #{leader.relation},
+       #{userId},
        #{leader.userId},
-       #{leader.erpUserId},
-       #{leader.erpUserName})
+       #{leader.realName})
       </foreach>
   </insert>
   

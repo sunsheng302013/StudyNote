@@ -5,11 +5,13 @@ package com.cq.dao.user;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.cq.common.base.PageInfo;
+import com.cq.dto.user.UserBaseResultDTO;
 import com.cq.dto.user.UserDTO;
 import com.cq.dto.user.UserQueryDTO;
 import com.cq.dto.user.UserTransferQueryDTO;
@@ -37,16 +39,34 @@ public interface UserDao {
      *            人员查询参数
      * @return UserDTO 人员档案
      */
-    List<UserDTO> select(@Param(value = "page") PageInfo page, @Param(value = "userQueryDto") UserQueryDTO userQueryDto);
+    List<UserDTO> list(@Param(value = "page") PageInfo page, @Param(value = "userQueryDto") UserQueryDTO userQueryDto);
+
+    /**
+     * 查询员工档案基本信息
+     *
+     * @param userId
+     *            人员查询参数
+     * @return UserDTO 人员档案
+     */
+    List<UserDTO> getUser(@Param(value = "userId") Long userId);
 
     /**
      * 查询员工档案总数
      *
-     * @param userQueryDto
+     * @param map
      *            人员查询参数
      * @return UserDTO 人员档案
      */
-    Integer selectCount(@Param(value = "userQueryDto") UserQueryDTO userQueryDto);
+    List<Long> listCount(Map<String, Object> map);
+
+    /**
+     * 查询员工档案基本信息
+     *
+     * @param userId
+     *            人员查询参数
+     * @return UserDTO 人员档案
+     */
+    UserBaseResultDTO get(@Param(value = "userId") Long userId);
 
     /**
      * 根据erpUserId修改员工档案
@@ -113,11 +133,20 @@ public interface UserDao {
     /**
      * 员工档案唯一性校验(证件类型+身份证号)
      *
-     * @param userDto
-     *            员工档案信息
+     * @param idCardNo
+     *            员工身份证信息
      * @return 0代表不存在，1代表唯一
      */
-    Integer uniquenessCheck(UserDTO userDto);
+    Integer uniquenessCheck(@Param(value = "idCardNo") String idCardNo);
+
+    /**
+     * 员工档案唯一性校验(证件类型+身份证号)
+     *
+     * @param userDto
+     *            人员资料
+     * @return 0代表不存在，1代表唯一
+     */
+    Integer uniquenessCheckExceptOneSelf(@Param(value = "userDto") UserDTO userDto);
 
     /**
      * 删除员工基本信息 伪删除
@@ -127,6 +156,15 @@ public interface UserDao {
      * @return 删除行数
      */
     Integer fakeDelete(List<Long> userIdList);
+
+    /**
+     * 根据userId获取erpUserId
+     *
+     * @param userId
+     *            人员ID
+     * @return ERP人员ID
+     */
+    List<Long> getErpUserIdByUserId(List<Long> userId);
 
     /**
      * 删除员工基本信息
@@ -147,6 +185,15 @@ public interface UserDao {
     Integer insert(UserDTO userDto);
 
     /**
+     * 更新员工档案信息
+     *
+     * @param userDto
+     *            员工档案信息
+     * @return 插入行数
+     */
+    Integer update(UserDTO userDto);
+
+    /**
      * 更新司龄
      */
     void updateEntryAge();
@@ -164,11 +211,23 @@ public interface UserDao {
     /**
      * 人事调动时查询人员信息
      *
+     * @param page
+     *            分页信息
      * @param userTransferQueryDto
      *            查询参数
      * @return 人员信息
      */
-    List<UserTransferResultDTO> transferList(@Param(value = "userTransferQueryDto") UserTransferQueryDTO userTransferQueryDto);
+    List<UserTransferResultDTO> transferList(@Param(value = "page") PageInfo page,
+            @Param(value = "userTransferQueryDto") UserTransferQueryDTO userTransferQueryDto);
+
+    /**
+     * 人事调动时查询人员信息总数
+     *
+     * @param userTransferQueryDto
+     *            查询参数
+     * @return 人员ID
+     */
+    List<Long> transferListCount(@Param(value = "userTransferQueryDto") UserTransferQueryDTO userTransferQueryDto);
 
     /**
      * 根据erpUserId获取userId

@@ -25,6 +25,9 @@ public class UserTransferQueryDTO implements Serializable {
     /** 人员状态 0在职 1不在职 2停职 3离职 4退休 5借调 **/
     private List<Integer> userStatusList;
 
+    /** 符合查询条件的人员ID **/
+    private List<Long> userIdList;
+
     /** 部门ID **/
     private Long departId;
 
@@ -68,6 +71,21 @@ public class UserTransferQueryDTO implements Serializable {
      */
     public void setUserStatusList(List<Integer> userStatusList) {
         this.userStatusList = userStatusList;
+    }
+
+    /**
+     * @return the userIdList
+     */
+    public List<Long> getUserIdList() {
+        return userIdList;
+    }
+
+    /**
+     * @param userIdList
+     *            要设置的 userIdList
+     */
+    public void setUserIdList(List<Long> userIdList) {
+        this.userIdList = userIdList;
     }
 
     /**

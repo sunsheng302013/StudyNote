@@ -8,7 +8,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cq.dto.user.UserLoginDTO;
 import com.cq.model.user.UserLogin;
 
 /**
@@ -34,13 +33,18 @@ public interface UserLoginDao {
     List<UserLogin> select(@Param(value = "userLoginId") Long userLoginId, @Param(value = "password") String password);
 
     /**
+     * 查询员工档案基本信息
+     */
+    List<UserLogin> list();
+
+    /**
      * 创建员工帐号信息
      *
      * @param user
      *            人员档案信息
      * @return 创建行数
      */
-    Integer insert(@Param(value = "user") UserLoginDTO user);
+    Integer insert(@Param(value = "user") UserLogin user);
 
     /**
      * 根据id修改员工帐号信息
@@ -49,7 +53,7 @@ public interface UserLoginDao {
      *            人员档案信息
      * @return 修改行数
      */
-    Integer updateById(@Param(value = "user") UserLoginDTO user);
+    Integer updateById(@Param(value = "user") UserLogin user);
 
     /**
      * 根据id删除员工帐号信息(伪删除)
@@ -76,6 +80,6 @@ public interface UserLoginDao {
      *            员工档案信息
      * @return 更新行数
      */
-    Integer resetPwd(List<UserLoginDTO> userList);
+    Integer resetPwd(List<UserLogin> userList);
 
 }
