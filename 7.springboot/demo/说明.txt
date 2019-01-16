@@ -1,4 +1,0 @@
-spring整合了mybatis项目
-有两个数据库，可以通过切库注解@DS进行切库
-在service实现类的方法上带上注解@DS，mybatis查询时使用master数据库，不加注解使用slave数据库。
-因为两个数据库的表不同，所以错误切库会导致mybatis查询出错
