@@ -1,0 +1,49 @@
+Java开发工具：百度云链接
+链接：https://pan.baidu.com/s/1WRJusKUm8ez1ncB_uSLvHA 
+提取码：re0q 
+
+Mysql+navicat 
+数据库组件
+
+JDK
+Java开发工具包
+
+tomcat 
+WEB服务器
+
+eclipse 
+Java开发工具
+
+checkStyle 
+Java规范组件
+
+maven 
+Java项目构建工具
+
+git+TortoiseGit
+(小乌龟)
+
+
+=====================================环境搭建步骤=======================================
+1. 安装JDK8环境+配置tomcat环境
+百度搜索 JDK安装，tomcat环境变量配置
+
+2. eclipse是免安装的，只要JDK环境变量配置正确，可以直接打开，打不开只能说明步骤1有问题
+
+3. maven也是免安装的，只需要配置环境变量。修改maven的默认仓库地址，修改maven镜像路径为阿里镜像(修改方法百度)
+maven默认仓库地址在C盘，随着项目越来越大，下载的jar包会越来越多，可以改到D盘或者其他盘中
+maven镜像默认是国外的地址，国内网络访问不了，不修改为阿里镜像会导致maven无法下载jar包，Java项目无法加载
+
+4. eclipse中设置有默认的tomcat和maven，需要改成步骤1,3设置的本地tomcat和maven
+
+5. eclipse添加CheckStyle代码规范, 具体步骤和工具在 “Java开发环境配置及规范”这个文件夹中
+
+6. 安装MySQL和navicat，安装步骤百度
+
+7. 安装git和小乌龟
+===================================环境搭建END======================================
+
+===================================项目开发步骤======================================
+1. 通过小乌龟下载github上的项目 
+2. 在eclipse中 File->import...->maven->Existing Maven Projects-> 选择下载的Java项目
+3. maven构建成功后，就打开了别人的开发项目了。
