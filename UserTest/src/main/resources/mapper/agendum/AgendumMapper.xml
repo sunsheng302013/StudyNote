@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.dao.agendum.AgendumDao">
+	<resultMap id="BaseResultMap" type="com.cq.model.agendum.Agendum">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="agendum_id" property="agendumId" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="location_name" property="locationName" jdbcType="VARCHAR" />
+		<result column="participant_user_id" property="participantUserId" jdbcType="BIGINT" />
+		<result column="participant_user_name" property="participantUserName" jdbcType="VARCHAR" />
+		<result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+		<result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="role_type" property="roleType" jdbcType="TINYINT" />
+		<result column="is_whole_day" property="isWholeDay" jdbcType="TINYINT" />
+		<result column="is_important" property="isImportant" jdbcType="TINYINT" />
+		<result column="is_share" property="isShare" jdbcType="TINYINT" />
+		<result column="share_group_id" property="shareGroupId" jdbcType="BIGINT" />
+		<result column="share_group_name" property="shareGroupName" jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="BaseResultDto" type="com.cq.dto.agendum.AgendumResultDTO" extends="BaseResultMap">
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, agendum_id, title, start_time, end_time, location_name, participant_user_id,
+		participant_user_name, create_user_id, create_user_name, content, role_type, is_whole_day,
+		is_important, is_share, share_group_id, share_group_name, gmt_create, gmt_modified
+	</sql>
+
+	<!-- 查询日程 -->
+	<select id="listAgendumResult" resultMap="BaseResultDto">
+		select
+		<include refid="Base_Column_List" />
+		from j_oa_agendum
+		where 1 = 1
+		<include refid="whereQuery"></include>
+		order by start_time asc, participant_user_id desc
+	</select>
+
+	<sql id="whereQuery">
+		<if test="query.userId != null">
+			and participant_user_id = #{query.userId}
+		</if>
+		<if test="query.userIdList != null and query.userIdList.size != 0">
+			and participant_user_id IN
+			<foreach collection="query.userIdList" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+		</if>
+		<if test="query.userName != null and query.userName != ''">
+			and participant_user_name like '%${query.userName}%'
+		</if>
+		<if test="query.startTime != null">
+			and end_time &gt;= #{query.startTime}
+		</if>
+		<if test="query.endTime != null">
+			and start_time &lt;= #{query.endTime}
+		</if>
+	</sql>
+</mapper>

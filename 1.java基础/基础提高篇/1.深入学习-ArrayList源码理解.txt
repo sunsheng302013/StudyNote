@@ -1,0 +1,94 @@
+ArrayList是数组列表，存储核心是 object类型的数组 Object[] elementData
+ArrayList可以存储各种类型的数据，因此需要使用泛型
+
+一 ：数据的初始化
+ArrayList有三种初始化
+1. 无参初始化 
+elementData数组为空，等到第一次添加数据的时候，数组长度会变成初始长度10
+2. Integer参数初始化
+elementData数组长度设置为传参长度
+3. Collection<Object>参数初始化，
+Collection是所有集合的子类，Collection类型的参数，
+就是说支持所有集合类型的参数 即List,Set及其子类
+
+列表数据的增删改查
+
+=================================================二：数据增加=====================================================
+ArrayList中数据新增的核心 扩容，和数组复制
+
+扩容规则：ArrayList的数组长度是会改变的，在每次增加数据时都会进行长度校验
+如果添加后列表数据个数超过了列表长度，列表就会扩容，
+长度变为原来长度的1.5倍,如果变为1.5倍长度还不够，长度会变成添加的数据个数，
+如果超过int最大值(2^32-1),长度为2^32-1
+如果初始长度太短的话，就会导致新增数据时频繁扩容，会影响效率，
+因此最好能在初始化时给列表一个合适的初始长度(太长造成空间浪费，太短造成效率下降)
+
+数组复制：System.arraycopy(dataType[] srcArray,int srcIndex,int destArray,int destIndex,int length)
+其中，srcArray 表示源数组；srcIndex 表示源数组中的起始索引；destArray 表示目标数组；
+destIndex 表示目标数组中的起始索引；length 表示要复制的数组长度。
+------------------------------------------------------------------------------
+扩容伪代码：
+
+if elementData == 空，minCapacity = 10
+else minCapacity不变
+ensureCapacityInternal(int minCapacity) {
+if elementData.length > minCapacity
+newCapacity = elementData.length扩容1.5倍
+
+if newCapacity < minCapacity 
+newCapacity = minCapacity
+
+if newCapacity > INTMAX
+newCapacity = INTMAX
+}
+
+生成长度为newCapacity的数组，原elementData数据复制到新数组中
+--------------------------------------------------------------------------------
+数据增加可以分为
+
+1. add(E e) 单个增加List对象
+扩容ensureCapacityInternal(size + 1)
+elementData[size++] = e;
+
+2. add(int Index, E e) 在指定位置添加对象
+判断index是否超过size长度，或者是否小于0
+扩容ensureCapacityInternal(size + 1)
+System.arraycopy(elementData, index, elementData, index + 1, size - index)
+elementData[index] = e
+
+3. AddAll(Collection c) 增加List对象列表
+Object[] a = c.toArray();
+扩容ensureCapacityInternal(size + a.length)
+System.arraycopy(a, 0, elementData, size, a.length)
+size = size + a.length
+
+4. AddAll(int index, Collection c) 在指定位置插入集合列表
+判断index是否超过size长度，或者是否小于0
+扩容ensureCapacityInternal(size + 1)
+将index后的数据复制到index + c.length之后System.arraycopy(elementData, index, elementData, index + num, movesize);
+将c的数据复制到elementData中
+size = size+a.length
+=================================================二：数据删除=====================================================
+删除的核心是 数组复制
+
+------------------------------------------------------------------------------------------------------------------
+数据删除可以分为
+1. remove(int index) 删除指定位置的数据
+判断index是否超过size长度，或者是否小于0
+将index后的数据复制到index
+elementData[size] = null
+size = size - 1
+
+2. remove(E e) 删除指定对象的数据
+for循环遍历元素 e.equal(elementData[index])
+删除符合的数据，只删除一个(删除过程和删除位置的数据一样)
+
+4. batchRemove(Collection c) 批量删除指定对象的数据
+
+===============================================三：数据更新和查询===============================================
+arrayList中更新和查询都比较简单，不涉及数组复制
+
+===============================================总结===========================================================
+arrayList中比较耗费效率的是新增和删除，这两个操作都会涉及到多个数据位置的移动，查询和更新则是可以直接通过数据查到对应的数据
+arrayList不是线程安全的，数据新增，删除不是原子操作，也就是当多个线程同时执行新增时会导致数据个数超过数组长度造成数据溢出
+

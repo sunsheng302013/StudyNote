@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cq.dao.user.UserInfoDao">
+	<resultMap id="BaseResultMap" type="com.cq.model.user.UserInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="img_key" property="imgKey" jdbcType="VARCHAR" />
+		<result column="main_depart_id" property="mainDepartId" jdbcType="BIGINT" />
+		<result column="main_depart_name" property="mainDepartName" jdbcType="VARCHAR" />
+		<result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+		<result column="is_blockup" property="isBlockup" jdbcType="TINYINT" />
+		<result column="memo" property="memo" jdbcType="VARCHAR" />
+		<result column="is_update_password" property="isUpdatePassword" jdbcType="TINYINT" />
+		<result column="leader_id" property="leaderId" jdbcType="BIGINT" />
+		<result column="leader_name" property="leaderName" jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, user_id, user_code, user_name, email, mobile, real_name, img_url, img_key, main_depart_id,
+		main_depart_name, is_delete, is_blockup, memo, is_update_password, leader_id, leader_name,
+		gmt_create, gmt_modified
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from j_user_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 查询下属信息 -->
+	<select id="listSubordinate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select <include refid="Base_Column_List" />
+		from j_user_info
+		where leader_id = #{leaderId}
+		and is_delete = 0
+		and is_blockup = 0
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from j_user_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="com.cq.model.user.UserInfo">
+		insert into j_user_info (id, user_id, user_code,
+		user_name, email, mobile,
+		real_name, img_url, img_key,
+		main_depart_id, main_depart_name, is_delete,
+		is_blockup, memo, is_update_password,
+		leader_id, leader_name, gmt_create,
+		gmt_modified)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{imgKey,jdbcType=VARCHAR},
+		#{mainDepartId,jdbcType=BIGINT}, #{mainDepartName,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT},
+		#{isBlockup,jdbcType=TINYINT}, #{memo,jdbcType=VARCHAR}, #{isUpdatePassword,jdbcType=TINYINT},
+		#{leaderId,jdbcType=BIGINT}, #{leaderName,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP},
+		#{gmtModified,jdbcType=TIMESTAMP})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.cq.model.user.UserInfo">
+		update j_user_info
+		set user_id = #{userId,jdbcType=BIGINT},
+		user_code = #{userCode,jdbcType=VARCHAR},
+		user_name = #{userName,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		real_name = #{realName,jdbcType=VARCHAR},
+		img_url = #{imgUrl,jdbcType=VARCHAR},
+		img_key = #{imgKey,jdbcType=VARCHAR},
+		main_depart_id = #{mainDepartId,jdbcType=BIGINT},
+		main_depart_name = #{mainDepartName,jdbcType=VARCHAR},
+		is_delete = #{isDelete,jdbcType=TINYINT},
+		is_blockup = #{isBlockup,jdbcType=TINYINT},
+		memo = #{memo,jdbcType=VARCHAR},
+		is_update_password = #{isUpdatePassword,jdbcType=TINYINT},
+		leader_id = #{leaderId,jdbcType=BIGINT},
+		leader_name = #{leaderName,jdbcType=VARCHAR},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
